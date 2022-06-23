@@ -1,0 +1,1 @@
+export const chemicalCompanyNames = ['Syngenta', 'Bayer', 'ArmorTech', 'Winfield', 'QualiPro'];
