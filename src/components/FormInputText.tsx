@@ -11,7 +11,7 @@ const FormInputText = ({ label, control, index }: IProps) => {
 
     return (
         <Controller
-            name={`TEST.${index}.${label}`}
+            name={`chemical.${index}.${label}`}
             control={control}
             defaultValue=''
             rules={{ required: true }}

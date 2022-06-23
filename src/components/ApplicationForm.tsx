@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { IDefaultValues } from '../types/ApplicationFormDefaultValues';
+import { IChemical } from '../types/ApplicationFormDefaultValues';
+import { useEffect } from 'react';
 
 
-const defaultValues: IDefaultValues = {
+const defaultValues: IChemical = {
     ChemicalCompany: '',
     ChemicalName: '',
     Amount: '',
@@ -15,14 +15,22 @@ const defaultValues: IDefaultValues = {
 
 const ApplicationForm = () => {
 
-    const { control, handleSubmit } = useForm<FieldValues>({ defaultValues });
-    const { fields, append, remove } = useFieldArray({ control, name: 'TEST' })
+    const { control, handleSubmit, reset } = useForm<FieldValues>();
+    const { fields, append, remove } = useFieldArray({ control, name: 'chemical' })
 
     const addChemical = () => append(defaultValues);
-    const removeChemical = () => console.log('removed called');
+    const removeChemical = () => remove(fields.length - 1);
     const submit = (data) => {
-        console.log('data', data.TEST);
+        console.log('data.chemcical', data.chemical);
+        reset();
+        console.log('data', data);
+        addChemical();
     }
+
+    useEffect(() => {
+        addChemical();
+    }, []);
+
     return (
         <Container sx={{ margin: '20px' }}>
             <form onSubmit={handleSubmit(submit)} >
@@ -32,11 +40,11 @@ const ApplicationForm = () => {
                 <Button onClick={addChemical} variant='outlined' color='inherit'>
                     Add
                 </Button>
-                {/* {numberOfChemicals > 1 &&
+                {fields.length > 1 &&
                     <Button onClick={removeChemical} variant='outlined' color='inherit'>
                         Remove
                     </Button>
-                } */}
+                }
                 <Button variant='outlined' color='inherit' type='submit'>Submit</Button>
             </form >
         </Container>

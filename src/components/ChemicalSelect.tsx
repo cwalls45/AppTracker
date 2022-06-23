@@ -15,7 +15,7 @@ const ChemicalSelect = ({ options, label, control, index }: IProps) => {
     return (
 
         <Controller
-            name={`TEST.${index}.${label}`}
+            name={`chemical.${index}.${label}`}
             control={control}
             render={({ field: { value, onChange }, fieldState }) => (
                 <Autocomplete

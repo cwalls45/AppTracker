@@ -1,4 +1,4 @@
-export interface IDefaultValues {
+export interface IChemical {
     ChemicalCompany: string;
     ChemicalName: string;
     Amount: string;
@@ -6,5 +6,5 @@ export interface IDefaultValues {
 };
 
 export interface IChemicalList {
-    TEST: IDefaultValues[];
+    chemical: IChemical[];
 }

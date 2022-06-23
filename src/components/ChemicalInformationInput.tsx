@@ -4,10 +4,10 @@ import { chemicals } from "../dummyData/chemical";
 import { chemicalCompanyNames } from "../dummyData/chemicalCompanyNames";
 import FormInputText from "./FormInputText";
 import { Control, FieldValues } from "react-hook-form";
-import { IDefaultValues } from "../types/ApplicationFormDefaultValues";
+import { IChemical, IChemicalList } from "../types/ApplicationFormDefaultValues";
 
 interface IProps {
-    control: Control<FieldValues, IDefaultValues>;
+    control: Control<FieldValues, IChemicalList>;
     index: number;
 }
 
