@@ -21,9 +21,7 @@ const ApplicationForm = () => {
     const addChemical = () => append(defaultValues);
     const removeChemical = () => remove(fields.length - 1);
     const submit = (data) => {
-        console.log('data.chemcical', data.chemical);
         reset();
-        console.log('data', data);
         addChemical();
     }
 
