@@ -1,10 +1,9 @@
-import { FieldValues, useForm, useFieldArray } from 'react-hook-form';
+import { useState } from 'react';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { IChemical } from '../types/ApplicationFormDefaultValues';
-import { useEffect } from 'react';
-
+import { IChemical, ChemicalList } from '../types/ApplicationFormDefaultValues';
 
 const defaultValues: IChemical = {
     ChemicalCompany: '',
@@ -14,36 +13,40 @@ const defaultValues: IChemical = {
 };
 
 const ApplicationForm = () => {
+    const [chemicalList, setChemicalList] = useState<ChemicalList>([defaultValues]);
 
-    const { control, handleSubmit, reset } = useForm<FieldValues>();
-    const { fields, append, remove } = useFieldArray({ control, name: 'chemical' })
+    const addChemical = () => setChemicalList([...chemicalList, defaultValues]);
 
-    const addChemical = () => append(defaultValues);
-    const removeChemical = () => remove(fields.length - 1);
-    const submit = (data) => {
-        reset();
-        addChemical();
+    const removeChemical = () => {
+        const lastChemicalIndex = chemicalList.length - 1;
+        const removeLastChemical = chemicalList.slice(0, lastChemicalIndex);
+        setChemicalList(removeLastChemical);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('Chemical List', chemicalList)
     }
 
-    useEffect(() => {
-        addChemical();
-    }, []);
-
     return (
-        <Container sx={{ margin: '20px' }}>
-            <form onSubmit={handleSubmit(submit)} >
-                {fields.map((field, index) => (
-                    <ChemicalInformationInput key={field.id} index={index} control={control} />
+        <Container>
+            <form onSubmit={handleSubmit} >
+                {chemicalList.map((chemical, index) => (
+                    <ChemicalInformationInput key={index} />
                 ))}
-                <Button onClick={addChemical} variant='outlined' color='inherit'>
-                    Add
-                </Button>
-                {fields.length > 1 &&
-                    <Button onClick={removeChemical} variant='outlined' color='inherit'>
-                        Remove
+                <Grid container justifyContent='center'>
+                    <Button onClick={addChemical} variant='outlined' color='inherit'>
+                        Add
                     </Button>
-                }
-                <Button variant='outlined' color='inherit' type='submit'>Submit</Button>
+                    {chemicalList.length > 1 &&
+                        <Button onClick={removeChemical} variant='outlined' color='inherit'>
+                            Remove
+                        </Button>
+                    }
+                    <Button variant='outlined' color='inherit' type='submit'>
+                        Submit
+                    </Button>
+                </Grid>
             </form >
         </Container>
     );
