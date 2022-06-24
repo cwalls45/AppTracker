@@ -5,6 +5,4 @@ export interface IChemical {
     Units: string
 };
 
-export interface IChemicalList {
-    chemical: IChemical[];
-}
+export type ChemicalList = IChemical[];

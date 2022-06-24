@@ -1,40 +1,29 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { Control, Controller, FieldValues } from 'react-hook-form';
-
 
 interface IProps {
     options: string[];
     label: string;
-    control: Control<FieldValues, any>;
-    index: number;
 };
 
-const ChemicalSelect = ({ options, label, control, index }: IProps) => {
+const ChemicalSelect = ({ options, label }: IProps) => {
 
     return (
-
-        <Controller
-            name={`chemical.${index}.${label}`}
-            control={control}
-            render={({ field: { value, onChange }, fieldState }) => (
-                <Autocomplete
-                    options={options}
-                    onChange={(_, item) => onChange(item)}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            value={value}
-                            label={label}
-                            variant='outlined'
-                            error={!!fieldState.error}
-                            helperText={fieldState.error ? fieldState.error.message : null}
-                        />
-                    )}
+        <Autocomplete
+            options={options}
+            onChange={() => null}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    label={label}
+                    variant='outlined'
+                    value={''}
+                    error={false}
+                    helperText={''}
                 />
             )}
         />
-    );
-};
+    )
+}
 
 export default ChemicalSelect;

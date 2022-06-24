@@ -16,14 +16,12 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Router>
                 <NavigationBar isLoggedIn={isLoggedIn} />
-                <Grid container>
-                    <Routes>
-                        <Route path='/' element={<Navigate to="/calendar" replace />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/calendar' element={<Calendar />} />
-                        <Route path='/createApplication' element={<ApplicationForm />} />
-                    </Routes>
-                </Grid>
+                <Routes>
+                    <Route path='/' element={<Navigate to="/calendar" replace />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/calendar' element={<Calendar />} />
+                    <Route path='/createApplication' element={<ApplicationForm />} />
+                </Routes>
             </Router>
         </ThemeProvider >
     );
