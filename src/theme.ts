@@ -1,16 +1,5 @@
 import { createTheme } from "@mui/material";
 
-declare module '@mui/material/styles' {
-    interface BreakpointOverrides {
-        xs: false; // removes the `xs` breakpoint
-        sm: false;
-        md: false;
-        lg: false;
-        xl: false;
-    }
-}
-
-
 export const theme = createTheme({
     palette: {
         primary: {
@@ -23,21 +12,13 @@ export const theme = createTheme({
             contrastText: '#ffcc00',
         }
     },
-    breakpoints: {
-        values: {
-            xs: false,
-            sm: false,
-            md: false,
-            lg: false,
-            xl: false,
-        }
-    },
     components: {
         MuiContainer: {
             styleOverrides: {
                 root: {
                     padding: 0,
                     margin: 0,
+                    minWidth: '100vw'
                 }
             }
         },
@@ -47,6 +28,15 @@ export const theme = createTheme({
                     margin: '10px',
                 }
             }
-        }
+        },
+        MuiGrid: {
+            styleOverrides: {
+                root: {
+                },
+                container: {
+                    margin: '10px',
+                }
+            }
+        },
     }
 });
