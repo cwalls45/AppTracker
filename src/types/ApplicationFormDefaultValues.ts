@@ -1,8 +1,9 @@
 export interface IChemical {
-    ChemicalCompany: string;
-    ChemicalName: string;
-    Amount: string;
-    Units: string
+    id: string;
+    chemicalCompany: string;
+    chemicalName: string;
+    amount: string;
+    units: string
 };
 
 export type ChemicalList = IChemical[];
