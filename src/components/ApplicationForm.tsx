@@ -6,17 +6,9 @@ import Button from '@mui/material/Button';
 import { v4 as uuidV4 } from 'uuid';
 import { IChemical, ChemicalList } from '../types/ApplicationFormDefaultValues';
 
-// const defaultValues: IChemical = {
-//     ChemicalCompany: '',
-//     ChemicalName: '',
-//     Amount: '',
-//     Units: ''
-// };
-
 const ApplicationForm = () => {
 
     const defaultValues = (): IChemical => ({
-        id: uuidV4(),
         chemicalCompany: '',
         chemicalName: '',
         amount: '',
@@ -44,6 +36,7 @@ const ApplicationForm = () => {
                 {chemicalList.map((chemical, index) => (
                     <ChemicalInformationInput
                         key={index}
+                        index={index}
                         chemical={chemical}
                         chemicalList={chemicalList}
                         setChemicalList={setChemicalList}

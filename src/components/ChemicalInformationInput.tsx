@@ -6,32 +6,56 @@ import FormInputText from "./FormInputText";
 import { IChemical, ChemicalList } from "../types/ApplicationFormDefaultValues";
 
 interface IProps {
+    index: number;
     chemical: IChemical,
     chemicalList: ChemicalList,
     setChemicalList: React.Dispatch<React.SetStateAction<ChemicalList>>
 }
 
-const ChemicalInformationInput = ({ chemical, chemicalList, setChemicalList }: IProps) => {
+const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalList }: IProps) => {
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
     return (
         <Grid container justifyContent='space-around'>
             <Grid item xs={12} md={4}>
                 <ChemicalSelect
-                    options={chemicalCompanyNames}
+                    index={index}
+                    property='chemicalCompany'
                     label='Chemical Company'
+                    chemicalList={chemicalList}
+                    setChemicalList={setChemicalList}
+                    options={chemicalCompanyNames}
+                />
+            </Grid>
+            <Grid item xs={12} md={4}>
+                <ChemicalSelect
+                    index={index}
+                    property='chemicalName'
+                    label='Chemical Name'
+                    options={chemicals}
                     chemicalList={chemicalList}
                     setChemicalList={setChemicalList}
                 />
             </Grid>
-            <Grid item xs={12} md={4}>
-                <ChemicalSelect options={chemicals} label='Chemical Name' />
+            <Grid item xs={6} md={1}>
+                <FormInputText
+                    index={index}
+                    property='amount'
+                    label='Amount'
+                    options={units}
+                    chemicalList={chemicalList}
+                    setChemicalList={setChemicalList}
+                />
             </Grid>
             <Grid item xs={6} md={1}>
-                <FormInputText label='Amount' />
-            </Grid>
-            <Grid item xs={6} md={1}>
-                <ChemicalSelect options={units} label='Units' />
+                <ChemicalSelect
+                    index={index}
+                    property='units'
+                    label='Units'
+                    options={units}
+                    chemicalList={chemicalList}
+                    setChemicalList={setChemicalList}
+                />
             </Grid>
         </Grid >
     );

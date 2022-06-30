@@ -1,5 +1,4 @@
 export interface IChemical {
-    id: string;
     chemicalCompany: string;
     chemicalName: string;
     amount: string;
