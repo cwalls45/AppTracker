@@ -1,0 +1,1 @@
+export const areaOfApplication = ['Greens', 'Tees', 'Approach', 'Fairway', 'Rough', 'Native'];

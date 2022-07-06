@@ -3,7 +3,6 @@ import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { v4 as uuidV4 } from 'uuid';
 import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
 
 const ApplicationForm = () => {
