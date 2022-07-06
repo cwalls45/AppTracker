@@ -1,8 +1,14 @@
-export interface IChemical {
-    ChemicalCompany: string;
-    ChemicalName: string;
-    Amount: string;
-    Units: string
-};
+export interface IChemicalApplicationForm {
+    dateOfApplication: string;
+    areaOfApplication: string;
+    acresCovered: string;
+    targetPests: string[];
+    chemicals: IChemical[];
+}
 
-export type ChemicalList = IChemical[];
+export interface IChemical {
+    chemicalCompany: string;
+    chemicalName: string;
+    amount: string;
+    units: string
+};

@@ -3,42 +3,63 @@ import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { IChemical, ChemicalList } from '../types/ApplicationFormDefaultValues';
-
-const defaultValues: IChemical = {
-    ChemicalCompany: '',
-    ChemicalName: '',
-    Amount: '',
-    Units: ''
-};
+import { v4 as uuidV4 } from 'uuid';
+import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
 
 const ApplicationForm = () => {
-    const [chemicalList, setChemicalList] = useState<ChemicalList>([defaultValues]);
 
-    const addChemical = () => setChemicalList([...chemicalList, defaultValues]);
+    const defaultValues = (): IChemicalApplicationForm => ({
+        dateOfApplication: '',
+        areaOfApplication: '',
+        acresCovered: '',
+        targetPests: [],
+        chemicals: [{
+            chemicalCompany: '',
+            chemicalName: '',
+            amount: '',
+            units: ''
+        }],
+    });
+
+    const chemicalListDefaultValues = (): IChemical => ({
+        chemicalCompany: '',
+        chemicalName: '',
+        amount: '',
+        units: ''
+    });
+
+    const [chemicalApplicationForm, setChemicalApplicationForm] = useState<IChemicalApplicationForm>(defaultValues());
+
+    const addChemical = () => setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: [...chemicalApplicationForm.chemicals, chemicalListDefaultValues()] });
 
     const removeChemical = () => {
-        const lastChemicalIndex = chemicalList.length - 1;
-        const removeLastChemical = chemicalList.slice(0, lastChemicalIndex);
-        setChemicalList(removeLastChemical);
+        const lastChemicalIndex = chemicalApplicationForm.chemicals.length - 1;
+        const removeLastChemical = chemicalApplicationForm.chemicals.slice(0, lastChemicalIndex);
+        setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: removeLastChemical })
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Chemical List', chemicalList)
+        console.log('Chemical List', chemicalApplicationForm)
     }
 
     return (
         <Container>
             <form onSubmit={handleSubmit} >
-                {chemicalList.map((chemical, index) => (
-                    <ChemicalInformationInput key={index} />
+                {chemicalApplicationForm.chemicals.map((chemical, index) => (
+                    <ChemicalInformationInput
+                        key={index}
+                        index={index}
+                        chemical={chemical}
+                        chemicalApplicationForm={chemicalApplicationForm}
+                        setChemicalApplicationForm={setChemicalApplicationForm}
+                    />
                 ))}
                 <Grid container justifyContent='center'>
                     <Button onClick={addChemical} variant='outlined' color='inherit'>
                         Add
                     </Button>
-                    {chemicalList.length > 1 &&
+                    {chemicalApplicationForm.chemicals.length > 1 &&
                         <Button onClick={removeChemical} variant='outlined' color='inherit'>
                             Remove
                         </Button>
