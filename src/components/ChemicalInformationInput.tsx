@@ -3,16 +3,16 @@ import Grid from '@mui/material/Grid';
 import { chemicals } from "../dummyData/chemical";
 import { chemicalCompanyNames } from "../dummyData/chemicalCompanyNames";
 import FormInputText from "./FormInputText";
-import { IChemical, ChemicalList } from "../types/ApplicationFormDefaultValues";
+import { IChemical, IChemicalApplicationForm } from "../types/ApplicationFormDefaultValues";
 
 interface IProps {
     index: number;
     chemical: IChemical,
-    chemicalList: ChemicalList,
-    setChemicalList: React.Dispatch<React.SetStateAction<ChemicalList>>
+    chemicalApplicationForm: IChemicalApplicationForm,
+    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
 }
 
-const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalList }: IProps) => {
+const ChemicalInformationInput = ({ index, chemical, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
     return (
@@ -22,8 +22,8 @@ const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalLi
                     index={index}
                     property='chemicalCompany'
                     label='Chemical Company'
-                    chemicalList={chemicalList}
-                    setChemicalList={setChemicalList}
+                    chemicalApplicationForm={chemicalApplicationForm}
+                    setChemicalApplicationForm={setChemicalApplicationForm}
                     options={chemicalCompanyNames}
                 />
             </Grid>
@@ -33,8 +33,8 @@ const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalLi
                     property='chemicalName'
                     label='Chemical Name'
                     options={chemicals}
-                    chemicalList={chemicalList}
-                    setChemicalList={setChemicalList}
+                    chemicalApplicationForm={chemicalApplicationForm}
+                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -43,8 +43,8 @@ const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalLi
                     property='amount'
                     label='Amount'
                     options={units}
-                    chemicalList={chemicalList}
-                    setChemicalList={setChemicalList}
+                    chemicalApplicationForm={chemicalApplicationForm}
+                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -53,8 +53,8 @@ const ChemicalInformationInput = ({ index, chemical, chemicalList, setChemicalLi
                     property='units'
                     label='Units'
                     options={units}
-                    chemicalList={chemicalList}
-                    setChemicalList={setChemicalList}
+                    chemicalApplicationForm={chemicalApplicationForm}
+                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
         </Grid >
