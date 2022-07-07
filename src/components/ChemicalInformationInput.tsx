@@ -6,13 +6,12 @@ import FormInputText from "./FormInputText";
 import { IChemical, IChemicalApplicationForm } from "../types/ApplicationFormDefaultValues";
 
 interface IProps {
-    index: number;
-    chemical: IChemical,
     chemicalApplicationForm: IChemicalApplicationForm,
     setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
+    index?: number;
 }
 
-const ChemicalInformationInput = ({ index, chemical, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
     return (
@@ -22,9 +21,9 @@ const ChemicalInformationInput = ({ index, chemical, chemicalApplicationForm, se
                     index={index}
                     property='chemicalCompany'
                     label='Chemical Company'
+                    options={chemicalCompanyNames}
                     chemicalApplicationForm={chemicalApplicationForm}
                     setChemicalApplicationForm={setChemicalApplicationForm}
-                    options={chemicalCompanyNames}
                 />
             </Grid>
             <Grid item xs={12} md={4}>

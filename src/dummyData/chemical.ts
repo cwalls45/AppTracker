@@ -1,1 +1,1 @@
-export const chemicals = ['Briskway', 'Daconil Ultra', 'Propiconazole', 'Torque', '26GT', 'Acelepryn']
+export const chemicals = ['Briskway', 'Daconil Ultra', 'Propiconazole', 'Torque', '26GT', 'Acelepryn', '']

@@ -3,22 +3,23 @@ import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDef
 
 interface IProps {
     options: string[];
-    index: number;
     property: string;
     label: string;
     chemicalApplicationForm: IChemicalApplicationForm,
     setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
+    index?: number;
 };
 
-const FormInputText = ({ options, index, property, label, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+const FormInputText = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
 
 
     const handleChange = (event) => {
-        console.log('event', event.target.value.toString())
-        const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: event.target.value.toString() };
-        const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
-        reconstructedChemicalList[index] = objectToUpdate
-        setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+        if (index) {
+            const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: event.target.value.toString() };
+            const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
+            reconstructedChemicalList[index] = objectToUpdate
+            setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+        }
     }
 
 

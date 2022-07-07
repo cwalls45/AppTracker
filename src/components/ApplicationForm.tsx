@@ -3,8 +3,9 @@ import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { v4 as uuidV4 } from 'uuid';
 import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
+import ChemicalSelect from './ChemicalSelect';
+import { areaOfApplication } from '../dummyData/areaOfApplication';
 
 const ApplicationForm = () => {
 
@@ -28,7 +29,7 @@ const ApplicationForm = () => {
         units: ''
     });
 
-    const [chemicalApplicationForm, setChemicalApplicationForm] = useState<IChemicalApplicationForm>(defaultValues());
+    const [chemicalApplicationForm, setChemicalApplicationForm] = useState<IChemicalApplicationForm>(defaultValues);
 
     const addChemical = () => setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: [...chemicalApplicationForm.chemicals, chemicalListDefaultValues()] });
 
@@ -46,11 +47,21 @@ const ApplicationForm = () => {
     return (
         <Container>
             <form onSubmit={handleSubmit} >
+                <Grid container justifyContent='center'>
+                    <Grid item xs={12} md={4}>
+                        <ChemicalSelect
+                            property='areaOfApplication'
+                            label='Area of Application'
+                            options={areaOfApplication}
+                            chemicalApplicationForm={chemicalApplicationForm}
+                            setChemicalApplicationForm={setChemicalApplicationForm}
+                        />
+                    </Grid>
+                </Grid>
                 {chemicalApplicationForm.chemicals.map((chemical, index) => (
                     <ChemicalInformationInput
                         key={index}
                         index={index}
-                        chemical={chemical}
                         chemicalApplicationForm={chemicalApplicationForm}
                         setChemicalApplicationForm={setChemicalApplicationForm}
                     />
