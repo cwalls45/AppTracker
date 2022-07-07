@@ -5,24 +5,29 @@ import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDef
 
 interface IProps {
     options: string[];
-    index: number;
     property: string;
     label: string;
-    chemicalApplicationForm: IChemicalApplicationForm,
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
+    chemicalApplicationForm: IChemicalApplicationForm;
+    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
+    index?: number;
 };
 
-const ChemicalSelect = ({ options, index, property, label, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
 
     const [autoCompleteValue, setAutoCompleteValue] = useState('');
     const [inputValue, setInputValue] = useState('');
 
     const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
         setAutoCompleteValue(newAutoCompleteValue);
-        const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: newAutoCompleteValue };
-        const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
-        reconstructedChemicalList[index] = objectToUpdate
-        setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+        if (index !== undefined) {
+            const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: newAutoCompleteValue };
+            const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
+            reconstructedChemicalList[index] = objectToUpdate
+            setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+        } else {
+            setChemicalApplicationForm({ ...chemicalApplicationForm, [property]: newAutoCompleteValue });
+        }
+
     }
 
     const handleInputChange = (event, newInputValue: string) => {
