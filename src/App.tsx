@@ -4,7 +4,7 @@ import { theme } from './theme';
 import { ThemeProvider } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Calendar from './components/Calendar';
-import ApplicationForm from './components/ApplicationForm';
+import ApplicationForm from './components/applicationForm/ApplicationForm';
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 

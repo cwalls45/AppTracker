@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
+import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 
 interface IProps {
     options: string[];

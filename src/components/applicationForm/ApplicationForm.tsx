@@ -3,9 +3,9 @@ import ChemicalInformationInput from './ChemicalInformationInput';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
+import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 import ChemicalSelect from './ChemicalSelect';
-import { areaOfApplication } from '../dummyData/areaOfApplication';
+import { areaOfApplication } from '../../dummyData/areaOfApplication';
 
 const ApplicationForm = () => {
 

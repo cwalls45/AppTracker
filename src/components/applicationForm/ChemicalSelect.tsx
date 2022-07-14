@@ -1,7 +1,7 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { IChemical, IChemicalApplicationForm } from '../types/ApplicationFormDefaultValues';
+import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 
 interface IProps {
     options: string[];
