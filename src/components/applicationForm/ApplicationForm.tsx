@@ -4,14 +4,15 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
-import ChemicalSelect from './ChemicalSelect';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
+import MultiSelect from './MultiSelect';
+import { targetPests } from '../../dummyData/targetPests';
 
 const ApplicationForm = () => {
 
     const defaultValues = (): IChemicalApplicationForm => ({
         dateOfApplication: '',
-        areaOfApplication: '',
+        areaOfApplication: [],
         acresCovered: '',
         targetPests: [],
         chemicals: [{
@@ -47,12 +48,21 @@ const ApplicationForm = () => {
     return (
         <Container>
             <form onSubmit={handleSubmit} >
-                <Grid container justifyContent='center'>
+                <Grid container justifyContent='space-around'>
                     <Grid item xs={12} md={4}>
-                        <ChemicalSelect
-                            property='areaOfApplication'
+                        <MultiSelect
                             label='Area of Application'
+                            property='areaOfApplication'
                             options={areaOfApplication}
+                            chemicalApplicationForm={chemicalApplicationForm}
+                            setChemicalApplicationForm={setChemicalApplicationForm}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <MultiSelect
+                            label='Target Pests'
+                            property='targetPests'
+                            options={targetPests}
                             chemicalApplicationForm={chemicalApplicationForm}
                             setChemicalApplicationForm={setChemicalApplicationForm}
                         />
