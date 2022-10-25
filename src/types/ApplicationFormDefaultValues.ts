@@ -1,7 +1,8 @@
 export interface IChemicalApplicationForm {
     dateOfApplication: string;
     areaOfApplication: string[];
-    acresCovered: string;
+    totalAreaOfApp: string;
+    totalAreaOfAppUnit: string;
     targetPests: string[];
     chemicals: IChemical[];
 }

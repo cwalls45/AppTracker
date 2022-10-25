@@ -2,15 +2,15 @@ import TextField from '@mui/material/TextField';
 import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 
 interface IProps {
-    options: string[];
     property: string;
     label: string;
-    chemicalApplicationForm: IChemicalApplicationForm,
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
+    chemicalApplicationForm: IChemicalApplicationForm;
+    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
+    options?: string[];
     index?: number;
 };
 
-const FormInputText = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
+const FormInputText = ({ property, label, chemicalApplicationForm, setChemicalApplicationForm, options, index }: IProps) => {
 
 
     const handleChange = (event) => {
@@ -19,10 +19,11 @@ const FormInputText = ({ options, property, label, chemicalApplicationForm, setC
             const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
             reconstructedChemicalList[index] = objectToUpdate
             setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+        } else {
+            const propertyToUpdate = { ...chemicalApplicationForm, [property]: event.target.value };
+            setChemicalApplicationForm(propertyToUpdate);
         }
     }
-
-
 
     return (
         <TextField
