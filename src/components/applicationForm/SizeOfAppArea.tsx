@@ -12,8 +12,8 @@ interface IProps {
 
 const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
     return (
-        <>
-            <Grid item xs={6} md={1}>
+        <Grid container justifyContent='space-evenly' xs={6} md={5}>
+            <Grid>
                 <FormInputText
                     property='totalAreaOfApp'
                     label='Total Area of Application'
@@ -21,7 +21,7 @@ const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: 
                     setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
-            <Grid item xs={6} md={1}>
+            <Grid>
                 <ChemicalSelect
                     property='totalAreaOfAppUnit'
                     label='Unit'
@@ -30,7 +30,7 @@ const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: 
                     setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
-        </>
+        </Grid>
     )
 }
 
