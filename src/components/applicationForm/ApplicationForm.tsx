@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
+import DatePickerCalendar from './DatePickerCalendar';
 import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
@@ -42,7 +43,6 @@ const ApplicationForm = () => {
     };
 
     const removeChemical = () => {
-
         const lastChemicalIndex = chemicalApplicationForm.chemicals.length - 1;
         const removeLastChemical = chemicalApplicationForm.chemicals.slice(0, lastChemicalIndex);
         if (attestForm) setAttestForm(false);
@@ -61,6 +61,14 @@ const ApplicationForm = () => {
         <Container>
             <form onSubmit={handleSubmit} >
                 <Grid container justifyContent='space-around'>
+                    <Grid>
+                        <DatePickerCalendar
+                            label='Date of Application'
+                            property='dateOfApplication'
+                            chemicalApplicationForm={chemicalApplicationForm}
+                            setChemicalApplicationForm={setChemicalApplicationForm}
+                        />
+                    </Grid>
                     <Grid item xs={12} md={4}>
                         <MultiSelect
                             label='Area of Application'
