@@ -61,32 +61,38 @@ const ApplicationForm = () => {
         <Container>
             <form onSubmit={handleSubmit} >
                 <Grid container justifyContent='space-around'>
-                    <Grid>
-                        <DatePickerCalendar
-                            label='Date of Application'
-                            property='dateOfApplication'
-                            chemicalApplicationForm={chemicalApplicationForm}
-                            setChemicalApplicationForm={setChemicalApplicationForm}
-                        />
+                    <Grid container justifyContent='space-around'>
+                        <Grid>
+                            <DatePickerCalendar
+                                label='Date of Application'
+                                property='dateOfApplication'
+                                chemicalApplicationForm={chemicalApplicationForm}
+                                setChemicalApplicationForm={setChemicalApplicationForm}
+                            />
+                        </Grid>
+                        <Grid item xs={12} md={4}>
+                            <MultiSelect
+                                label='Target Pests'
+                                property='targetPests'
+                                options={targetPests}
+                                chemicalApplicationForm={chemicalApplicationForm}
+                                setChemicalApplicationForm={setChemicalApplicationForm}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                        <MultiSelect
-                            label='Area of Application'
-                            property='areaOfApplication'
-                            options={areaOfApplication}
-                            chemicalApplicationForm={chemicalApplicationForm}
-                            setChemicalApplicationForm={setChemicalApplicationForm}
-                        />
-                    </Grid>
-                    <SizeOfAppArea
-                        chemicalApplicationForm={chemicalApplicationForm}
-                        setChemicalApplicationForm={setChemicalApplicationForm}
-                    />
-                    <Grid item xs={12} md={4}>
-                        <MultiSelect
-                            label='Target Pests'
-                            property='targetPests'
-                            options={targetPests}
+                    <Grid container justifyContent='space-evenly'>
+                        <Grid container xs={11} md={6}>
+                            <Grid xs={12}>
+                                <MultiSelect
+                                    label='Area of Application'
+                                    property='areaOfApplication'
+                                    options={areaOfApplication}
+                                    chemicalApplicationForm={chemicalApplicationForm}
+                                    setChemicalApplicationForm={setChemicalApplicationForm}
+                                />
+                            </Grid>
+                        </Grid>
+                        <SizeOfAppArea
                             chemicalApplicationForm={chemicalApplicationForm}
                             setChemicalApplicationForm={setChemicalApplicationForm}
                         />
@@ -118,7 +124,7 @@ const ApplicationForm = () => {
                     </Button>
                 </Grid>
             </form >
-        </Container>
+        </Container >
     );
 }
 
