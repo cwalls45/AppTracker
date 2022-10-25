@@ -8,13 +8,15 @@ import MultiSelect from './MultiSelect';
 import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
+import SizeOfAppArea from './SizeOfAppArea';
 
 const ApplicationForm = () => {
 
     const defaultValues = (): IChemicalApplicationForm => ({
         dateOfApplication: '',
         areaOfApplication: [],
-        acresCovered: '',
+        totalAreaOfApp: '',
+        totalAreaOfAppUnit: '',
         targetPests: [],
         chemicals: [{
             chemicalCompany: '',
@@ -68,6 +70,10 @@ const ApplicationForm = () => {
                             setChemicalApplicationForm={setChemicalApplicationForm}
                         />
                     </Grid>
+                    <SizeOfAppArea
+                        chemicalApplicationForm={chemicalApplicationForm}
+                        setChemicalApplicationForm={setChemicalApplicationForm}
+                    />
                     <Grid item xs={12} md={4}>
                         <MultiSelect
                             label='Target Pests'
