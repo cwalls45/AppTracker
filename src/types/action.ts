@@ -1,4 +1,4 @@
-import { ChemicalApplicationActions } from "../redux/actionTypes";
+import { ChemicalApplicationActions } from "../redux/action-types/chemicalApplicationActionTypes";
 
 export type Action = IAddAreaOfApplicationAction | IRemoveAreaOfApplicationAction;
 

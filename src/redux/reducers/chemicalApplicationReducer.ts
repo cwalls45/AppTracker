@@ -1,6 +1,6 @@
-import { Action } from "../../types/action";
+import { Action } from "../../types/Action";
 import { IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
-import { ChemicalApplicationActions } from "../actionTypes";
+import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 
 
 const initialState: IChemicalApplicationForm = {
