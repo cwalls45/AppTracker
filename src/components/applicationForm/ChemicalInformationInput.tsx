@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import { chemicals } from "../../dummyData/chemical";
 import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
 import FormInputText from "./FormInputText";
-import { IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
+import { ChemicalProperties, IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
 
 interface IProps {
     chemicalApplicationForm: IChemicalApplicationForm,
@@ -19,7 +19,7 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
             <Grid item xs={12} md={4}>
                 <ChemicalSelect
                     index={index}
-                    property='chemicalCompany'
+                    property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
                     options={chemicalCompanyNames}
                     chemicalApplicationForm={chemicalApplicationForm}
@@ -29,7 +29,7 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
             <Grid item xs={12} md={4}>
                 <ChemicalSelect
                     index={index}
-                    property='chemicalName'
+                    property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
                     options={chemicals}
                     chemicalApplicationForm={chemicalApplicationForm}
@@ -39,7 +39,7 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
             <Grid item xs={6} md={1}>
                 <FormInputText
                     index={index}
-                    property='amount'
+                    property={ChemicalProperties.AMOUNT}
                     label='Amount'
                     options={units}
                     chemicalApplicationForm={chemicalApplicationForm}
@@ -49,7 +49,7 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
             <Grid item xs={6} md={1}>
                 <ChemicalSelect
                     index={index}
-                    property='units'
+                    property={ChemicalProperties.UNITS}
                     label='Units'
                     options={units}
                     chemicalApplicationForm={chemicalApplicationForm}

@@ -4,10 +4,15 @@ export type Action = IAddAreaOfApplicationAction | IRemoveAreaOfApplicationActio
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;
-    payload: string;
+    payload: IStringPayload;
 };
 
 export interface IRemoveAreaOfApplicationAction {
     type: ChemicalApplicationActions.REMOVE_AREA_OF_APPLICATION;
-    payload: string;
+    payload: IStringPayload;
+}
+
+export interface IStringPayload {
+    data: string;
+    property: string;
 }

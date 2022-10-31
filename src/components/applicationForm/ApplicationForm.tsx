@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
@@ -65,7 +65,7 @@ const ApplicationForm = () => {
                         <Grid>
                             <DatePickerCalendar
                                 label='Date of Application'
-                                property='dateOfApplication'
+                                property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
                                 chemicalApplicationForm={chemicalApplicationForm}
                                 setChemicalApplicationForm={setChemicalApplicationForm}
                             />
@@ -73,7 +73,7 @@ const ApplicationForm = () => {
                         <Grid item xs={12} md={4}>
                             <MultiSelect
                                 label='Target Pests'
-                                property='targetPests'
+                                property={ChemicalApplicationFormProperty.TARGET_PESTS}
                                 options={targetPests}
                                 chemicalApplicationForm={chemicalApplicationForm}
                                 setChemicalApplicationForm={setChemicalApplicationForm}
@@ -85,7 +85,7 @@ const ApplicationForm = () => {
                             <Grid xs={12}>
                                 <MultiSelect
                                     label='Area of Application'
-                                    property='areaOfApplication'
+                                    property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
                                     options={areaOfApplication}
                                     chemicalApplicationForm={chemicalApplicationForm}
                                     setChemicalApplicationForm={setChemicalApplicationForm}

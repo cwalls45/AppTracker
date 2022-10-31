@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import FormInputText from "./FormInputText";
 import ChemicalSelect from "./ChemicalSelect";
-import { IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
+import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
 import { sizeOfApplicationAreaUnits } from '../../dummyData/areaOfApplication';
 
 interface IProps {
@@ -15,7 +15,7 @@ const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: 
         <Grid container justifyContent='space-evenly' xs={6} md={5}>
             <Grid>
                 <FormInputText
-                    property='totalAreaOfApp'
+                    property={ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP}
                     label='Total Area of Application'
                     chemicalApplicationForm={chemicalApplicationForm}
                     setChemicalApplicationForm={setChemicalApplicationForm}
@@ -23,7 +23,7 @@ const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: 
             </Grid>
             <Grid>
                 <ChemicalSelect
-                    property='totalAreaOfAppUnit'
+                    property={ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP_UNIT}
                     label='Unit'
                     options={sizeOfApplicationAreaUnits}
                     chemicalApplicationForm={chemicalApplicationForm}
