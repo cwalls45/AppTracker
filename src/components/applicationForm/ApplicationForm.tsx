@@ -75,8 +75,6 @@ const ApplicationForm = () => {
                                 label='Target Pests'
                                 property={ChemicalApplicationFormProperty.TARGET_PESTS}
                                 options={targetPests}
-                                chemicalApplicationForm={chemicalApplicationForm}
-                                setChemicalApplicationForm={setChemicalApplicationForm}
                             />
                         </Grid>
                     </Grid>
@@ -87,8 +85,6 @@ const ApplicationForm = () => {
                                     label='Area of Application'
                                     property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
                                     options={areaOfApplication}
-                                    chemicalApplicationForm={chemicalApplicationForm}
-                                    setChemicalApplicationForm={setChemicalApplicationForm}
                                 />
                             </Grid>
                         </Grid>

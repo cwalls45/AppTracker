@@ -12,33 +12,34 @@ interface IProps {
     label: string;
     property: string;
     options: any[];
-    chemicalApplicationForm: IChemicalApplicationForm;
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
 }
 
-const MultiSelect = ({ label, property, options, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+const MultiSelect = ({ label, property, options }: IProps) => {
 
     const dispatch = useDispatch();
-    const { addAreaOfApplication } = bindActionCreators(actionCreators, dispatch);
+    const { addAreaOfApplication, updateTargetPests } = bindActionCreators(actionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const [multiSelectValue, setMultiSelectValue] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
 
-    const actionCreatorFactory = (data) => {
+    const actionCreatorFactory = (data, property: string) => {
         if (property === ChemicalApplicationFormProperty.AREA_OF_APPLICATION) {
             addAreaOfApplication({
                 data,
                 property
-            })
+            });
+        } else if (property === ChemicalApplicationFormProperty.TARGET_PESTS) {
+            updateTargetPests({
+                data,
+                property
+            });
         }
     }
 
     const handleMultiSelectChange = (event, newMultiSelectValue: string[]) => {
         setMultiSelectValue(newMultiSelectValue);
-        actionCreatorFactory(newMultiSelectValue);
-        const newState = { ...chemicalApplicationForm, [property]: newMultiSelectValue };
-        setChemicalApplicationForm(newState);
+        actionCreatorFactory(newMultiSelectValue, property);
     };
 
     const handleInputChange = (event, newInputValue: string) => {

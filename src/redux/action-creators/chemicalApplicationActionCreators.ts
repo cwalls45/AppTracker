@@ -8,3 +8,10 @@ export const addAreaOfApplication = (addAreaOfApplication: IStringPayload) => {
         payload: addAreaOfApplication
     })
 }
+
+export const updateTargetPests = (updateTargetPest: IStringPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.UPDATE_TARGET_PESTS,
+        payload: updateTargetPest
+    })
+}
