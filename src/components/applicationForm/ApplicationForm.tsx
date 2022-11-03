@@ -66,8 +66,6 @@ const ApplicationForm = () => {
                             <DatePickerCalendar
                                 label='Date of Application'
                                 property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
-                                chemicalApplicationForm={chemicalApplicationForm}
-                                setChemicalApplicationForm={setChemicalApplicationForm}
                             />
                         </Grid>
                         <Grid item xs={12} md={4}>

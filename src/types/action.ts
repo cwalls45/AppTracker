@@ -1,6 +1,6 @@
 import { ChemicalApplicationActions } from "../redux/action-types/chemicalApplicationActionTypes";
 
-export type Action = IAddAreaOfApplicationAction | IUpdateTargetPests;
+export type Action = IAddAreaOfApplicationAction | IUpdateTargetPests | IUpdateDateOfApplication;
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;
@@ -9,6 +9,11 @@ export interface IAddAreaOfApplicationAction {
 
 export interface IUpdateTargetPests {
     type: ChemicalApplicationActions.UPDATE_TARGET_PESTS;
+    payload: IStringPayload;
+};
+
+export interface IUpdateDateOfApplication {
+    type: ChemicalApplicationActions.UPDATE_DATE_OF_APPLICATION;
     payload: IStringPayload;
 }
 

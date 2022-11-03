@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../types/ApplicationFormDefaultValues';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../redux';
-import { State } from '../../redux/reducers';
 
 interface IProps {
     label: string;
@@ -18,7 +16,6 @@ const MultiSelect = ({ label, property, options }: IProps) => {
 
     const dispatch = useDispatch();
     const { addAreaOfApplication, updateTargetPests } = bindActionCreators(actionCreators, dispatch);
-    const state = useSelector((state: State) => state);
 
     const [multiSelectValue, setMultiSelectValue] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
