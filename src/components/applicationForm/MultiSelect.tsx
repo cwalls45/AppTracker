@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
+import { State } from '../../redux/reducers';
 
 interface IProps {
     label: string;
@@ -13,15 +18,29 @@ interface IProps {
 
 const MultiSelect = ({ label, property, options, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
 
+    const dispatch = useDispatch();
+    const { addAreaOfApplication } = bindActionCreators(actionCreators, dispatch);
+    const state = useSelector((state: State) => state);
+
     const [multiSelectValue, setMultiSelectValue] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
 
+    const actionCreatorFactory = (data) => {
+        if (property === ChemicalApplicationFormProperty.AREA_OF_APPLICATION) {
+            addAreaOfApplication({
+                data,
+                property
+            })
+        }
+    }
 
     const handleMultiSelectChange = (event, newMultiSelectValue: string[]) => {
         setMultiSelectValue(newMultiSelectValue);
+        actionCreatorFactory(newMultiSelectValue);
         const newState = { ...chemicalApplicationForm, [property]: newMultiSelectValue };
         setChemicalApplicationForm(newState);
     };
+
     const handleInputChange = (event, newInputValue: string) => {
         setInputValue(newInputValue);
     };

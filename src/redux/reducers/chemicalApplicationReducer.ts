@@ -19,7 +19,7 @@ const initialState: IChemicalApplicationForm = {
 
 const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: Action) => {
     if (action.type === ChemicalApplicationActions.ADD_AREA_OF_APPLICATION) {
-        const newAreasOfApplication = [...state.areaOfApplication, action.payload]
+        const newAreasOfApplication = action.payload.data;
         return { ...state, areaOfApplication: newAreasOfApplication };
     } else if (action.type === ChemicalApplicationActions.REMOVE_AREA_OF_APPLICATION) {
         //Update later when implemting remove
