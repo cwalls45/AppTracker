@@ -11,6 +11,7 @@ interface IProps {
 }
 
 const SizeOfAppArea = ({ chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+
     return (
         <Grid container justifyContent='space-evenly' xs={6} md={5}>
             <Grid>

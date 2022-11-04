@@ -1,7 +1,10 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
+import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 
 interface IProps {
     options: string[];
@@ -14,6 +17,18 @@ interface IProps {
 
 const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
 
+    const dispatch = useDispatch();
+    const { updateTotalAreaOfAppUnits } = bindActionCreators(actionCreators, dispatch);
+
+    const actionCreatorFactory = (data, property: string) => {
+        if (property === ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP_UNIT) {
+            updateTotalAreaOfAppUnits({
+                data,
+                property
+            });
+        }
+    }
+
     const [autoCompleteValue, setAutoCompleteValue] = useState('');
     const [inputValue, setInputValue] = useState('');
 
@@ -25,7 +40,7 @@ const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, set
             reconstructedChemicalList[index] = objectToUpdate
             setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
         } else {
-            setChemicalApplicationForm({ ...chemicalApplicationForm, [property]: newAutoCompleteValue });
+            actionCreatorFactory(newAutoCompleteValue, property)
         }
 
     }

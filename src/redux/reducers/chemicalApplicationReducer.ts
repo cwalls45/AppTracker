@@ -19,6 +19,10 @@ const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialSta
         return { ...state, targetPest: action.payload.data };
     } else if (action.type === ChemicalApplicationActions.UPDATE_DATE_OF_APPLICATION) {
         return { ...state, dateOfApplication: action.payload.data }
+    } else if (action.type === ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP) {
+        return { ...state, totalAreaOfApp: action.payload.data }
+    } else if (action.type === ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP_UNITS) {
+        return { ...state, totalAreaOfAppUnit: action.payload.data }
     } else {
         return state;
     }

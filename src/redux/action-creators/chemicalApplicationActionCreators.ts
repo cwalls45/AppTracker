@@ -21,4 +21,18 @@ export const updateDateOfApplication = (dateOfApplicaion: IStringPayload) => {
         type: ChemicalApplicationActions.UPDATE_DATE_OF_APPLICATION,
         payload: dateOfApplicaion
     })
-}
+};
+
+export const updateTotalAreaOfApp = (totalAreaOfApp: IStringPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP,
+        payload: totalAreaOfApp
+    })
+};
+
+export const updateTotalAreaOfAppUnits = (totalAreaOfAppUnits: IStringPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP_UNITS,
+        payload: totalAreaOfAppUnits
+    })
+};
