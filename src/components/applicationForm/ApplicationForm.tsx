@@ -10,6 +10,8 @@ import { ChemicalApplicationFormProperty, IChemical, IChemicalApplicationForm } 
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
+import { useSelector } from 'react-redux';
+import { State } from '../../redux'
 
 const ApplicationForm = () => {
 
@@ -34,6 +36,7 @@ const ApplicationForm = () => {
         units: ''
     });
 
+    const state = useSelector((state: State) => state);
     const [chemicalApplicationForm, setChemicalApplicationForm] = useState<IChemicalApplicationForm>(defaultValues);
     const [attestForm, setAttestForm] = useState<boolean>(false);
 
@@ -54,7 +57,7 @@ const ApplicationForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!attestForm) return;
-        console.log('Chemical List', chemicalApplicationForm)
+        console.log('Chemical List', state)
     }
 
     return (
@@ -92,7 +95,7 @@ const ApplicationForm = () => {
                         />
                     </Grid>
                 </Grid>
-                {chemicalApplicationForm.chemicals.map((chemical, index) => (
+                {state.chemicalApplication.chemicals.map((chemical, index) => (
                     <ChemicalInformationInput
                         key={index}
                         index={index}

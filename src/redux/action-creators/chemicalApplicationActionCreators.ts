@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { Action, IStringPayload } from '../../types/Action';
+import { Action, IChemicalsPayload, IStringPayload } from '../../types/Action';
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes"
 
 export const addAreaOfApplication = (addAreaOfApplication: IStringPayload) => {
@@ -34,5 +34,19 @@ export const updateTotalAreaOfAppUnits = (totalAreaOfAppUnits: IStringPayload) =
     return (dispatch: Dispatch<Action>) => dispatch({
         type: ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP_UNITS,
         payload: totalAreaOfAppUnits
+    })
+};
+
+export const setChemicalCompany = (chemicalList: IChemicalsPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.SET_CHEMICAL_COMPANY,
+        payload: chemicalList
+    })
+};
+
+export const setChemicalName = (chemicalList: IChemicalsPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.SET_CHEMICAL_NAME,
+        payload: chemicalList
     })
 };

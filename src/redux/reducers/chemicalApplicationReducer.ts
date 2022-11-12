@@ -9,7 +9,12 @@ const initialState: IChemicalApplicationForm = {
     totalAreaOfApp: '',
     totalAreaOfAppUnit: '',
     targetPests: [],
-    chemicals: [],
+    chemicals: [{
+        chemicalCompany: '',
+        chemicalName: '',
+        amount: '',
+        units: ''
+    }],
 }
 
 const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: Action) => {
@@ -23,7 +28,12 @@ const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialSta
         return { ...state, totalAreaOfApp: action.payload.data }
     } else if (action.type === ChemicalApplicationActions.UPDATE_TOTAL_AREA_OF_APP_UNITS) {
         return { ...state, totalAreaOfAppUnit: action.payload.data }
-    } else {
+    } else if (action.type === ChemicalApplicationActions.SET_CHEMICAL_COMPANY) {
+        return { ...state, chemicals: action.payload.data }
+    } else if (action.type === ChemicalApplicationActions.SET_CHEMICAL_NAME) {
+        return { ...state, chemicals: action.payload.data }
+    }
+    else {
         return state;
     }
 };

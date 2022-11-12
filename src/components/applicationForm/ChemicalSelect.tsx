@@ -1,10 +1,11 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../redux';
-import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { actionCreators, State } from '../../redux';
+import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
 
 interface IProps {
     options: string[];
@@ -18,11 +19,22 @@ interface IProps {
 const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
 
     const dispatch = useDispatch();
-    const { updateTotalAreaOfAppUnits } = bindActionCreators(actionCreators, dispatch);
+    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName } = bindActionCreators(actionCreators, dispatch);
+    const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {
         if (property === ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP_UNIT) {
             updateTotalAreaOfAppUnits({
+                data,
+                property
+            });
+        } else if (property === ChemicalProperties.CHEMICAL_COMPANY) {
+            setChemicalCompany({
+                data,
+                property
+            });
+        } else if (property === ChemicalProperties.CHEMICAL_NAME) {
+            setChemicalName({
                 data,
                 property
             });
@@ -35,10 +47,10 @@ const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, set
     const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
         setAutoCompleteValue(newAutoCompleteValue);
         if (index !== undefined) {
-            const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: newAutoCompleteValue };
-            const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
+            const objectToUpdate = { ...state.chemicalApplication.chemicals[index], [property]: newAutoCompleteValue };
+            const reconstructedChemicalList = [...state.chemicalApplication.chemicals]
             reconstructedChemicalList[index] = objectToUpdate
-            setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+            actionCreatorFactory(reconstructedChemicalList, property)
         } else {
             actionCreatorFactory(newAutoCompleteValue, property)
         }
