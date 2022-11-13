@@ -57,3 +57,10 @@ export const setChemicalAmount = (chemicalList: IChemicalsPayload) => {
         payload: chemicalList
     })
 };
+
+export const setChemicalAmountUnits = (chemicalList: IChemicalsPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.SET_CHEMICAL_AMOUNT_UNITS,
+        payload: chemicalList
+    })
+};

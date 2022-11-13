@@ -19,7 +19,7 @@ interface IProps {
 const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
 
     const dispatch = useDispatch();
-    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName } = bindActionCreators(actionCreators, dispatch);
+    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(actionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {
@@ -35,6 +35,11 @@ const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, set
             });
         } else if (property === ChemicalProperties.CHEMICAL_NAME) {
             setChemicalName({
+                data,
+                property
+            });
+        } else if (property === ChemicalProperties.UNITS) {
+            setChemicalAmountUnits({
                 data,
                 property
             });

@@ -34,6 +34,8 @@ const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialSta
         return { ...state, chemicals: action.payload.data }
     } else if (action.type === ChemicalApplicationActions.SET_CHEMICAL_AMOUNT) {
         return { ...state, chemicals: action.payload.data }
+    } else if (action.type === ChemicalApplicationActions.SET_CHEMICAL_AMOUNT_UNITS) {
+        return { ...state, chemicals: action.payload.data }
     }
     else {
         return state;
