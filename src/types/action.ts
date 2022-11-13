@@ -7,7 +7,8 @@ export type Action = IAddAreaOfApplicationAction
     | IUpdateTotalAreaOfApp
     | IUpdateTotalAreaOfAppUnits
     | ISetChemicalCompany
-    | ISetChemicalName;
+    | ISetChemicalName
+    | ISetChemicalAmount;
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;
@@ -41,6 +42,11 @@ export interface ISetChemicalCompany {
 
 export interface ISetChemicalName {
     type: ChemicalApplicationActions.SET_CHEMICAL_NAME;
+    payload: IChemicalsPayload;
+}
+
+export interface ISetChemicalAmount {
+    type: ChemicalApplicationActions.SET_CHEMICAL_AMOUNT;
     payload: IChemicalsPayload;
 }
 

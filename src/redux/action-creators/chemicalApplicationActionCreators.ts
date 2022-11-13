@@ -50,3 +50,10 @@ export const setChemicalName = (chemicalList: IChemicalsPayload) => {
         payload: chemicalList
     })
 };
+
+export const setChemicalAmount = (chemicalList: IChemicalsPayload) => {
+    return (dispatch: Dispatch<Action>) => dispatch({
+        type: ChemicalApplicationActions.SET_CHEMICAL_AMOUNT,
+        payload: chemicalList
+    })
+};
