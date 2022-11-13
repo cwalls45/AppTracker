@@ -1,5 +1,6 @@
 import { Action } from "../../types/Action";
 import { IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
+import { chemicalListDefaultValues } from "../../utils/applicationFormDefaultValues";
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 
 
@@ -36,8 +37,13 @@ const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialSta
         return { ...state, chemicals: action.payload.data }
     } else if (action.type === ChemicalApplicationActions.SET_CHEMICAL_AMOUNT_UNITS) {
         return { ...state, chemicals: action.payload.data }
-    }
-    else {
+    } else if (action.type === ChemicalApplicationActions.ADD_CHEMICAL) {
+        return { ...state, chemicals: [...state.chemicals, chemicalListDefaultValues()] }
+    } else if (action.type === ChemicalApplicationActions.REMOVE_CHEMICAL) {
+        const lastChemicalIndex = state.chemicals.length - 1;
+        const removeLastChemical = state.chemicals.slice(0, lastChemicalIndex);
+        return { ...state, chemicals: removeLastChemical };
+    } else {
         return state;
     }
 };

@@ -6,50 +6,30 @@ import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { ChemicalApplicationFormProperty, IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../types/ApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
-import { useSelector } from 'react-redux';
-import { State } from '../../redux'
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreators, State } from '../../redux'
+import { bindActionCreators } from 'redux';
 
 const ApplicationForm = () => {
 
-    const defaultValues = (): IChemicalApplicationForm => ({
-        dateOfApplication: '',
-        areaOfApplication: [],
-        totalAreaOfApp: '',
-        totalAreaOfAppUnit: '',
-        targetPests: [],
-        chemicals: [{
-            chemicalCompany: '',
-            chemicalName: '',
-            amount: '',
-            units: ''
-        }],
-    });
-
-    const chemicalListDefaultValues = (): IChemical => ({
-        chemicalCompany: '',
-        chemicalName: '',
-        amount: '',
-        units: ''
-    });
-
+    const dispatch = useDispatch();
+    const { addChemical, removeChemical } = bindActionCreators(actionCreators, dispatch);
     const state = useSelector((state: State) => state);
-    const [chemicalApplicationForm, setChemicalApplicationForm] = useState<IChemicalApplicationForm>(defaultValues);
+
     const [attestForm, setAttestForm] = useState<boolean>(false);
 
-    const addChemical = () => {
+    const addChemicalEvent = () => {
         if (attestForm) setAttestForm(false);
-        setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: [...chemicalApplicationForm.chemicals, chemicalListDefaultValues()] })
+        addChemical();
     };
 
-    const removeChemical = () => {
-        const lastChemicalIndex = chemicalApplicationForm.chemicals.length - 1;
-        const removeLastChemical = chemicalApplicationForm.chemicals.slice(0, lastChemicalIndex);
+    const removeChemicalEvent = () => {
         if (attestForm) setAttestForm(false);
-        setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: removeLastChemical })
+        removeChemical();
     };
 
     const handleAttestFormToggle = () => setAttestForm(!attestForm);
@@ -104,11 +84,11 @@ const ApplicationForm = () => {
                     I attest that the above information is correct.
                 </Grid>
                 <Grid container justifyContent='center'>
-                    <Button onClick={addChemical} variant='outlined' color='inherit'>
+                    <Button onClick={addChemicalEvent} variant='outlined' color='inherit'>
                         Add
                     </Button>
-                    {chemicalApplicationForm.chemicals.length > 1 &&
-                        <Button onClick={removeChemical} variant='outlined' color='inherit'>
+                    {state.chemicalApplication.chemicals.length > 1 &&
+                        <Button onClick={removeChemicalEvent} variant='outlined' color='inherit'>
                             Remove
                         </Button>
                     }
