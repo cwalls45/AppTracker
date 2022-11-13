@@ -90,8 +90,6 @@ const ApplicationForm = () => {
                             </Grid>
                         </Grid>
                         <SizeOfAppArea
-                            chemicalApplicationForm={chemicalApplicationForm}
-                            setChemicalApplicationForm={setChemicalApplicationForm}
                         />
                     </Grid>
                 </Grid>
@@ -99,8 +97,6 @@ const ApplicationForm = () => {
                     <ChemicalInformationInput
                         key={index}
                         index={index}
-                        chemicalApplicationForm={chemicalApplicationForm}
-                        setChemicalApplicationForm={setChemicalApplicationForm}
                     />
                 ))}
                 <Grid container justifyContent='center' alignItems='center'>

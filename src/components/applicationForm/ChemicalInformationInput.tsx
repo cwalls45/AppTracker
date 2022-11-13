@@ -6,12 +6,10 @@ import FormInputText from "./FormInputText";
 import { ChemicalProperties, IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
 
 interface IProps {
-    chemicalApplicationForm: IChemicalApplicationForm,
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>
     index?: number;
 }
 
-const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
+const ChemicalInformationInput = ({ index }: IProps) => {
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
     return (
@@ -22,8 +20,6 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
                     property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
                     options={chemicalCompanyNames}
-                    chemicalApplicationForm={chemicalApplicationForm}
-                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -32,8 +28,6 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
                     property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
                     options={chemicals}
-                    chemicalApplicationForm={chemicalApplicationForm}
-                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -42,8 +36,6 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
                     property={ChemicalProperties.AMOUNT}
                     label='Amount'
                     options={units}
-                    chemicalApplicationForm={chemicalApplicationForm}
-                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -52,8 +44,6 @@ const ChemicalInformationInput = ({ chemicalApplicationForm, setChemicalApplicat
                     property={ChemicalProperties.UNITS}
                     label='Units'
                     options={units}
-                    chemicalApplicationForm={chemicalApplicationForm}
-                    setChemicalApplicationForm={setChemicalApplicationForm}
                 />
             </Grid>
         </Grid >

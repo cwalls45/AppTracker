@@ -11,12 +11,10 @@ interface IProps {
     options: string[];
     property: string;
     label: string;
-    chemicalApplicationForm: IChemicalApplicationForm;
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
     index?: number;
 };
 
-const ChemicalSelect = ({ options, property, label, chemicalApplicationForm, setChemicalApplicationForm, index }: IProps) => {
+const ChemicalSelect = ({ options, property, label, index }: IProps) => {
 
     const dispatch = useDispatch();
     const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(actionCreators, dispatch);
