@@ -1,27 +1,44 @@
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../types/ApplicationFormDefaultValues';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../../redux';
 
 interface IProps {
     label: string;
     property: string;
     options: any[];
-    chemicalApplicationForm: IChemicalApplicationForm;
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
 }
 
-const MultiSelect = ({ label, property, options, chemicalApplicationForm, setChemicalApplicationForm }: IProps) => {
+const MultiSelect = ({ label, property, options }: IProps) => {
+
+    const dispatch = useDispatch();
+    const { addAreaOfApplication, updateTargetPests } = bindActionCreators(actionCreators, dispatch);
 
     const [multiSelectValue, setMultiSelectValue] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
 
+    const actionCreatorFactory = (data, property: string) => {
+        if (property === ChemicalApplicationFormProperty.AREA_OF_APPLICATION) {
+            addAreaOfApplication({
+                data,
+                property
+            });
+        } else if (property === ChemicalApplicationFormProperty.TARGET_PESTS) {
+            updateTargetPests({
+                data,
+                property
+            });
+        }
+    }
 
     const handleMultiSelectChange = (event, newMultiSelectValue: string[]) => {
         setMultiSelectValue(newMultiSelectValue);
-        const newState = { ...chemicalApplicationForm, [property]: newMultiSelectValue };
-        setChemicalApplicationForm(newState);
+        actionCreatorFactory(newMultiSelectValue, property);
     };
+
     const handleInputChange = (event, newInputValue: string) => {
         setInputValue(newInputValue);
     };

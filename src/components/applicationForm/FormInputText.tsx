@@ -1,27 +1,44 @@
 import TextField from '@mui/material/TextField';
-import { IChemical, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators, State } from '../../redux';
 
 interface IProps {
     property: string;
     label: string;
-    chemicalApplicationForm: IChemicalApplicationForm;
-    setChemicalApplicationForm: React.Dispatch<React.SetStateAction<IChemicalApplicationForm>>;
     options?: string[];
     index?: number;
 };
 
-const FormInputText = ({ property, label, chemicalApplicationForm, setChemicalApplicationForm, options, index }: IProps) => {
+const FormInputText = ({ property, label, options, index }: IProps) => {
 
+    const dispatch = useDispatch();
+    const { updateTotalAreaOfApp, setChemicalAmount } = bindActionCreators(actionCreators, dispatch);
+    const state = useSelector((state: State) => state);
+
+    const actionCreatorFactory = (data, property: string) => {
+        if (property === ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP) {
+            updateTotalAreaOfApp({
+                data,
+                property
+            });
+        } else if (property === ChemicalProperties.AMOUNT) {
+            setChemicalAmount({
+                data,
+                property
+            });
+        }
+    }
 
     const handleChange = (event) => {
-        if (index) {
-            const objectToUpdate = { ...chemicalApplicationForm.chemicals[index], [property]: event.target.value.toString() };
-            const reconstructedChemicalList = [...chemicalApplicationForm.chemicals]
+        if (index !== undefined) {
+            const objectToUpdate = { ...state.chemicalApplication.chemicals[index], [property]: event.target.value.toString() };
+            const reconstructedChemicalList = [...state.chemicalApplication.chemicals]
             reconstructedChemicalList[index] = objectToUpdate
-            setChemicalApplicationForm({ ...chemicalApplicationForm, chemicals: reconstructedChemicalList });
+            actionCreatorFactory(reconstructedChemicalList, property)
         } else {
-            const propertyToUpdate = { ...chemicalApplicationForm, [property]: event.target.value };
-            setChemicalApplicationForm(propertyToUpdate);
+            actionCreatorFactory(event.target.value, property)
         }
     }
 
