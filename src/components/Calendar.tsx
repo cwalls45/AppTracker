@@ -1,10 +1,47 @@
 import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '../types/paths';
+
 
 const Calendar = () => {
+
+    const navigate = useNavigate();
+
     return (
         <Container>
-            <Scheduler view='month' />
+            <Scheduler
+                view='month'
+                month={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 1,
+                    endHour: 23,
+                    cellRenderer: ({ height, start, onClick, ...props }) => {
+                        return (
+                            <Button
+                                onClick={() => navigate(Paths.CREATE_APPLICATION)}
+                            />
+                        )
+                    }
+                }}
+                week={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 4,
+                    endHour: 21,
+                    step: 60,
+                    cellRenderer: ({ height, start, onClick, ...props }) => {
+                        return (
+                            <Button
+                                onClick={() => navigate(Paths.CREATE_APPLICATION)}
+                            />
+                        )
+                    }
+                }}
+
+            />
         </Container>
     );
 }
