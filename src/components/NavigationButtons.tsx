@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
+import { Paths } from '../types/paths';
 
 interface IProps {
     isLoggedIn: boolean;
@@ -8,8 +9,8 @@ interface IProps {
 const NavigationButtons = ({ isLoggedIn }: IProps) => {
 
     const routes = [
-        { path: '/calendar', text: 'Calendar' },
-        { path: '/createApplication', text: 'Create Application' }
+        { path: Paths.CALENDAR, text: 'Calendar' },
+        { path: Paths.CREATE_APPLICATION, text: 'Create Application' }
     ];
 
     return (
@@ -20,7 +21,7 @@ const NavigationButtons = ({ isLoggedIn }: IProps) => {
                         {route.text}
                     </Button>
                 )) :
-                    <Button component={Link} to='/login' color="inherit">
+                    <Button component={Link} to={Paths.LOGIN} color="inherit">
                         Login
                     </Button>
             }
