@@ -9,6 +9,8 @@ const Calendar = () => {
 
     const navigate = useNavigate();
 
+    const navigateToCreateApplication = () => navigate(Paths.CREATE_APPLICATION)
+
     return (
         <Container>
             <Scheduler
@@ -21,7 +23,7 @@ const Calendar = () => {
                     cellRenderer: ({ height, start, onClick, ...props }) => {
                         return (
                             <Button
-                                onClick={() => navigate(Paths.CREATE_APPLICATION)}
+                                onClick={navigateToCreateApplication}
                             />
                         )
                     }
@@ -35,7 +37,7 @@ const Calendar = () => {
                     cellRenderer: ({ height, start, onClick, ...props }) => {
                         return (
                             <Button
-                                onClick={() => navigate(Paths.CREATE_APPLICATION)}
+                                onClick={navigateToCreateApplication}
                             />
                         )
                     }
