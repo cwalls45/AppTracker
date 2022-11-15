@@ -1,5 +1,5 @@
-import { Action } from "../../types/Action";
-import { IChemicalApplicationForm } from "../../types/ApplicationFormDefaultValues";
+import { ChemicalApplicationFormActions } from "../../types/chemicalApplicationFormActions";
+import { IChemicalApplicationForm } from "../../types/applicationFormDefaultValues";
 import { chemicalListDefaultValues } from "../../utils/applicationFormDefaultValues";
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 
@@ -18,7 +18,7 @@ const initialState: IChemicalApplicationForm = {
     }],
 }
 
-const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: Action) => {
+const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: ChemicalApplicationFormActions) => {
     if (action.type === ChemicalApplicationActions.ADD_AREA_OF_APPLICATION) {
         return { ...state, areaOfApplication: action.payload.data };
     } else if (action.type === ChemicalApplicationActions.UPDATE_TARGET_PESTS) {
