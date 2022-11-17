@@ -1,4 +1,5 @@
 import { ApplicationsActions } from "../redux/action-types/applicationsActionTypes";
+import { IApplication } from "./applications";
 
 export type ApplicationActionsType =
     IAddApplication;
@@ -9,6 +10,5 @@ export interface IAddApplication {
 };
 
 export interface IApplicationPayload {
-    data: [];
-    property: string;
+    data: IApplication;
 };

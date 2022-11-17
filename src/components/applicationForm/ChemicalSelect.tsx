@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../../redux';
+import { chemicalApplicationFormActionCreators, State } from '../../redux';
 import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/applicationFormDefaultValues';
 
 interface IProps {
@@ -17,7 +17,7 @@ interface IProps {
 const ChemicalSelect = ({ options, property, label, index }: IProps) => {
 
     const dispatch = useDispatch();
-    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(actionCreators, dispatch);
+    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {

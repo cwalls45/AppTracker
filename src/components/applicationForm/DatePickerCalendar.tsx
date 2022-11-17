@@ -8,7 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { IChemicalApplicationForm } from '../../types/applicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../../redux';
+import { chemicalApplicationFormActionCreators } from '../../redux';
 import { State } from '../../redux/reducers';
 
 interface IProps {
@@ -19,7 +19,7 @@ interface IProps {
 const DatePickerCalendar = ({ label, property }: IProps) => {
 
     const dispatch = useDispatch();
-    const { updateDateOfApplication } = bindActionCreators(actionCreators, dispatch);
+    const { updateDateOfApplication } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
     const dateOfApplication = useSelector((state: State) => state.chemicalApplication.dateOfApplication);
 
     const [date, setDate] = useState<Dayjs>(dayjs);
