@@ -18,7 +18,7 @@ const initialState: IChemicalApplicationForm = {
     }],
 }
 
-const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: ChemicalApplicationFormActions) => {
+const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialState, action: ChemicalApplicationFormActions): IChemicalApplicationForm => {
     if (action.type === ChemicalApplicationActions.ADD_AREA_OF_APPLICATION) {
         return { ...state, areaOfApplication: action.payload.data };
     } else if (action.type === ChemicalApplicationActions.UPDATE_TARGET_PESTS) {

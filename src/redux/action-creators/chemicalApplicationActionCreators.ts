@@ -1,15 +1,15 @@
 import { Dispatch } from 'redux';
-import { ChemicalApplicationFormActions, IChemicalsPayload, IStringPayload } from '../../types/chemicalApplicationFormActions';
+import { ChemicalApplicationFormActions, IChemicalsPayload, IStringArrayPayload, IStringPayload } from '../../types/chemicalApplicationFormActions';
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes"
 
-export const addAreaOfApplication = (addAreaOfApplication: IStringPayload) => {
+export const addAreaOfApplication = (addAreaOfApplication: IStringArrayPayload) => {
     return (dispatch: Dispatch<ChemicalApplicationFormActions>) => dispatch({
         type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION,
         payload: addAreaOfApplication
     })
 };
 
-export const updateTargetPests = (updateTargetPest: IStringPayload) => {
+export const updateTargetPests = (updateTargetPest: IStringArrayPayload) => {
     return (dispatch: Dispatch<ChemicalApplicationFormActions>) => dispatch({
         type: ChemicalApplicationActions.UPDATE_TARGET_PESTS,
         payload: updateTargetPest

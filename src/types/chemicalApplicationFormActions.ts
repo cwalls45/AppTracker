@@ -16,12 +16,12 @@ export type ChemicalApplicationFormActions =
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;
-    payload: IStringPayload;
+    payload: IStringArrayPayload;
 };
 
 export interface IUpdateTargetPests {
     type: ChemicalApplicationActions.UPDATE_TARGET_PESTS;
-    payload: IStringPayload;
+    payload: IStringArrayPayload;
 };
 
 export interface IUpdateDateOfApplication {
@@ -65,6 +65,11 @@ export interface IAddChemical {
 
 export interface IRemoveChemical {
     type: ChemicalApplicationActions.REMOVE_CHEMICAL;
+};
+
+export interface IStringArrayPayload {
+    data: string[];
+    property: string;
 };
 
 export interface IStringPayload {

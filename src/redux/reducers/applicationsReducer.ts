@@ -4,7 +4,7 @@ import { ApplicationsActions } from "../action-types/applicationsActionTypes";
 
 const initialState: IApplication[] = [];
 
-const applicationsReducer = (state = initialState, action: ApplicationActionsType) => {
+const applicationsReducer = (state = initialState, action: ApplicationActionsType): IApplication[] => {
     if (action.type === ApplicationsActions.ADD_APPLICATION) {
         return [...state, action.payload];
     } else {
