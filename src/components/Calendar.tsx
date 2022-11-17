@@ -3,9 +3,13 @@ import Button from '@mui/material/Button';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../types/paths';
+import { useSelector } from 'react-redux';
+import { State } from '../redux';
 
 
 const Calendar = () => {
+
+    const state = useSelector((state: State) => state);
 
     const navigate = useNavigate();
 
@@ -15,6 +19,7 @@ const Calendar = () => {
         <Container>
             <Scheduler
                 view='month'
+                events={state.applications}
                 month={{
                     weekDays: [0, 1, 2, 3, 4, 5, 6],
                     weekStartOn: 0,

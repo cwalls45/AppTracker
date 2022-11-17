@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 export const formatChemicalApplicationToApplicationEvent = (chemApp: IChemicalApplicationForm): IApplication => {
     const event_id = `application-${uuidv4()}`
     const applicationDate = new Date(chemApp.dateOfApplication);
-    console.log('applicationDate', applicationDate)
     return {
         event_id,
         title: combineAreaOfApplication(chemApp.areaOfApplication),
@@ -15,5 +14,5 @@ export const formatChemicalApplicationToApplicationEvent = (chemApp: IChemicalAp
 };
 
 export const combineAreaOfApplication = (areas: string[]) => {
-    return 'This, is, a, test';
+    return areas.join(', ');
 }

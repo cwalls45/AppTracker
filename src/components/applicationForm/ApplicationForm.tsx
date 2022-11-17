@@ -40,7 +40,8 @@ const ApplicationForm = () => {
         event.preventDefault();
         if (!attestForm) return;
         console.log('Chemical List', state)
-        // formatChemicalApplicationToApplicationEvent(state.chemicalApplication)
+        const formattedApplicationEventPayload = { data: formatChemicalApplicationToApplicationEvent(state.chemicalApplication) };
+        addApplication(formattedApplicationEventPayload);
     }
 
     return (
