@@ -64,8 +64,8 @@ const ApplicationForm = () => {
                         </Grid>
                     </Grid>
                     <Grid container justifyContent='space-evenly'>
-                        <Grid container xs={11} md={6}>
-                            <Grid xs={12}>
+                        <Grid item xs={11} md={6}>
+                            <Grid item xs={12}>
                                 <MultiSelect
                                     label='Area of Application'
                                     property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
@@ -96,7 +96,7 @@ const ApplicationForm = () => {
                             Remove
                         </Button>
                     }
-                    <Button variant='outlined' color='inherit' type='submit' disabled={!attestForm}>
+                    <Button variant='contained' type='submit' disabled={!attestForm}>
                         Submit
                     </Button>
                 </Grid>

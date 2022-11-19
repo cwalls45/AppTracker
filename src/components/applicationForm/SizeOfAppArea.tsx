@@ -1,13 +1,13 @@
 import Grid from '@mui/material/Grid';
 import FormInputText from "./FormInputText";
 import ChemicalSelect from "./ChemicalSelect";
-import { ChemicalApplicationFormProperty, IChemicalApplicationForm } from "../../types/applicationFormDefaultValues";
+import { ChemicalApplicationFormProperty } from "../../types/applicationFormDefaultValues";
 import { sizeOfApplicationAreaUnits } from '../../dummyData/areaOfApplication';
 
 const SizeOfAppArea = () => {
 
     return (
-        <Grid container justifyContent='space-evenly' xs={6} md={5}>
+        <Grid item justifyContent='space-evenly' xs={6} md={5}>
             <Grid>
                 <FormInputText
                     property={ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP}

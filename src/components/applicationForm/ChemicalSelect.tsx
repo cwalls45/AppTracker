@@ -80,6 +80,10 @@ const ChemicalSelect = ({ options, property, label, index }: IProps) => {
                     helperText={''}
                 />
             )}
+            isOptionEqualToValue={(option, value) => {
+                if (option === value || !value) return true
+                else return false;
+            }}
         />
     )
 }
