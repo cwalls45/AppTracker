@@ -1,8 +1,8 @@
 import TextField from '@mui/material/TextField';
-import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/applicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../../redux';
+import { chemicalApplicationFormActionCreators, State } from '../../redux';
 
 interface IProps {
     property: string;
@@ -14,7 +14,7 @@ interface IProps {
 const FormInputText = ({ property, label, options, index }: IProps) => {
 
     const dispatch = useDispatch();
-    const { updateTotalAreaOfApp, setChemicalAmount } = bindActionCreators(actionCreators, dispatch);
+    const { updateTotalAreaOfApp, setChemicalAmount } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {

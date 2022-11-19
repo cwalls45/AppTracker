@@ -6,18 +6,20 @@ import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { ChemicalApplicationFormProperty } from '../../types/ApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../types/applicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators, State } from '../../redux'
+import { applicationsActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
 import { bindActionCreators } from 'redux';
+import { formatChemicalApplicationToApplicationEvent } from '../../utils/formatChemicalApplicationToApplicationEvent';
 
 const ApplicationForm = () => {
 
     const dispatch = useDispatch();
-    const { addChemical, removeChemical } = bindActionCreators(actionCreators, dispatch);
+    const { addChemical, removeChemical } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
+    const { addApplication } = bindActionCreators(applicationsActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const [attestForm, setAttestForm] = useState<boolean>(false);
@@ -38,6 +40,8 @@ const ApplicationForm = () => {
         event.preventDefault();
         if (!attestForm) return;
         console.log('Chemical List', state)
+        const formattedApplicationEventPayload = { data: formatChemicalApplicationToApplicationEvent(state.chemicalApplication) };
+        addApplication(formattedApplicationEventPayload);
     }
 
     return (
@@ -60,8 +64,8 @@ const ApplicationForm = () => {
                         </Grid>
                     </Grid>
                     <Grid container justifyContent='space-evenly'>
-                        <Grid container xs={11} md={6}>
-                            <Grid xs={12}>
+                        <Grid item xs={11} md={6}>
+                            <Grid item xs={12}>
                                 <MultiSelect
                                     label='Area of Application'
                                     property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
@@ -92,7 +96,7 @@ const ApplicationForm = () => {
                             Remove
                         </Button>
                     }
-                    <Button variant='outlined' color='inherit' type='submit' disabled={!attestForm}>
+                    <Button variant='contained' type='submit' disabled={!attestForm}>
                         Submit
                     </Button>
                 </Grid>
