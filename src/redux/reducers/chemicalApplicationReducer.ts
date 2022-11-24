@@ -1,5 +1,5 @@
 import { ChemicalApplicationFormActions } from "../../types/chemicalApplicationFormActions";
-import { IChemicalApplicationForm } from "../../types/applicationFormDefaultValues";
+import { IChemicalApplicationForm } from "../../types/chemicalApplicationFormDefaultValues";
 import { chemicalListDefaultValues } from "../../utils/applicationFormDefaultValues";
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 

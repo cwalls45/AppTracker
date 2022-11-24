@@ -1,5 +1,5 @@
 import { ChemicalApplicationActions } from "../redux/action-types/chemicalApplicationActionTypes";
-import { IChemical } from "./applicationFormDefaultValues";
+import { IChemical } from "./chemicalApplicationFormDefaultValues";
 
 export type ChemicalApplicationFormActions =
     IAddAreaOfApplicationAction

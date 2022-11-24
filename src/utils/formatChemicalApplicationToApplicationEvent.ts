@@ -1,4 +1,4 @@
-import { IChemicalApplicationForm } from "../types/applicationFormDefaultValues";
+import { IChemicalApplicationForm } from "../types/chemicalApplicationFormDefaultValues";
 import { IApplication } from "../types/applications";
 import { v4 as uuidv4 } from 'uuid';
 

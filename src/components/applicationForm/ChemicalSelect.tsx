@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
-import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/applicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../types/chemicalApplicationFormDefaultValues';
 
 interface IProps {
     options: string[];

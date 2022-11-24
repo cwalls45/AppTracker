@@ -1,4 +1,4 @@
-import { IChemical, IChemicalApplicationForm } from "../types/applicationFormDefaultValues";
+import { IChemical, IChemicalApplicationForm } from "../types/chemicalApplicationFormDefaultValues";
 
 export const defaultValues = (): IChemicalApplicationForm => ({
     dateOfApplication: '',
