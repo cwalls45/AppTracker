@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { Scheduler } from '@aldabil/react-scheduler';
 import { useNavigate } from 'react-router-dom';
-import { Paths } from '../types/paths';
+import { Paths } from '../entities/paths';
 import { useSelector } from 'react-redux';
 import { State } from '../redux';
 

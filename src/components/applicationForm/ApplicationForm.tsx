@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { ChemicalApplicationFormProperty } from '../../types/applicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../entities/chemicalApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
@@ -19,7 +19,7 @@ const ApplicationForm = () => {
 
     const dispatch = useDispatch();
     const { addChemical, removeChemical } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
-    const { addApplication } = bindActionCreators(applicationsActionCreators, dispatch);
+    const { postChemicalApplication } = bindActionCreators(applicationsActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const [attestForm, setAttestForm] = useState<boolean>(false);
@@ -39,9 +39,7 @@ const ApplicationForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (!attestForm) return;
-        console.log('Chemical List', state)
-        const formattedApplicationEventPayload = { data: formatChemicalApplicationToApplicationEvent(state.chemicalApplication) };
-        addApplication(formattedApplicationEventPayload);
+        postChemicalApplication(state.chemicalApplication);
     }
 
     return (

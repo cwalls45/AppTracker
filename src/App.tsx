@@ -6,7 +6,7 @@ import Calendar from './components/Calendar';
 import ApplicationForm from './components/applicationForm/ApplicationForm';
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
-import { Paths } from './types/paths';
+import { Paths } from './entities/paths';
 
 const App = () => {
 
