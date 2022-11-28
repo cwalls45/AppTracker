@@ -1,5 +1,5 @@
-import { IApplication } from "../../types/applications";
-import { ApplicationActionsType } from "../../types/applicationsActions";
+import { IApplication } from "../../entities/applications";
+import { ApplicationActionsType } from "../../entities/applicationsActions";
 import { ApplicationsActions } from "../action-types/applicationsActionTypes";
 
 const initialState: IApplication[] = [];

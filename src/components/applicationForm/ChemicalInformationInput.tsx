@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import { chemicals } from "../../dummyData/chemical";
 import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
 import FormInputText from "./FormInputText";
-import { ChemicalProperties, IChemicalApplicationForm } from "../../types/chemicalApplicationFormDefaultValues";
+import { ChemicalProperties, IChemicalApplicationForm } from "../../entities/chemicalApplicationFormDefaultValues";
 
 interface IProps {
     index?: number;

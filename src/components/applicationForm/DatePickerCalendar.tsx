@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { IChemicalApplicationForm } from '../../types/chemicalApplicationFormDefaultValues';
+import { IChemicalApplicationForm } from '../../entities/chemicalApplicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators } from '../../redux';

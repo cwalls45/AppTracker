@@ -6,7 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { ChemicalApplicationFormProperty } from '../../types/chemicalApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty } from '../../entities/chemicalApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';

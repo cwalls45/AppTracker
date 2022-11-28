@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import FormInputText from "./FormInputText";
 import ChemicalSelect from "./ChemicalSelect";
-import { ChemicalApplicationFormProperty } from "../../types/chemicalApplicationFormDefaultValues";
+import { ChemicalApplicationFormProperty } from "../../entities/chemicalApplicationFormDefaultValues";
 import { sizeOfApplicationAreaUnits } from '../../dummyData/areaOfApplication';
 
 const SizeOfAppArea = () => {
