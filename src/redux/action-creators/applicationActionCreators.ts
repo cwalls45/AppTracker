@@ -23,7 +23,7 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
                 payload: formattedApplicationEvent
             });
         } catch (error) {
-            console.log('error', error)
+            console.log('error', error.response.data)
         }
     }
 }
