@@ -13,7 +13,6 @@ import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
 import { applicationsActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
 import { bindActionCreators } from 'redux';
-import { formatChemicalApplicationToApplicationEvent } from '../../utils/formatChemicalApplicationToApplicationEvent';
 
 const ApplicationForm = () => {
 
