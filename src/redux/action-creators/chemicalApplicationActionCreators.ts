@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ChemicalApplicationFormActions, IChemicalsPayload, IStringArrayPayload, IStringPayload } from '../../entities/chemicalApplicationFormActions';
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
@@ -75,4 +76,16 @@ export const removeChemical = () => {
     return (dispatch: Dispatch<ChemicalApplicationFormActions>) => dispatch({
         type: ChemicalApplicationActions.REMOVE_CHEMICAL,
     })
+};
+
+export const fetchChemicalByPartialName = () => {
+    return async (dispatch: Dispatch<ChemicalApplicationFormActions>) => {
+        try {
+            const response = await axios.get('http://localhost:3000/api//partialChemicalName/propiconazole');
+            let chemicals = response.data;
+            console.log('CHEMICALS', chemicals)
+        } catch (error) {
+            console.log('ERROR: ', error.response)
+        }
+    }
 };

@@ -12,7 +12,8 @@ export type ChemicalApplicationFormActions =
     | ISetChemicalAmount
     | ISetChemicalAmountUnits
     | IAddChemical
-    | IRemoveChemical;
+    | IRemoveChemical
+    | IFetchChemicalByPartialName;
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;
@@ -65,6 +66,10 @@ export interface IAddChemical {
 
 export interface IRemoveChemical {
     type: ChemicalApplicationActions.REMOVE_CHEMICAL;
+};
+
+export interface IFetchChemicalByPartialName {
+    type: ChemicalApplicationActions.FETCH_CHEMICAL_BY_PARTIAL_NAME;
 };
 
 export interface IStringArrayPayload {
