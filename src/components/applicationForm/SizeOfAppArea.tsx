@@ -18,7 +18,8 @@ const SizeOfAppArea = () => {
                 <ChemicalSelect
                     property={ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP_UNIT}
                     label='Unit'
-                    options={sizeOfApplicationAreaUnits}
+                    defaultOptions={sizeOfApplicationAreaUnits}
+                    asyncOptions={false}
                 />
             </Grid>
         </Grid>

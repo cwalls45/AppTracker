@@ -1,6 +1,6 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,13 +8,14 @@ import { chemicalApplicationFormActionCreators, State } from '../../redux';
 import { ChemicalApplicationFormProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
 
 interface IProps {
-    options: string[];
+    asyncOptions: boolean
+    defaultOptions: string[];
     property: string;
     label: string;
     index?: number;
 };
 
-const ChemicalSelect = ({ options, property, label, index }: IProps) => {
+const ChemicalSelect = ({ asyncOptions, defaultOptions, property, label, index }: IProps) => {
 
     const dispatch = useDispatch();
     const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits, fetchChemicalByPartialName } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
@@ -46,6 +47,7 @@ const ChemicalSelect = ({ options, property, label, index }: IProps) => {
 
     const [autoCompleteValue, setAutoCompleteValue] = useState('');
     const [inputValue, setInputValue] = useState('');
+    const [options, setOptions] = useState(defaultOptions);
 
     const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
         setAutoCompleteValue(newAutoCompleteValue);
@@ -61,9 +63,14 @@ const ChemicalSelect = ({ options, property, label, index }: IProps) => {
     }
 
     const handleInputChange = (event, newInputValue: string) => {
-        console.log('input fired')
-        setInputValue(newInputValue);
-        fetchChemicalByPartialName();
+        if (asyncOptions) {
+            console.log('ASYNC input fired')
+            setInputValue(newInputValue);
+            // fetchChemicalByPartialName();
+        } else {
+            console.log('input fired')
+            setInputValue(newInputValue);
+        }
     }
 
     return (

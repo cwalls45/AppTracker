@@ -19,7 +19,9 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
-                    options={chemicals}
+                    defaultOptions={[]}
+                    asyncOptions={true}
+
                 />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -27,7 +29,8 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
-                    options={chemicalCompanyNames}
+                    defaultOptions={chemicalCompanyNames}
+                    asyncOptions={false}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -43,7 +46,8 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.UNITS}
                     label='Units'
-                    options={units}
+                    defaultOptions={units}
+                    asyncOptions={false}
                 />
             </Grid>
         </Grid >
