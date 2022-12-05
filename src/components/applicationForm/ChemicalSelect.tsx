@@ -1,20 +1,28 @@
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
-import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface IProps {
-    options: string[];
+    defaultOptions: string[];
     property: string;
     label: string;
+    apiRequestFunc?: (queryString: string) => Promise<any>;
     index?: number;
 };
 
-const ChemicalSelect = ({ options, property, label, index }: IProps) => {
+const ChemicalSelect = ({ defaultOptions, property, label, apiRequestFunc, index }: IProps) => {
+
+    const [autoCompleteValue, setAutoCompleteValue] = useState('');
+    const [searchValue, setSearchValue] = useState('');
+    const [options, setOptions] = useState(defaultOptions);
+    const [isSearching, setIsSearching] = useState(false);
+    const debouncedSearchTerm = useDebounce(searchValue, 300);
 
     const dispatch = useDispatch();
     const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
@@ -44,9 +52,6 @@ const ChemicalSelect = ({ options, property, label, index }: IProps) => {
         }
     }
 
-    const [autoCompleteValue, setAutoCompleteValue] = useState('');
-    const [inputValue, setInputValue] = useState('');
-
     const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
         setAutoCompleteValue(newAutoCompleteValue);
         if (index !== undefined) {
@@ -57,19 +62,38 @@ const ChemicalSelect = ({ options, property, label, index }: IProps) => {
         } else {
             actionCreatorFactory(newAutoCompleteValue, property)
         }
-
-    }
+    };
 
     const handleInputChange = (event, newInputValue: string) => {
-        setInputValue(newInputValue);
-    }
+        setSearchValue(newInputValue);
+    };
+
+    useEffect(() => {
+        if (apiRequestFunc) {
+            if (debouncedSearchTerm) {
+                const fetchData = async () => {
+                    const searchResults = await apiRequestFunc(searchValue);
+                    setOptions(searchResults);
+                    setIsSearching(false);
+                };
+
+                setIsSearching(true);
+                fetchData().catch((error) => console.log('Error in ChemicalSelect: ', error))
+            } else {
+                setOptions([]);
+                setIsSearching(false);
+            }
+        }
+    }, [debouncedSearchTerm]);
 
     return (
         <Autocomplete
             options={options}
+            filterOptions={(searchResults) => searchResults}
+            loading={isSearching}
             value={autoCompleteValue}
             onChange={(event, newAutoCompleteValue: string) => handleAutoCompleteChange(event, newAutoCompleteValue)}
-            inputValue={inputValue}
+            inputValue={searchValue}
             onInputChange={(event, newInputValue) => handleInputChange(event, newInputValue)}
             renderInput={(params) => (
                 <TextField

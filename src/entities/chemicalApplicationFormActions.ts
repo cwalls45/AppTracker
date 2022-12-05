@@ -12,7 +12,7 @@ export type ChemicalApplicationFormActions =
     | ISetChemicalAmount
     | ISetChemicalAmountUnits
     | IAddChemical
-    | IRemoveChemical;
+    | IRemoveChemical
 
 export interface IAddAreaOfApplicationAction {
     type: ChemicalApplicationActions.ADD_AREA_OF_APPLICATION;

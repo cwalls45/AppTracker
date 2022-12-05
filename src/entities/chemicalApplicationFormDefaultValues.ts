@@ -29,3 +29,9 @@ export enum ChemicalProperties {
     AMOUNT = 'amount',
     UNITS = 'units'
 };
+
+export interface IProductSummary {
+    epaRegistrationNumber: string;
+    productName: string;
+    productStatus: string;
+}
