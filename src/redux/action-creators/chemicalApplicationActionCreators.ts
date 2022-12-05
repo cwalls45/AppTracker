@@ -77,15 +77,3 @@ export const removeChemical = () => {
         type: ChemicalApplicationActions.REMOVE_CHEMICAL,
     })
 };
-
-export const fetchChemicalByPartialName = () => {
-    return async (dispatch: Dispatch<ChemicalApplicationFormActions>) => {
-        try {
-            const response = await axios.get('http://localhost:3000/api//partialChemicalName/propiconazole');
-            let chemicals = response.data;
-            console.log('CHEMICALS', chemicals)
-        } catch (error) {
-            console.log('ERROR: ', error.response)
-        }
-    }
-};

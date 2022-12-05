@@ -6,19 +6,26 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
 import { ChemicalApplicationFormProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface IProps {
-    asyncOptions: boolean
     defaultOptions: string[];
     property: string;
     label: string;
+    apiRequestFunc?: (queryString: string) => Promise<any>;
     index?: number;
 };
 
-const ChemicalSelect = ({ asyncOptions, defaultOptions, property, label, index }: IProps) => {
+const ChemicalSelect = ({ defaultOptions, property, label, apiRequestFunc, index }: IProps) => {
+
+    const [autoCompleteValue, setAutoCompleteValue] = useState('');
+    const [searchValue, setSearchValue] = useState('');
+    const [options, setOptions] = useState(defaultOptions);
+    const [isSearching, setIsSearching] = useState(false);
+    const debouncedSearchTerm = useDebounce(searchValue, 300);
 
     const dispatch = useDispatch();
-    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits, fetchChemicalByPartialName } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
+    const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {
@@ -45,10 +52,6 @@ const ChemicalSelect = ({ asyncOptions, defaultOptions, property, label, index }
         }
     }
 
-    const [autoCompleteValue, setAutoCompleteValue] = useState('');
-    const [inputValue, setInputValue] = useState('');
-    const [options, setOptions] = useState(defaultOptions);
-
     const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
         setAutoCompleteValue(newAutoCompleteValue);
         if (index !== undefined) {
@@ -59,26 +62,38 @@ const ChemicalSelect = ({ asyncOptions, defaultOptions, property, label, index }
         } else {
             actionCreatorFactory(newAutoCompleteValue, property)
         }
-
-    }
+    };
 
     const handleInputChange = (event, newInputValue: string) => {
-        if (asyncOptions) {
-            console.log('ASYNC input fired')
-            setInputValue(newInputValue);
-            // fetchChemicalByPartialName();
-        } else {
-            console.log('input fired')
-            setInputValue(newInputValue);
+        setSearchValue(newInputValue);
+    };
+
+    useEffect(() => {
+        if (apiRequestFunc) {
+            if (debouncedSearchTerm) {
+                const fetchData = async () => {
+                    const searchResults = await apiRequestFunc(searchValue);
+                    setOptions(searchResults);
+                    setIsSearching(false);
+                };
+
+                setIsSearching(true);
+                fetchData().catch((error) => console.log('Error in ChemicalSelect: ', error))
+            } else {
+                setOptions([]);
+                setIsSearching(false);
+            }
         }
-    }
+    }, [debouncedSearchTerm]);
 
     return (
         <Autocomplete
             options={options}
+            filterOptions={(searchResults) => searchResults}
+            loading={isSearching}
             value={autoCompleteValue}
             onChange={(event, newAutoCompleteValue: string) => handleAutoCompleteChange(event, newAutoCompleteValue)}
-            inputValue={inputValue}
+            inputValue={searchValue}
             onInputChange={(event, newInputValue) => handleInputChange(event, newInputValue)}
             renderInput={(params) => (
                 <TextField

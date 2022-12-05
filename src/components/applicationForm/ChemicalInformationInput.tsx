@@ -4,6 +4,7 @@ import { chemicals } from "../../dummyData/chemical";
 import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
 import FormInputText from "./FormInputText";
 import { ChemicalProperties, IChemicalApplicationForm } from "../../entities/chemicalApplicationFormDefaultValues";
+import { searchChemicalNames } from "../../utils/apiRequests";
 
 interface IProps {
     index?: number;
@@ -20,7 +21,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
                     defaultOptions={[]}
-                    asyncOptions={true}
+                    apiRequestFunc={searchChemicalNames}
 
                 />
             </Grid>
@@ -30,7 +31,6 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
                     defaultOptions={chemicalCompanyNames}
-                    asyncOptions={false}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -47,7 +47,6 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.UNITS}
                     label='Units'
                     defaultOptions={units}
-                    asyncOptions={false}
                 />
             </Grid>
         </Grid >
