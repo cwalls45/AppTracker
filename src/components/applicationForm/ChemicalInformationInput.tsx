@@ -1,17 +1,21 @@
-import ChemicalSelect from "./ChemicalSelect";
 import Grid from '@mui/material/Grid';
-import { chemicals } from "../../dummyData/chemical";
-import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
+import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
-import { ChemicalProperties, IChemicalApplicationForm } from "../../entities/chemicalApplicationFormDefaultValues";
+import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
+import { ChemicalProperties } from "../../entities/chemicalApplicationFormDefaultValues";
 import { searchChemicalNames } from "../../utils/apiRequests";
+import { State } from '../../redux';
+import { useSelector } from 'react-redux';
 
 interface IProps {
-    index?: number;
+    index: number;
 }
 
 const ChemicalInformationInput = ({ index }: IProps) => {
+
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
+
+    const { chemicalApplication } = useSelector((state: State) => state);
 
     return (
         <Grid container justifyContent='space-around'>
@@ -21,6 +25,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
                     defaultOptions={[]}
+                    dependentValue={null}
                     apiRequestFunc={searchChemicalNames}
 
                 />
@@ -31,6 +36,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
                     defaultOptions={chemicalCompanyNames}
+                    dependentValue={chemicalApplication.chemicals[index].chemicalName}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
@@ -47,6 +53,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     property={ChemicalProperties.UNITS}
                     label='Units'
                     defaultOptions={units}
+                    dependentValue={null}
                 />
             </Grid>
         </Grid >
