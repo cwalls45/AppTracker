@@ -4,7 +4,7 @@ import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
 import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
 import { ChemicalProperties } from "../../entities/chemicalApplicationFormDefaultValues";
-import { searchChemicalNames } from "../../utils/apiRequests";
+import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
 import { useSelector } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -17,35 +17,47 @@ const ChemicalInformationInput = ({ index }: IProps) => {
 
     const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
-    const [options, setOptions] = useState([]);
+    const [chemicalOptions, setChemicalOptions] = useState<string[]>([]);
+    const [companyOptions, setCompanyOptions] = useState<string[]>([]);
     const [isSearching, setIsSearching] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const { chemicalApplication } = useSelector((state: State) => state);
-    const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 300);
+    const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 400);
 
     const fetchData = async (
         searchValue: string,
-        apiRequestFunc: (queryString: string) => Promise<any>
+        apiRequestFunc: (queryString: string) => Promise<any>,
+        setterFunc: React.Dispatch<React.SetStateAction<string[]>>
     ) => {
         const searchResults = await apiRequestFunc(searchValue);
-        console.log('searchResults', searchResults)
-        setOptions(searchResults);
+        setterFunc(searchResults);
         setIsSearching(false);
     };
 
     useEffect(() => {
-        console.log('in useeffect', debouncedChemicalName)
-        console.log('index', index)
         if (debouncedChemicalName) {
-            console.log('inDebounceChemicalName', debouncedChemicalName)
             setIsSearching(true);
-            fetchData(chemicalApplication.chemicals[index].chemicalName, searchChemicalNames)
+            fetchData(chemicalApplication.chemicals[index].chemicalName, searchChemicalNames, setChemicalOptions)
                 .catch((error) => {
                     setIsSearching(false);
-                    console.log('Error in ChemicalSelect: ', error);
+                    console.log('Error fetching chemical Names: ', error);
                 })
         } else {
-            setOptions([]);
+            setChemicalOptions([]);
+            setIsSearching(false);
+        }
+    }, [debouncedChemicalName]);
+
+    useEffect(() => {
+        if (debouncedChemicalName) {
+            setIsSearching(true);
+            fetchData(chemicalApplication.chemicals[index].chemicalName, searchChemicalCompaniesByName, setCompanyOptions)
+                .catch((error) => {
+                    setIsSearching(false);
+                    console.log('Error fetching chemical company names: ', error);
+                })
+        } else {
+            setCompanyOptions([]);
             setIsSearching(false);
         }
     }, [debouncedChemicalName]);
@@ -58,7 +70,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.CHEMICAL_NAME}
                     label='Chemical Name'
-                    options={options}
+                    options={chemicalOptions}
                     isSearching={isSearching}
                     isDisabled={false}
                 />
@@ -68,7 +80,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.CHEMICAL_COMPANY}
                     label='Chemical Company'
-                    options={chemicalCompanyNames}
+                    options={companyOptions}
                     isSearching={isSearching}
                     isDisabled={false}
                 />
