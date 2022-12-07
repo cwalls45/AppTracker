@@ -1,30 +1,24 @@
+import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
 import { ChemicalApplicationFormProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
-import { useDebounce } from '../../hooks/useDebounce';
 
 interface IProps {
-    defaultOptions: string[];
     property: string;
     label: string;
-    dependentValue: any;
-    apiRequestFunc?: (queryString: string) => Promise<any>;
+    options: string[];
+    isSearching: boolean;
+    isDisabled: boolean
     index?: number;
 };
 
-const ChemicalSelect = ({ defaultOptions, property, label, dependentValue, apiRequestFunc, index }: IProps) => {
+const ChemicalSelect = ({ property, label, options, isSearching, isDisabled, index }: IProps) => {
 
-    const [autoCompleteValue, setAutoCompleteValue] = useState('');
     const [searchValue, setSearchValue] = useState('');
-    const [options, setOptions] = useState(defaultOptions);
-    const [isSearching, setIsSearching] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
-    const debouncedSearchTerm = useDebounce(searchValue, 300);
 
     const dispatch = useDispatch();
     const { updateTotalAreaOfAppUnits, setChemicalCompany, setChemicalName, setChemicalAmountUnits } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
@@ -54,47 +48,17 @@ const ChemicalSelect = ({ defaultOptions, property, label, dependentValue, apiRe
         }
     }
 
-    const handleAutoCompleteChange = (event, newAutoCompleteValue: string) => {
-        setAutoCompleteValue(newAutoCompleteValue);
+    const handleInputChange = (event, newInputValue: string) => {
+        setSearchValue(newInputValue);
         if (index !== undefined) {
-            const objectToUpdate = { ...state.chemicalApplication.chemicals[index], [property]: newAutoCompleteValue };
+            const objectToUpdate = { ...state.chemicalApplication.chemicals[index], [property]: newInputValue };
             const reconstructedChemicalList = [...state.chemicalApplication.chemicals]
             reconstructedChemicalList[index] = objectToUpdate
             actionCreatorFactory(reconstructedChemicalList, property)
         } else {
-            actionCreatorFactory(newAutoCompleteValue, property)
+            actionCreatorFactory(newInputValue, property)
         }
     };
-
-    const handleInputChange = (event, newInputValue: string) => {
-        setSearchValue(newInputValue);
-    };
-
-    useEffect(() => {
-        if (apiRequestFunc) {
-            if (debouncedSearchTerm) {
-                const fetchData = async (searchValue: string) => {
-                    const searchResults = await apiRequestFunc(searchValue);
-                    setOptions(searchResults);
-                    setIsSearching(false);
-                };
-
-                setIsSearching(true);
-                fetchData(searchValue).catch((error) => console.log('Error in ChemicalSelect: ', error))
-            } else {
-                setOptions([]);
-                setIsSearching(false);
-            }
-        }
-    }, [debouncedSearchTerm]);
-
-    useEffect(() => {
-        if (dependentValue !== null && !dependentValue) {
-            setIsDisabled(true);
-        } else if (dependentValue !== null && dependentValue) {
-            setIsDisabled(false)
-        }
-    }, [dependentValue])
 
     return (
         <Autocomplete
@@ -102,8 +66,6 @@ const ChemicalSelect = ({ defaultOptions, property, label, dependentValue, apiRe
             filterOptions={(searchResults) => searchResults}
             loading={isSearching}
             disabled={isDisabled}
-            value={autoCompleteValue}
-            onChange={(event, newAutoCompleteValue: string) => handleAutoCompleteChange(event, newAutoCompleteValue)}
             inputValue={searchValue}
             onInputChange={(event, newInputValue) => handleInputChange(event, newInputValue)}
             renderInput={(params) => (
