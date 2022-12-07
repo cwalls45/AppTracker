@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
-import { chemicalCompanyNames } from "../../dummyData/chemicalCompanyNames";
 import { ChemicalProperties } from "../../entities/chemicalApplicationFormDefaultValues";
 import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
