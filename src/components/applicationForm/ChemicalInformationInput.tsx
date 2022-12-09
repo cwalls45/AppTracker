@@ -20,6 +20,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
     const [isSearching, setIsSearching] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+
     const { chemicalApplication } = useSelector((state: State) => state);
     const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 400);
 
@@ -81,7 +82,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     label='Chemical Company'
                     options={companyOptions}
                     isSearching={isSearching}
-                    isDisabled={false}
+                    isDisabled={chemicalApplication.chemicals[index].chemicalName === ''}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
