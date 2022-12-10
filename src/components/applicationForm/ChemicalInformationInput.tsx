@@ -28,7 +28,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
         searchValue: string,
     ) => {
         const searchResults = await searchChemicalNames(searchValue);
-        const chemicalNames = searchResults.map((chemical: IProductSummary) => chemical.productName);
+        const chemicalNames = [...new Set(searchResults.map((chemical: IProductSummary) => chemical.productName))];
         setChemicalOptions(chemicalNames);
         setIsSearching(false);
     };
@@ -37,7 +37,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
         searchValue: string,
     ) => {
         const searchResults = await searchChemicalCompaniesByName(searchValue);
-        const chemicalNames = searchResults.map((chemicalCompanies: IChemicalCompanySummary) => chemicalCompanies.companyName);
+        const chemicalNames = [...new Set(searchResults.map((chemicalCompanies: IChemicalCompanySummary) => chemicalCompanies.companyName))];
         setCompanyOptions(chemicalNames);
         setIsSearching(false);
     };
