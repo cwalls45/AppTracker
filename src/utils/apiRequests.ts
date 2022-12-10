@@ -1,15 +1,12 @@
 import axios from 'axios';
-import { IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
+import { IChemicalCompanySummary, IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
 
-export const searchChemicalNames = async (queryString: string) => {
+export const searchChemicalNames = async (queryString: string): Promise<IProductSummary[]> => {
     const response = await axios.get(`http://localhost:3000/api/partialChemicalName/${queryString}`);
-    const chemicalNames: IProductSummary = response.data.chemicals.map((chemical) => chemical.productName);
-    return chemicalNames;
+    return response.data.chemicals;
 };
 
-export const searchChemicalCompaniesByName = async (queryString: string) => {
+export const searchChemicalCompaniesByName = async (queryString: string): Promise<IChemicalCompanySummary[]> => {
     const response = await axios.get(`http://localhost:3000/api/companyNamesByProduct/${queryString}`);
-    //TODO: update once service sends exact info
-    const companyNames = response.data.chemicalData.map((chemical) => chemical.companyinfo[0].name);
-    return companyNames;
+    return response.data.chemicalData;
 }; 

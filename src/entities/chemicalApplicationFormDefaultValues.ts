@@ -34,4 +34,19 @@ export interface IProductSummary {
     epaRegistrationNumber: string;
     productName: string;
     productStatus: string;
+};
+
+export interface IChemicalCompanySummary {
+    epaRegistrationNumber: string;
+    productName: string;
+    companyName: string;
+    activeIngredients: IActiveIngredient[];
+    formulations: { formulation: string }[];
+};
+
+export interface IActiveIngredient {
+    pc_Code: string;
+    activeIngredient: string;
+    activeIngredientPercent: number;
+    cas_Number: string;
 }

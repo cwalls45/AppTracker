@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
-import { ChemicalProperties } from "../../entities/chemicalApplicationFormDefaultValues";
+import { ChemicalProperties, IChemicalCompanySummary, IProductSummary } from "../../entities/chemicalApplicationFormDefaultValues";
 import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
 import { useSelector } from 'react-redux';
@@ -20,23 +20,32 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
     const [isSearching, setIsSearching] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+
     const { chemicalApplication } = useSelector((state: State) => state);
     const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 400);
 
-    const fetchData = async (
+    const fetchChemicalNames = async (
         searchValue: string,
-        apiRequestFunc: (queryString: string) => Promise<any>,
-        setterFunc: React.Dispatch<React.SetStateAction<string[]>>
     ) => {
-        const searchResults = await apiRequestFunc(searchValue);
-        setterFunc(searchResults);
+        const searchResults = await searchChemicalNames(searchValue);
+        const chemicalNames = searchResults.map((chemical: IProductSummary) => chemical.productName);
+        setChemicalOptions(chemicalNames);
+        setIsSearching(false);
+    };
+
+    const fetchCompanies = async (
+        searchValue: string,
+    ) => {
+        const searchResults = await searchChemicalCompaniesByName(searchValue);
+        const chemicalNames = searchResults.map((chemicalCompanies: IChemicalCompanySummary) => chemicalCompanies.companyName);
+        setCompanyOptions(chemicalNames);
         setIsSearching(false);
     };
 
     useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
-            fetchData(chemicalApplication.chemicals[index].chemicalName, searchChemicalNames, setChemicalOptions)
+            fetchChemicalNames(chemicalApplication.chemicals[index].chemicalName)
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical Names: ', error);
@@ -50,7 +59,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
-            fetchData(chemicalApplication.chemicals[index].chemicalName, searchChemicalCompaniesByName, setCompanyOptions)
+            fetchCompanies(chemicalApplication.chemicals[index].chemicalName)
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical company names: ', error);
@@ -81,7 +90,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     label='Chemical Company'
                     options={companyOptions}
                     isSearching={isSearching}
-                    isDisabled={false}
+                    isDisabled={chemicalApplication.chemicals[index].chemicalName === ''}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
