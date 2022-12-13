@@ -30,6 +30,15 @@ export enum ChemicalProperties {
     UNITS = 'units'
 };
 
+export enum Units {
+    LBS = 'lbs',
+    OZ = 'oz',
+    GALLONS = 'gallon(s)',
+    FLOZ = 'fl. oz'
+}
+
+export const units = [Units.LBS, Units.OZ, Units.GALLONS, Units.FLOZ];
+
 export interface IProductSummary {
     epaRegistrationNumber: string;
     productName: string;

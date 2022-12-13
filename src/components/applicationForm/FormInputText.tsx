@@ -7,11 +7,10 @@ import { chemicalApplicationFormActionCreators, State } from '../../redux';
 interface IProps {
     property: string;
     label: string;
-    options?: string[];
     index?: number;
 };
 
-const FormInputText = ({ property, label, options, index }: IProps) => {
+const FormInputText = ({ property, label, index }: IProps) => {
 
     const dispatch = useDispatch();
     const { updateTotalAreaOfApp, setChemicalAmount } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);

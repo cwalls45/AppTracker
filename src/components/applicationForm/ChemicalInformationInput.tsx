@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
-import { ChemicalProperties, IChemicalCompanySummary, IProductSummary } from "../../entities/chemicalApplicationFormDefaultValues";
+import { ChemicalProperties, IChemicalCompanySummary, IProductSummary, units } from "../../entities/chemicalApplicationFormDefaultValues";
 import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
 import { useSelector } from 'react-redux';
@@ -13,8 +13,6 @@ interface IProps {
 }
 
 const ChemicalInformationInput = ({ index }: IProps) => {
-
-    const units = ['lbs', 'oz', 'gallon(s)', 'fl. oz'];
 
     const [chemicalOptions, setChemicalOptions] = useState<string[]>([]);
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
@@ -98,7 +96,6 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     index={index}
                     property={ChemicalProperties.AMOUNT}
                     label='Amount'
-                    options={units}
                 />
             </Grid>
             <Grid item xs={6} md={1}>
