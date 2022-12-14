@@ -18,7 +18,7 @@ const AutoCompleteDropDown = ({ label, options, stateValue, setterFunction, isSe
     }
 
     return (
-        <Grid>
+        <Grid item xs={3}>
             <Autocomplete
                 options={options}
                 filterOptions={(searchResults) => searchResults}

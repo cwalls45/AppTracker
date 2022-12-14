@@ -4,6 +4,9 @@ import AutoCompleteDropDown from "./AutoCompleteDropDown";
 import { useDebounce } from "../../hooks/useDebounce";
 import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
+import FormTextField from "./FormTextField";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 
 const AddInventoryForm = () => {
 
@@ -11,11 +14,25 @@ const AddInventoryForm = () => {
     const [chemicalName, setChemicalName] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
-    const [units, setUnits] = useState('')
+    const [amount, setAmount] = useState('');
+    const [units, setUnits] = useState('');
+    const [cost, setCost] = useState('');
 
     const [isSearching, setIsSearching] = useState(false)
 
     const debouncedChemicalName = useDebounce(chemicalName, 400);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const inventoryToAdd = {
+            chemicalName,
+            companyName,
+            amount,
+            units,
+            cost,
+        }
+        console.log('submitted', inventoryToAdd)
+    }
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -65,27 +82,48 @@ const AddInventoryForm = () => {
 
     return (
         <Grid container item md={4} direction="column">
-            <AutoCompleteDropDown
-                label='Chemical Name'
-                options={chemicalOptions}
-                stateValue={chemicalName}
-                setterFunction={setChemicalName}
-                isSearching={isSearching}
-            />
-            <AutoCompleteDropDown
-                label='Company Name'
-                options={companyOptions}
-                stateValue={companyName}
-                setterFunction={setCompanyName}
-                isSearching={isSearching}
-            />
-            <AutoCompleteDropDown
-                label='Units'
-                options={volumeUnits}
-                stateValue={units}
-                setterFunction={setUnits}
-                isSearching={false}
-            />
+            <form onSubmit={handleSubmit}>
+                <Grid container direction="column" rowSpacing={1}>
+                    <AutoCompleteDropDown
+                        label='Chemical Name'
+                        options={chemicalOptions}
+                        stateValue={chemicalName}
+                        setterFunction={setChemicalName}
+                        isSearching={isSearching}
+                    />
+                    <AutoCompleteDropDown
+                        label='Company Name'
+                        options={companyOptions}
+                        stateValue={companyName}
+                        setterFunction={setCompanyName}
+                        isSearching={isSearching}
+                    />
+                </Grid>
+                <Grid container justifyContent='space-around'>
+                    <FormTextField
+                        label='Amount'
+                        setterFunction={setAmount}
+                    />
+                    <AutoCompleteDropDown
+                        label='Units'
+                        options={volumeUnits}
+                        stateValue={units}
+                        setterFunction={setUnits}
+                        isSearching={false}
+                    />
+                </Grid>
+                <Grid container justifyContent='center'>
+                    <FormTextField
+                        label='Cost of Product'
+                        setterFunction={setCost}
+                    />
+                </Grid>
+                <Grid container justifyContent='center'>
+                    <Button variant='contained' type='submit'>
+                        Add to Inventory
+                    </Button>
+                </Grid>
+            </form>
         </Grid>
     )
 };
