@@ -8,6 +8,7 @@ import FormTextField from "./FormTextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { IAddToInventory } from "../../entities/inventory";
+import Typography from "@mui/material/Typography";
 
 const AddInventoryForm = () => {
 
@@ -87,50 +88,67 @@ const AddInventoryForm = () => {
     }, [debouncedChemicalName]);
 
     return (
-        <Grid container item md={4} direction="column">
+        <Grid container item md={2}>
+            <Grid container item justifyContent='center'>
+                <Typography variant="h4" component="div">
+                    Add Inventory
+                </Typography>
+            </Grid>
             <form onSubmit={handleSubmit}>
-                <Grid container direction="column" rowSpacing={1}>
-                    <AutoCompleteDropDown
-                        label='Chemical Name'
-                        options={chemicalOptions}
-                        stateValue={chemicalName}
-                        setterFunction={setChemicalName}
-                        isSearching={isSearching}
-                    />
-                    <AutoCompleteDropDown
-                        label='Company Name'
-                        options={companyOptions}
-                        stateValue={companyName}
-                        setterFunction={setCompanyName}
-                        isSearching={isSearching}
-                    />
+                <Grid container rowSpacing={4}>
+                    <Grid item xs={12}>
+                        <AutoCompleteDropDown
+                            label='Chemical Name'
+                            options={chemicalOptions}
+                            stateValue={chemicalName}
+                            setterFunction={setChemicalName}
+                            isSearching={isSearching}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <AutoCompleteDropDown
+                            label='Company Name'
+                            options={companyOptions}
+                            stateValue={companyName}
+                            setterFunction={setCompanyName}
+                            isSearching={isSearching}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid container justifyContent='space-around'>
-                    <FormTextField
-                        label='Amount'
-                        setterFunction={setAmount}
-                    />
-                    <AutoCompleteDropDown
-                        label='Units'
-                        options={volumeUnits}
-                        stateValue={units}
-                        setterFunction={setUnits}
-                        isSearching={false}
-                    />
+                <Grid container justifyContent='space-between' rowSpacing={4}>
+                    <Grid item xs={6}>
+                        <FormTextField
+                            label='Amount'
+                            setterFunction={setAmount}
+                        />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <AutoCompleteDropDown
+                            label='Units'
+                            options={volumeUnits}
+                            stateValue={units}
+                            setterFunction={setUnits}
+                            isSearching={false}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid container justifyContent='center'>
-                    <FormTextField
-                        label='Cost of Product'
-                        setterFunction={setCost}
-                    />
+                <Grid container justifyContent='center' rowSpacing={4}>
+                    <Grid item xs={8}>
+                        <FormTextField
+                            label='Cost of Product'
+                            setterFunction={setCost}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid container justifyContent='center'>
-                    <Button variant='contained' type='submit'>
-                        Add to Inventory
-                    </Button>
+                <Grid container justifyContent='center' rowSpacing={2}>
+                    <Grid item>
+                        <Button variant='contained' type='submit'>
+                            Add to Inventory
+                        </Button>
+                    </Grid>
                 </Grid>
-            </form>
-        </Grid>
+            </form >
+        </Grid >
     )
 };
 
