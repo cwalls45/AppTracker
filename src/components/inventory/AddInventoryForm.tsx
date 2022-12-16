@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
 import { useDebounce } from "../../hooks/useDebounce";
-import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
+import { postAddInventory, searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
 import FormTextField from "./FormTextField";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { IAddToInventory } from "../../entities/inventory";
 
 const AddInventoryForm = () => {
 
@@ -22,17 +23,22 @@ const AddInventoryForm = () => {
 
     const debouncedChemicalName = useDebounce(chemicalName, 400);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const inventoryToAdd = {
-            chemicalName,
-            companyName,
-            amount,
-            units,
-            cost,
+    const handleSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            const inventoryToAdd: IAddToInventory = {
+                chemicalName,
+                companyName,
+                amount,
+                units,
+                cost,
+            }
+            console.log('submitted', inventoryToAdd);
+            const addInventory = await postAddInventory(inventoryToAdd);
+        } catch (error) {
+            console.log('ERROR ADDING INVENTORY', error);
         }
-        console.log('submitted', inventoryToAdd)
-    }
+    };
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -69,7 +75,7 @@ const AddInventoryForm = () => {
     useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
-            fetchCompanies(companyName)
+            fetchCompanies(chemicalName)
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical company names: ', error);
