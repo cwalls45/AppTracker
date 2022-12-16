@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
 import { useDebounce } from "../../hooks/useDebounce";
-import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
+import { postAddInventory, searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
+import FormTextField from "./FormTextField";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import { IAddToInventory } from "../../entities/inventory";
+import Typography from "@mui/material/Typography";
 
 const AddInventoryForm = () => {
 
@@ -11,11 +16,30 @@ const AddInventoryForm = () => {
     const [chemicalName, setChemicalName] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [companyOptions, setCompanyOptions] = useState<string[]>([]);
-    const [units, setUnits] = useState('')
+    const [amount, setAmount] = useState('');
+    const [units, setUnits] = useState('');
+    const [cost, setCost] = useState('');
 
     const [isSearching, setIsSearching] = useState(false)
 
     const debouncedChemicalName = useDebounce(chemicalName, 400);
+
+    const handleSubmit = async (event) => {
+        try {
+            event.preventDefault();
+            const inventoryToAdd: IAddToInventory = {
+                chemicalName,
+                companyName,
+                amount,
+                units,
+                cost,
+            }
+            console.log('submitted', inventoryToAdd);
+            const addInventory = await postAddInventory(inventoryToAdd);
+        } catch (error) {
+            console.log('ERROR ADDING INVENTORY', error);
+        }
+    };
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -52,7 +76,7 @@ const AddInventoryForm = () => {
     useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
-            fetchCompanies(companyName)
+            fetchCompanies(chemicalName)
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical company names: ', error);
@@ -64,29 +88,67 @@ const AddInventoryForm = () => {
     }, [debouncedChemicalName]);
 
     return (
-        <Grid container item md={4} direction="column">
-            <AutoCompleteDropDown
-                label='Chemical Name'
-                options={chemicalOptions}
-                stateValue={chemicalName}
-                setterFunction={setChemicalName}
-                isSearching={isSearching}
-            />
-            <AutoCompleteDropDown
-                label='Company Name'
-                options={companyOptions}
-                stateValue={companyName}
-                setterFunction={setCompanyName}
-                isSearching={isSearching}
-            />
-            <AutoCompleteDropDown
-                label='Units'
-                options={volumeUnits}
-                stateValue={units}
-                setterFunction={setUnits}
-                isSearching={false}
-            />
-        </Grid>
+        <Grid container item md={2}>
+            <Grid container item justifyContent='center'>
+                <Typography variant="h4" component="div">
+                    Add Inventory
+                </Typography>
+            </Grid>
+            <form onSubmit={handleSubmit}>
+                <Grid container rowSpacing={4}>
+                    <Grid item xs={12}>
+                        <AutoCompleteDropDown
+                            label='Chemical Name'
+                            options={chemicalOptions}
+                            stateValue={chemicalName}
+                            setterFunction={setChemicalName}
+                            isSearching={isSearching}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <AutoCompleteDropDown
+                            label='Company Name'
+                            options={companyOptions}
+                            stateValue={companyName}
+                            setterFunction={setCompanyName}
+                            isSearching={isSearching}
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container justifyContent='space-between' rowSpacing={4}>
+                    <Grid item xs={6}>
+                        <FormTextField
+                            label='Amount'
+                            setterFunction={setAmount}
+                        />
+                    </Grid>
+                    <Grid item xs={5}>
+                        <AutoCompleteDropDown
+                            label='Units'
+                            options={volumeUnits}
+                            stateValue={units}
+                            setterFunction={setUnits}
+                            isSearching={false}
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container justifyContent='center' rowSpacing={4}>
+                    <Grid item xs={8}>
+                        <FormTextField
+                            label='Cost of Product'
+                            setterFunction={setCost}
+                        />
+                    </Grid>
+                </Grid>
+                <Grid container justifyContent='center' rowSpacing={2}>
+                    <Grid item>
+                        <Button variant='contained' type='submit'>
+                            Add to Inventory
+                        </Button>
+                    </Grid>
+                </Grid>
+            </form >
+        </Grid >
     )
 };
 
