@@ -5,7 +5,6 @@ import { useDebounce } from "../../hooks/useDebounce";
 import { postAddInventory, searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
 import FormTextField from "./FormTextField";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { IAddToInventory } from "../../entities/inventory";
 import Typography from "@mui/material/Typography";
@@ -119,6 +118,7 @@ const AddInventoryForm = () => {
                     <Grid item xs={6}>
                         <FormTextField
                             label='Amount'
+                            value={amount}
                             setterFunction={setAmount}
                         />
                     </Grid>
@@ -136,6 +136,7 @@ const AddInventoryForm = () => {
                     <Grid item xs={8}>
                         <FormTextField
                             label='Cost of Product'
+                            value={cost}
                             setterFunction={setCost}
                         />
                     </Grid>
