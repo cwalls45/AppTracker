@@ -4,7 +4,7 @@ import AddInventoryForm from "./AddInventoryForm";
 
 const Inventory = () => {
     return (
-        <Grid container>
+        <Grid container sx={{ width: 'auto' }}>
             <Grid container justifyContent='center'>
                 <Typography variant="h2" component="div">
                     Inventory Dashboard
