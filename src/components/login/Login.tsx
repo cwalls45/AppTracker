@@ -4,13 +4,18 @@ import SignUp from './SignUp';
 
 // 3vh is height of AppBar and 10px is margin of AppBar set in theme.ts
 
-const Login = () => {
+interface IProps {
+    isLoggedIn: boolean;
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
     return (
         <Grid container sx={{
             height: `calc(91.5vh - (3vh - 10px))`,
             width: 'auto'
         }}>
-            < LoginForm />
+            < LoginForm setIsLoggedIn={setIsLoggedIn} />
             <SignUp />
         </Grid >
     );

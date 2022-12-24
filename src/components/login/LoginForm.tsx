@@ -3,18 +3,38 @@ import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography";
 import FormTextField from "../inventory/FormTextField";
 import Button from "@mui/material/Button";
+import { Paths } from "../../entities/paths";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+interface IProps {
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('username: ', username);
         console.log('password: ', password);
-        resetPassword();
+        const isAuthenticated = authenticateUser();
+        if (isAuthenticated) {
+            setIsLoggedIn(true);
+            navigateToCalendar();
+            resetPassword();
+        }
     };
+
+    const authenticateUser = () => {
+        //TODO: will eventually authenticate with AWS congnito
+        return true;
+    };
+
+    const navigateToCalendar = () => navigate(Paths.CALENDAR);
 
     const resetPassword = () => {
         setUsername('');
