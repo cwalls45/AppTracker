@@ -49,14 +49,14 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
                 </Typography>
             </Grid>
             <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                <Grid item xs={8}>
+                <Grid item xs={6.5}>
                     <FormTextField
                         label='Username'
                         value={username}
                         setterFunction={setUsername}
                     />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={6.5}>
                     <FormTextField
                         label='Password'
                         value={password}
@@ -67,7 +67,11 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
             </Grid>
             <Grid container item xs={12} justifyContent='center'>
                 <Grid item>
-                    <Button variant='contained' onClick={handleSubmit}>
+                    <Button variant='contained' onClick={handleSubmit} sx={{
+                        flexGrow: 1,
+                        width: '15em'
+                    }}
+                    >
                         Sign In
                     </Button>
                 </Grid>
