@@ -8,7 +8,7 @@ import NavigationBar from './components/navigation/NavigationBar';
 import Login from './components/login/Login';
 import { Paths } from './entities/paths';
 import Inventory from './components/inventory/Inventory';
-import ProtectedWrapper from './components/login/ProtectedRoute';
+import ProtectedWrapper from './components/login/ProtectedWrapper';
 
 const App = () => {
 
