@@ -38,5 +38,14 @@ export const theme = createTheme({
                 }
             }
         },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    margin: '0px 0px 10px 0px',
+                    boxShadow: 'none',
+                    minHeight: '3vh'
+                }
+            }
+        }
     }
 });

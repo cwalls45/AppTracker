@@ -85,15 +85,15 @@ const ApplicationForm = () => {
                     I attest that the above information is correct.
                 </Grid>
                 <Grid container justifyContent='center'>
-                    <Button onClick={addChemicalEvent} variant='outlined' color='inherit'>
+                    <Button onClick={addChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
                         Add
                     </Button>
                     {state.chemicalApplication.chemicals.length > 1 &&
-                        <Button onClick={removeChemicalEvent} variant='outlined' color='inherit'>
+                        <Button onClick={removeChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
                             Remove
                         </Button>
                     }
-                    <Button variant='contained' type='submit' disabled={!attestForm}>
+                    <Button variant='contained' type='submit' disabled={!attestForm} sx={{ width: '15em' }}>
                         Submit
                     </Button>
                 </Grid>

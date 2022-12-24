@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
-import { Paths } from '../entities/paths';
+import { Paths } from '../../entities/paths';
 
 interface IProps {
     isLoggedIn: boolean;
