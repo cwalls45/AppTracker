@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material';
@@ -9,10 +9,21 @@ import Login from './components/login/Login';
 import { Paths } from './entities/paths';
 import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { environmentActionCreators } from './redux';
 
 const App = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const dispatch = useDispatch();
+    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
+
+    useEffect(() => {
+        setAPIUrl();
+    }, []);
+
 
     return (
         <ThemeProvider theme={theme}>

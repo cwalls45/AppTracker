@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Dispatch } from 'redux';
 import { ChemicalApplicationFormActions, IChemicalsPayload, IStringArrayPayload, IStringPayload } from '../../entities/chemicalApplicationFormActions';
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
