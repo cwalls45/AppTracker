@@ -4,7 +4,8 @@
   "description": "Application for tracking chemical applications",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open",
+    "start:dev": "cross-env webpack serve --open --env stage=dev",
+    "start:local": "cross-env webpack serve --open --env stage=local",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cameron Walls",
@@ -42,6 +43,8 @@
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.3",
+    "dotenv-webpack": "^8.0.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.0",

@@ -3,3 +3,7 @@
 
 # production
 /build
+
+#environment variables
+.env.dev
+.env.local

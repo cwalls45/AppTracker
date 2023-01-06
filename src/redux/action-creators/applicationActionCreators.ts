@@ -4,6 +4,7 @@ import { IChemicalApplicationForm } from "../../entities/chemicalApplicationForm
 import { ApplicationsActions } from "../action-types/applicationsActionTypes";
 import axios from 'axios';
 import { IApplication } from "../../entities/applications";
+import { State } from "../reducers";
 
 export const addApplication = (application: IApplication) => {
     return (dispatch: Dispatch<ApplicationActionsType>) => dispatch({
@@ -13,9 +14,10 @@ export const addApplication = (application: IApplication) => {
 };
 
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
-    return async (dispatch: Dispatch<ApplicationActionsType>) => {
+    return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
-            const response = await axios.post('http://localhost:3000/api/createApplication', {
+            const { environment } = getState();
+            const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
                 application
             });
             let formattedApplicationEvent: IApplication = response.data;
@@ -37,9 +39,10 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
 };
 
 export const fetchApplicationEvents = () => {
-    return async (dispatch: Dispatch<ApplicationActionsType>) => {
+    return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
-            const response = await axios.get('http://localhost:3000/api/applicationEvents');
+            const { environment } = getState();
+            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents`);
             let applicationEvents: IApplication[] = response.data;
             applicationEvents = applicationEvents.map((event) => ({
                 event_id: event.event_id,

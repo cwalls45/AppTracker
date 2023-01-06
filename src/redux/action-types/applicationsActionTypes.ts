@@ -1,4 +1,4 @@
-export const enum ApplicationsActions {
+export enum ApplicationsActions {
     ADD_APPLICATION = 'ADD_APPLICATION',
     FETCH_APPLICATION_EVENTS = 'FETCH_APPLICATION_EVENT',
     SET_APPLICATION_EVENTS = 'SET_APPLICATION_EVENTS'
