@@ -61,7 +61,7 @@ const ApplicationForm = () => {
                         </Grid>
                     </Grid>
                     <Grid container justifyContent='space-evenly'>
-                        <Grid container xs={11} md={6}>
+                        <Grid container item xs={11} md={6}>
                             <Grid item justifyContent='space-evenly' xs={12}>
                                 <MultiSelect
                                     label='Area of Application'
