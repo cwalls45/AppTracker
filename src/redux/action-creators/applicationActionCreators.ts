@@ -17,6 +17,7 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
             const { environment } = getState();
+
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
                 application
             });

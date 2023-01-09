@@ -1,4 +1,5 @@
 export interface IChemicalApplicationForm {
+    id?: string;
     dateOfApplication: string;
     areaOfApplication: string[];
     totalAreaOfApp: string;
@@ -15,6 +16,7 @@ export interface IChemical {
 };
 
 export enum ChemicalApplicationFormProperty {
+    ID = 'id',
     DATE_OF_APPLICATION = 'dateOfApplication',
     AREA_OF_APPLICATION = 'areaOfApplication',
     TOTAL_AREA_OF_APP = 'totalAreaOfApp',
