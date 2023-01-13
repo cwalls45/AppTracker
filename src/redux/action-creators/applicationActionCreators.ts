@@ -16,10 +16,13 @@ export const addApplication = (application: IApplication) => {
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
+            //TODO: get account id out of state
+            const accountId = 'accountId-123';
             const { environment } = getState();
 
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
-                application
+                application,
+                accountId
             });
             let formattedApplicationEvent: IApplication = response.data;
             formattedApplicationEvent = {
@@ -34,7 +37,7 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
                 payload: formattedApplicationEvent
             });
         } catch (error) {
-            console.log('ERROR: ', error.response.data)
+            console.log('ERROR creating chemical application: ', error.response.data)
         }
     }
 };
@@ -57,7 +60,7 @@ export const fetchApplicationEvents = () => {
                 payload: applicationEvents
             });
         } catch (error) {
-            console.log('ERROR: ', error.response)
+            console.log('ERROR fetching application events: ', error.response)
         }
     }
 }
