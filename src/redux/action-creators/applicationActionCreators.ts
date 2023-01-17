@@ -19,22 +19,25 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
             const { environment } = getState();
 
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
-                application
+                application,
+                accountId: environment.accountId
             });
+
             let formattedApplicationEvent: IApplication = response.data;
+
             formattedApplicationEvent = {
                 event_id: formattedApplicationEvent.event_id,
                 title: formattedApplicationEvent.title,
                 start: new Date(formattedApplicationEvent.start),
                 end: new Date(formattedApplicationEvent.start)
-            }
+            };
 
             dispatch({
                 type: ApplicationsActions.ADD_APPLICATION,
                 payload: formattedApplicationEvent
             });
         } catch (error) {
-            console.log('ERROR: ', error.response.data)
+            console.log('ERROR creating chemical application: ', error.response.data)
         }
     }
 };
@@ -43,8 +46,11 @@ export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
             const { environment } = getState();
-            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents`);
+
+            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${environment.accountId}`);
+
             let applicationEvents: IApplication[] = response.data;
+
             applicationEvents = applicationEvents.map((event) => ({
                 event_id: event.event_id,
                 title: event.title,
@@ -57,7 +63,7 @@ export const fetchApplicationEvents = () => {
                 payload: applicationEvents
             });
         } catch (error) {
-            console.log('ERROR: ', error.response)
+            console.log('ERROR fetching application events: ', error.response)
         }
     }
 }
