@@ -7,3 +7,10 @@ export const setAPIUrl = () => {
         type: EnvironmentActionsTypes.SET_API_URL
     });
 }
+
+export const setAccountId = (accountId: string) => {
+    return (dispatch: Dispatch<EnvironmentActions>) => dispatch({
+        type: EnvironmentActionsTypes.SET_ACCOUNT_ID,
+        payload: accountId
+    });
+}

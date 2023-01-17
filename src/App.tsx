@@ -18,10 +18,11 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const dispatch = useDispatch();
-    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
+    const { setAPIUrl, setAccountId } = bindActionCreators(environmentActionCreators, dispatch);
 
     useEffect(() => {
         setAPIUrl();
+        setAccountId('accountId-123');
     }, []);
 
 

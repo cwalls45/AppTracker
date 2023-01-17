@@ -16,21 +16,21 @@ export const addApplication = (application: IApplication) => {
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
-            //TODO: get account id out of state
-            const accountId = 'accountId-123';
             const { environment } = getState();
 
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
                 application,
-                accountId
+                accountId: environment.accountId
             });
+
             let formattedApplicationEvent: IApplication = response.data;
+
             formattedApplicationEvent = {
                 event_id: formattedApplicationEvent.event_id,
                 title: formattedApplicationEvent.title,
                 start: new Date(formattedApplicationEvent.start),
                 end: new Date(formattedApplicationEvent.start)
-            }
+            };
 
             dispatch({
                 type: ApplicationsActions.ADD_APPLICATION,
