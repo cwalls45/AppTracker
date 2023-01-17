@@ -46,8 +46,11 @@ export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
             const { environment } = getState();
-            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents`);
+
+            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${environment.accountId}`);
+
             let applicationEvents: IApplication[] = response.data;
+
             applicationEvents = applicationEvents.map((event) => ({
                 event_id: event.event_id,
                 title: event.title,
