@@ -13,6 +13,8 @@ import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
 import { applicationsActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
 import { bindActionCreators } from 'redux';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '../../entities/paths';
 
 const ApplicationForm = () => {
 
@@ -22,6 +24,9 @@ const ApplicationForm = () => {
     const state = useSelector((state: State) => state);
 
     const [attestForm, setAttestForm] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+    const navigateToCalendar = () => navigate(Paths.CALENDAR);
 
     const addChemicalEvent = () => {
         if (attestForm) setAttestForm(false);
@@ -39,6 +44,7 @@ const ApplicationForm = () => {
         event.preventDefault();
         if (!attestForm) return;
         postChemicalApplication(state.chemicalApplication);
+        navigateToCalendar();
     }
 
     return (
