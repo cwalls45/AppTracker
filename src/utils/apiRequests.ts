@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { IChemicalCompanySummary, IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
-import { IAddToInventory } from '../entities/inventory';
+import { IInventory } from '../entities/inventory';
 import { store } from '../redux/store';
 
 export const searchChemicalNames = async (queryString: string): Promise<IProductSummary[]> => {
@@ -15,9 +15,10 @@ export const searchChemicalCompaniesByName = async (queryString: string): Promis
     return response.data.chemicalData;
 };
 
-export const postAddInventory = async (inventory: IAddToInventory): Promise<any> => {
+export const postAddInventory = async (inventory: IInventory): Promise<any> => {
     const { environment } = store.getState();
-    const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory });
+    const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: environment.accountId });
     console.log('response', response);
+    //TODO: add inventory to state
     return 'Inventory added'
 }

@@ -6,7 +6,7 @@ import { postAddInventory, searchChemicalCompaniesByName, searchChemicalNames } 
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
 import FormTextField from "./FormTextField";
 import Button from "@mui/material/Button";
-import { IAddToInventory } from "../../entities/inventory";
+import { IInventory } from "../../entities/inventory";
 import Typography from "@mui/material/Typography";
 
 const AddInventoryForm = () => {
@@ -26,7 +26,7 @@ const AddInventoryForm = () => {
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
-            const inventoryToAdd: IAddToInventory = {
+            const inventoryToAdd: IInventory = {
                 chemicalName,
                 companyName,
                 amount,
