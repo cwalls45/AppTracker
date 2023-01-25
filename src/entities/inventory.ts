@@ -4,6 +4,7 @@ export interface IInventory {
     amount: string;
     units: string;
     cost: string;
+    costUnit: string;
 };
 
 export enum Units {
