@@ -18,7 +18,6 @@ const AddInventoryForm = () => {
     const [amount, setAmount] = useState('');
     const [units, setUnits] = useState('');
     const [cost, setCost] = useState('');
-    const [costUnit, setCostUnit] = useState('');
 
     const [isSearching, setIsSearching] = useState(false)
 
@@ -33,7 +32,7 @@ const AddInventoryForm = () => {
                 amount,
                 units,
                 cost,
-                costUnit
+                costUnit: units
             }
             console.log('submitted', inventoryToAdd);
             const addInventory = await postAddInventory(inventoryToAdd);
@@ -142,14 +141,10 @@ const AddInventoryForm = () => {
                             setterFunction={setCost}
                         />
                     </Grid>
-                    <Grid item xs={5}>
-                        <AutoCompleteDropDown
-                            label='Units'
-                            options={volumeUnits}
-                            stateValue={costUnit}
-                            setterFunction={setCostUnit}
-                            isSearching={false}
-                        />
+                    <Grid container item xs={5}>
+                        <Typography component="div">
+                            per {units}
+                        </Typography>
                     </Grid>
                 </Grid>
                 <Grid container justifyContent='center' rowSpacing={2}>
