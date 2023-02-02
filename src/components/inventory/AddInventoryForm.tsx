@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
 import { useDebounce } from "../../hooks/useDebounce";
-import { postAddInventory, searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
+import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
 import FormTextField from "./FormTextField";
 import Button from "@mui/material/Button";
 import { IInventory } from "../../entities/inventory";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { inventoryActionCreators } from "../../redux";
+import { bindActionCreators } from "redux";
 
 const AddInventoryForm = () => {
 
@@ -23,6 +26,9 @@ const AddInventoryForm = () => {
 
     const debouncedChemicalName = useDebounce(chemicalName, 400);
 
+    const dispatch = useDispatch();
+    const { postInventory } = bindActionCreators(inventoryActionCreators, dispatch)
+
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
@@ -34,8 +40,7 @@ const AddInventoryForm = () => {
                 cost,
                 costUnit: units
             }
-            console.log('submitted', inventoryToAdd);
-            const addInventory = await postAddInventory(inventoryToAdd);
+            await postInventory(inventoryToAdd);
         } catch (error) {
             console.log('ERROR ADDING INVENTORY', error);
         }

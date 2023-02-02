@@ -14,11 +14,3 @@ export const searchChemicalCompaniesByName = async (queryString: string): Promis
     const response = await axios.get(`${environment.apiUrl}/api/companyNamesByProduct/${queryString}`);
     return response.data.chemicalData;
 };
-
-export const postAddInventory = async (inventory: IInventory): Promise<any> => {
-    const { environment } = store.getState();
-    const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: environment.accountId });
-    console.log('response', response);
-    //TODO: add inventory to state
-    return 'Inventory added'
-}
