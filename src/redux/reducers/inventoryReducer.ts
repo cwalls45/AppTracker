@@ -6,10 +6,12 @@ const initialState: IInventory[] = [];
 
 const inventoryReducer = (state = initialState, action: InventoryActions): IInventory[] => {
     if (action.type === InventoryActionTypes.ADD_INVENTORY) {
-        return [...state, action.payload];
+        const inventoryWithoutUpdatedItem
+            = state.filter((inventory) => inventory.companyName !== action.payload.companyName && inventory.chemicalName !== action.payload.chemicalName)
+        return [...inventoryWithoutUpdatedItem, action.payload];
     } else {
         return state;
     }
 }
 
-export default inventoryReducer; 
+export default inventoryReducer;
