@@ -27,7 +27,7 @@ const AddInventoryForm = () => {
     const debouncedChemicalName = useDebounce(chemicalName, 400);
 
     const dispatch = useDispatch();
-    const { postInventory } = bindActionCreators(inventoryActionCreators, dispatch)
+    const { postInventory, getAllInventory } = bindActionCreators(inventoryActionCreators, dispatch)
 
     const handleSubmit = async (event) => {
         try {
@@ -63,6 +63,10 @@ const AddInventoryForm = () => {
         setCompanyOptions(chemicalNames);
         setIsSearching(false);
     };
+
+    useEffect(() => {
+        getAllInventory()
+    }, []);
 
     useEffect(() => {
         if (debouncedChemicalName) {

@@ -16,13 +16,34 @@ export const postInventory = (inventory: IInventory) => {
     return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
         try {
             const { environment } = getState();
+
             const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: environment.accountId });
             const formattedInventory: IInventory = response.data;
-            //TODO: if chemical is in state update dont create new object
+
             dispatch({
                 type: InventoryActionTypes.ADD_INVENTORY,
                 payload: formattedInventory
-            })
+            });
+
+        } catch (error) {
+            console.log('ERROR creating inventory: ', JSON.stringify(error, null, 2))
+        }
+    }
+}
+
+export const getAllInventory = () => {
+    return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
+        try {
+            const { environment } = getState();
+
+            const response = await axios.get(`${environment.apiUrl}/api/getAllInventory/${environment.accountId}`);
+            const formattedInventory: IInventory[] = response.data;
+
+            dispatch({
+                type: InventoryActionTypes.UPDATE_ALL_INVENTORY,
+                payload: formattedInventory
+            });
+
         } catch (error) {
             console.log('ERROR creating inventory: ', JSON.stringify(error, null, 2))
         }

@@ -9,6 +9,8 @@ const inventoryReducer = (state = initialState, action: InventoryActions): IInve
         const inventoryWithoutUpdatedItem
             = state.filter((inventory) => inventory.companyName !== action.payload.companyName && inventory.chemicalName !== action.payload.chemicalName)
         return [...inventoryWithoutUpdatedItem, action.payload];
+    } else if (action.type === InventoryActionTypes.UPDATE_ALL_INVENTORY) {
+        return action.payload
     } else {
         return state;
     }
