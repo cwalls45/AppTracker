@@ -65,10 +65,6 @@ const AddInventoryForm = () => {
     };
 
     useEffect(() => {
-        getAllInventory()
-    }, []);
-
-    useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
             fetchChemicalNames(chemicalName)
