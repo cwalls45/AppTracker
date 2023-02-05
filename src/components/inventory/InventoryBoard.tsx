@@ -8,7 +8,7 @@ interface IProps {
 
 const InventoryBoard = ({ inventory }: IProps) => {
     return (
-        <Grid container item md={7}>
+        <Grid container item justifyContent='center' md={true}>
             {inventory.map((invtry) => <Card property={invtry} />)}
         </Grid>
     )
