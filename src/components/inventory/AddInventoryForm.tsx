@@ -159,7 +159,7 @@ const AddInventoryForm = () => {
                     </Grid>
                     <Grid container item xs={5}>
                         <Typography component="div">
-                            per {units}
+                            per {units || 'unit'}
                         </Typography>
                     </Grid>
                 </Grid>
