@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { IChemicalCompanySummary, IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
-import { IInventory } from '../entities/inventory';
 import { store } from '../redux/store';
 
 export const searchChemicalNames = async (queryString: string): Promise<IProductSummary[]> => {
