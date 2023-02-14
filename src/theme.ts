@@ -46,6 +46,16 @@ export const theme = createTheme({
                     minHeight: '3vh'
                 }
             }
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    height: 'fit-content',
+                    margin: '1em',
+                    boxShadow: 'none',
+                    outline: '1px solid #d3d3d3'
+                }
+            }
         }
     }
 });

@@ -27,7 +27,7 @@ const AddInventoryForm = () => {
     const debouncedChemicalName = useDebounce(chemicalName, 400);
 
     const dispatch = useDispatch();
-    const { postInventory, getAllInventory } = bindActionCreators(inventoryActionCreators, dispatch)
+    const { postInventory } = bindActionCreators(inventoryActionCreators, dispatch)
 
     const handleSubmit = async (event) => {
         try {
@@ -39,12 +39,23 @@ const AddInventoryForm = () => {
                 units,
                 cost,
                 costUnit: units
-            }
+            };
             await postInventory(inventoryToAdd);
+            resetInventoryForm();
         } catch (error) {
             console.log('ERROR ADDING INVENTORY', error);
         }
     };
+
+    const resetInventoryForm = () => {
+        setChemicalOptions([]);
+        setChemicalName('');
+        setCompanyName('');
+        setCompanyOptions([]);
+        setAmount('');
+        setUnits('');
+        setCost('');
+    }
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -148,7 +159,7 @@ const AddInventoryForm = () => {
                     </Grid>
                     <Grid container item xs={5}>
                         <Typography component="div">
-                            per {units}
+                            per {units || 'unit'}
                         </Typography>
                     </Grid>
                 </Grid>
