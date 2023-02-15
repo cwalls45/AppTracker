@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { Paths } from "../../entities/paths";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../utils/authenticateUser";
+import { useCookies } from "react-cookie";
 
 interface IProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +18,8 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
+
+    const [cookies, setCookies] = useCookies();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -34,7 +37,12 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
         if (!isLoggedIn) {
             return false
         }
-        //TODO: set session cookie
+
+        // TODO: Dont forget to remove cookies and make cookie name more specific
+        const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn;
+        setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
+        setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
+
         return true;
     };
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AuthenticateResponse } from '../entities/auth';
 import { store } from '../redux/store';
 
-export const loginUser = async (email: string, password: string): Promise<AuthenticateResponse | boolean> => {
+export const loginUser = async (email: string, password: string): Promise<AuthenticateResponse | false> => {
     const { environment } = store.getState();
     try {
         const { data }: { data: { user: AuthenticateResponse } } =
