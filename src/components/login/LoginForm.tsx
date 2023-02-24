@@ -33,7 +33,6 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const authenticateUser = async (email: string, password: string) => {
         const isLoggedIn = await loginUser(email, password);
-        console.log('isLoggedIn: ', isLoggedIn);
         if (!isLoggedIn) {
             return false
         }

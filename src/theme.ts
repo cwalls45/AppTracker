@@ -7,9 +7,8 @@ export const theme = createTheme({
             contrastText: '#fefefe'
         },
         secondary: {
-            light: '#0066ff',
-            main: '#0044ff',
-            contrastText: '#ffcc00',
+            main: '#fefefe',
+            contrastText: '#6EA243',
         }
     },
     components: {
@@ -26,8 +25,9 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     margin: '10px',
+                    boxShadow: 'none',
                 }
-            }
+            },
         },
         MuiGrid: {
             styleOverrides: {
@@ -54,6 +54,13 @@ export const theme = createTheme({
                     margin: '1em',
                     boxShadow: 'none',
                     outline: '1px solid #d3d3d3'
+                }
+            }
+        },
+        MuiTypography: {
+            styleOverrides: {
+                root: {
+                    color: '#fefefe'
                 }
             }
         }
