@@ -6,11 +6,7 @@ import IconButton from '@mui/material/IconButton';
 //import MenuIcon from '@mui/icons-material/Menu';
 import NavigationButtons from './NavigationButtons';
 
-interface IProps {
-    isLoggedIn: boolean;
-};
-
-const NavigationBar = ({ isLoggedIn }: IProps) => {
+const NavigationBar = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -28,7 +24,7 @@ const NavigationBar = ({ isLoggedIn }: IProps) => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         LOGO
                     </Typography>
-                    <NavigationButtons isLoggedIn={isLoggedIn} />
+                    <NavigationButtons />
                 </Toolbar>
             </AppBar>
         </Box>

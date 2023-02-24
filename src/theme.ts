@@ -34,7 +34,7 @@ export const theme = createTheme({
                 root: {
                 },
                 container: {
-                    margin: '10px',
+                    margin: '0',
                 }
             }
         },

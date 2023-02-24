@@ -12,7 +12,7 @@ interface IProps {
 const Login = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
     return (
         <Grid container sx={{
-            height: `calc(91.5vh - (3vh - 10px))`,
+            height: '100vh',
             width: 'auto'
         }}>
             < LoginForm setIsLoggedIn={setIsLoggedIn} />

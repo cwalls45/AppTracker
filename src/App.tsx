@@ -39,7 +39,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <Router>
-                <NavigationBar isLoggedIn={isLoggedIn} />
+                {isLoggedIn && <NavigationBar />}
                 <Routes>
                     <Route
                         path={Paths.ROOT}
