@@ -4,13 +4,9 @@ import { darken } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { theme } from "../../theme";
 
-const styles = {
-
-}
-
 const SignUp = () => {
     return (
-        <Grid container item md={4} justifyContent='center' sx={{ backgroundColor: theme.palette.primary.main }}>
+        <Grid container item md={4} justifyContent="space-around" alignItems='center' sx={{ backgroundColor: theme.palette.primary.main }}>
             <Grid container justifyContent='center'>
                 <Typography variant="h3" align='center' component="div">
                     New to TurfTracker?
