@@ -1,10 +1,10 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid"
-import { darken } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { theme } from "../../theme";
 
 const SignUp = () => {
+
     return (
         <Grid container item md={4} justifyContent="space-around" alignItems='center' sx={{ backgroundColor: theme.palette.primary.main }}>
             <Grid container justifyContent='center'>
