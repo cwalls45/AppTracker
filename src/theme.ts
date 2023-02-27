@@ -1,4 +1,10 @@
-import { createTheme } from "@mui/material";
+import { createTheme, darken } from "@mui/material";
+
+declare module "@mui/material/Button" {
+    interface ButtonPropsVariantOverrides {
+        secondary: true;
+    }
+}
 
 export const theme = createTheme({
     palette: {
@@ -7,9 +13,8 @@ export const theme = createTheme({
             contrastText: '#fefefe'
         },
         secondary: {
-            light: '#0066ff',
-            main: '#0044ff',
-            contrastText: '#ffcc00',
+            main: '#fefefe',
+            contrastText: '#6EA243',
         }
     },
     components: {
@@ -26,15 +31,29 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     margin: '10px',
+                    boxShadow: 'none',
+                },
+            },
+            variants: [
+                {
+                    props: { variant: 'secondary' },
+                    style: {
+                        flexGrow: 1,
+                        width: '15em',
+                        backgroundColor: '#fefefe',
+                        '&:hover': {
+                            backgroundColor: darken('#fefefe', 0.1),
+                        }
+                    }
                 }
-            }
+            ]
         },
         MuiGrid: {
             styleOverrides: {
                 root: {
                 },
                 container: {
-                    margin: '10px',
+                    margin: '0',
                 }
             }
         },
@@ -56,6 +75,21 @@ export const theme = createTheme({
                     outline: '1px solid #d3d3d3'
                 }
             }
+        },
+        MuiTypography: {
+            styleOverrides: {
+                root: {
+                    color: '#6EA243'
+                }
+            },
+            variants: [
+                {
+                    props: { color: 'secondary' },
+                    style: {
+                        color: '#fefefe',
+                    },
+                },
+            ],
         }
-    }
+    },
 });

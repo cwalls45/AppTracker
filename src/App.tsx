@@ -12,6 +12,8 @@ import ProtectedWrapper from './components/login/ProtectedWrapper';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { environmentActionCreators } from './redux';
+import { useCookies } from 'react-cookie';
+
 
 const App = () => {
 
@@ -20,16 +22,24 @@ const App = () => {
     const dispatch = useDispatch();
     const { setAPIUrl, setAccountId } = bindActionCreators(environmentActionCreators, dispatch);
 
+    const [cookies] = useCookies();
+
     useEffect(() => {
+
         setAPIUrl();
-        setAccountId('accountId-123');
+
+        if (cookies.TurfTrackerAccessToken && cookies.TurfTrackerRefreshToken) {
+            setIsLoggedIn(true);
+            setAccountId('accountId-123');
+        }
+
     }, []);
 
 
     return (
         <ThemeProvider theme={theme}>
             <Router>
-                <NavigationBar isLoggedIn={isLoggedIn} />
+                {isLoggedIn && <NavigationBar />}
                 <Routes>
                     <Route
                         path={Paths.ROOT}

@@ -1,4 +1,5 @@
 import Grid from '@mui/material/Grid';
+import { useCookies } from 'react-cookie';
 import LoginForm from './LoginForm';
 import SignUp from './SignUp';
 
@@ -10,13 +11,16 @@ interface IProps {
 }
 
 const Login = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
+
+    const [cookies] = useCookies();
+
     return (
         <Grid container sx={{
-            height: `calc(91.5vh - (3vh - 10px))`,
+            height: '100vh',
             width: 'auto'
         }}>
-            < LoginForm setIsLoggedIn={setIsLoggedIn} />
-            <SignUp />
+            <LoginForm setIsLoggedIn={setIsLoggedIn} />
+            {(!cookies.TurfTrackerAccessToken || !cookies.TurfTrackerRefreshToken) && < SignUp />}
         </Grid >
     );
 }

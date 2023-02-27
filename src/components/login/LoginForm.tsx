@@ -5,6 +5,8 @@ import FormTextField from "../inventory/FormTextField";
 import Button from "@mui/material/Button";
 import { Paths } from "../../entities/paths";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../utils/authenticateUser";
+import { useCookies } from "react-cookie";
 
 interface IProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,32 +14,41 @@ interface IProps {
 
 const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const [cookies, setCookies] = useCookies();
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('username: ', username);
-        console.log('password: ', password);
-        const isAuthenticated = authenticateUser();
+        const isAuthenticated = await authenticateUser(email, password);
+        setIsLoggedIn(isAuthenticated);
         if (isAuthenticated) {
-            setIsLoggedIn(true);
             navigateToCalendar();
-            resetPassword();
         }
+        resetPassword();
     };
 
-    const authenticateUser = () => {
-        //TODO: will eventually authenticate with AWS congnito
+    const authenticateUser = async (email: string, password: string) => {
+        const isLoggedIn = await loginUser(email, password);
+        if (!isLoggedIn) {
+            return false
+        }
+
+        // TODO: Dont forget to remove cookies and make cookie name more specific
+        const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn;
+        setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
+        setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
+
         return true;
     };
 
     const navigateToCalendar = () => navigate(Paths.CALENDAR);
 
     const resetPassword = () => {
-        setUsername('');
+        setEmail('');
         setPassword('');
     }
 
@@ -51,9 +62,9 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
             <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                 <Grid item xs={6.5}>
                     <FormTextField
-                        label='Username'
-                        value={username}
-                        setterFunction={setUsername}
+                        label='Email'
+                        value={email}
+                        setterFunction={setEmail}
                     />
                 </Grid>
                 <Grid item xs={6.5}>
