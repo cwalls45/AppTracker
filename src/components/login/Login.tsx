@@ -15,7 +15,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
             height: '100vh',
             width: 'auto'
         }}>
-            < LoginForm setIsLoggedIn={setIsLoggedIn} />
+            <LoginForm setIsLoggedIn={setIsLoggedIn} />
             <SignUp />
         </Grid >
     );

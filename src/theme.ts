@@ -1,4 +1,10 @@
-import { createTheme } from "@mui/material";
+import { createTheme, darken } from "@mui/material";
+
+declare module "@mui/material/Button" {
+    interface ButtonPropsVariantOverrides {
+        secondary: true;
+    }
+}
 
 export const theme = createTheme({
     palette: {
@@ -26,8 +32,21 @@ export const theme = createTheme({
                 root: {
                     margin: '10px',
                     boxShadow: 'none',
-                }
+                },
             },
+            variants: [
+                {
+                    props: { variant: 'secondary' },
+                    style: {
+                        flexGrow: 1,
+                        width: '15em',
+                        backgroundColor: '#fefefe',
+                        '&:hover': {
+                            backgroundColor: darken('#fefefe', 0.1),
+                        }
+                    }
+                }
+            ]
         },
         MuiGrid: {
             styleOverrides: {
@@ -60,9 +79,17 @@ export const theme = createTheme({
         MuiTypography: {
             styleOverrides: {
                 root: {
-                    color: '#fefefe'
+                    color: '#6EA243'
                 }
-            }
+            },
+            variants: [
+                {
+                    props: { color: 'secondary' },
+                    style: {
+                        color: '#fefefe',
+                    },
+                },
+            ],
         }
-    }
+    },
 });
