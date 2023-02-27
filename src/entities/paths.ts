@@ -3,5 +3,6 @@ export enum Paths {
     CREATE_APPLICATION = '/createApplication',
     CALENDAR = '/calendar',
     LOGIN = '/login',
-    INVENTORY = '/inventory'
+    INVENTORY = '/inventory',
+    SIGNUP = '/signUp'
 };

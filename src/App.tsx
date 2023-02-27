@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { environmentActionCreators } from './redux';
 import { useCookies } from 'react-cookie';
+import SignUpForm from './components/login/SignUpForm';
 
 
 const App = () => {
@@ -74,6 +75,7 @@ const App = () => {
                         }
                     />
                     <Route path={Paths.LOGIN} element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+                    <Route path={Paths.SIGNUP} element={<SignUpForm />} />
                 </Routes>
             </Router>
         </ThemeProvider >
