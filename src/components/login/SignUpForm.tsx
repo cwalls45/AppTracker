@@ -1,7 +1,9 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
+import { Paths } from "../../entities/paths";
 import { environmentActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
@@ -14,19 +16,23 @@ const SignUpForm = () => {
     const dispatch = useDispatch();
     const { signUpUser } = bindActionCreators(environmentActionCreators, dispatch);
 
+    const navigate = useNavigate()
+
 
     const handleSubmit = () => {
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
 
         if (!isEmailValid || !passwordIsValidated) {
-            console.log('email or password is invalid');
+            console.log('email or password is invalid: ', passwordValidations);
             return;
         };
 
-        signUpUser(email, password);
+        signUpUser(email, password, navigateToCourseInformation);
 
     }
+
+    const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);
 
     const validateEmail = () => {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;

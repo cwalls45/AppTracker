@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { Dispatch } from "redux"
 import { EnvironmentActions } from "../../entities/environmentActions"
+import { Paths } from "../../entities/paths";
 import { EnvironmentActionsTypes } from "../action-types/environmentActionTypes"
 import { State } from "../reducers";
 
@@ -18,11 +18,10 @@ export const setAccountId = (accountId: string) => {
     });
 }
 
-export const signUpUser = (email: string, password: string) => {
+export const signUpUser = (email: string, password: string, navigateToCourseInformation: () => void) => {
     return async (dispatch: Dispatch<EnvironmentActions>, getState: () => State) => {
         try {
             const { environment } = getState();
-            const navigate = useNavigate();
 
             const response = await axios.post(`${environment.apiUrl}/auth/signUp`, {
                 signUp: {
@@ -31,10 +30,9 @@ export const signUpUser = (email: string, password: string) => {
                 }
             });
 
-
-            console.log('user: ', JSON.stringify(response, null, 2))
+            navigateToCourseInformation();
         } catch (error) {
-            console.log(`Error signing up ${email}`)
+            console.log(`Error signing up ${email}: ${error}`)
         }
     };
 }
