@@ -4,5 +4,6 @@ export enum Paths {
     CALENDAR = '/calendar',
     LOGIN = '/login',
     INVENTORY = '/inventory',
-    SIGNUP = '/signUp'
+    SIGNUP = '/signUp',
+    COURSE_INFO = '/courseInformation'
 };
