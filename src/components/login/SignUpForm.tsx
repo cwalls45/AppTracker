@@ -1,5 +1,8 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { environmentActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
 const SignUpForm = () => {
@@ -8,15 +11,25 @@ const SignUpForm = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
+    const dispatch = useDispatch();
+    const { signUpUser } = bindActionCreators(environmentActionCreators, dispatch);
+
+
     const handleSubmit = () => {
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
-        console.log(isEmailValid, passwordValidations)
+
+        if (!isEmailValid || !passwordIsValidated) {
+            console.log('email or password is invalid');
+            return;
+        };
+
+        signUpUser(email, password);
+
     }
 
     const validateEmail = () => {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-        ;
         const isValidEmail = emailRegex.test(email);
 
         return isValidEmail;
