@@ -23,12 +23,12 @@ export const signUpUser = (email: string, password: string, navigateToCourseInfo
         try {
             const { environment } = getState();
 
-            const response = await axios.post(`${environment.apiUrl}/auth/signUp`, {
-                signUp: {
-                    email,
-                    password
-                }
-            });
+            // const response = await axios.post(`${environment.apiUrl}/auth/signUp`, {
+            //     signUp: {
+            //         email,
+            //         password
+            //     }
+            // });
 
             navigateToCourseInformation();
         } catch (error) {

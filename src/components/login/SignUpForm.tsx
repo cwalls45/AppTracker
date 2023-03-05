@@ -24,10 +24,10 @@ const SignUpForm = () => {
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
 
-        if (!isEmailValid || !passwordIsValidated) {
-            console.log('email or password is invalid: ', passwordValidations);
-            return;
-        };
+        // if (!isEmailValid || !passwordIsValidated) {
+        //     console.log('email or password is invalid: ', passwordValidations);
+        //     return;
+        // };
 
         signUpUser(email, password, navigateToCourseInformation);
     }
