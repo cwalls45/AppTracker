@@ -19,7 +19,8 @@ const SignUpForm = () => {
     const navigate = useNavigate()
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
 
@@ -29,7 +30,6 @@ const SignUpForm = () => {
         };
 
         signUpUser(email, password, navigateToCourseInformation);
-
     }
 
     const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);
@@ -58,47 +58,49 @@ const SignUpForm = () => {
     }
 
     return (
-        <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
-            <Grid container justifyContent='center'>
-                <Typography variant="h4" component="div">
-                    Create Username and Password
-                </Typography>
-            </Grid>
-            <Grid container justifyContent='center'>
-                <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                    <Grid item xs={6.5}>
-                        <FormTextField
-                            label='Email'
-                            value={email}
-                            setterFunction={setEmail}
-                        />
+        <form onSubmit={handleSubmit}>
+            <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
+                <Grid container justifyContent='center'>
+                    <Typography variant="h4" component="div">
+                        Create Username and Password
+                    </Typography>
+                </Grid>
+                <Grid container justifyContent='center'>
+                    <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
+                        <Grid item xs={6.5}>
+                            <FormTextField
+                                label='Email'
+                                value={email}
+                                setterFunction={setEmail}
+                            />
+                        </Grid>
+                        <Grid item xs={6.5}>
+                            <FormTextField
+                                label='Password'
+                                value={password}
+                                setterFunction={setPassword}
+                                type='password'
+                            />
+                        </Grid>
+                        <Grid item xs={6.5}>
+                            <FormTextField
+                                label='Confirm Password'
+                                value={confirmPassword}
+                                setterFunction={setConfirmPassword}
+                                type='password'
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={6.5}>
-                        <FormTextField
-                            label='Password'
-                            value={password}
-                            setterFunction={setPassword}
-                            type='password'
-                        />
-                    </Grid>
-                    <Grid item xs={6.5}>
-                        <FormTextField
-                            label='Confirm Password'
-                            value={confirmPassword}
-                            setterFunction={setConfirmPassword}
-                            type='password'
-                        />
+                    <Grid container item xs={12} justifyContent='center'>
+                        <Grid item>
+                            <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
+                                Sign Up
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} justifyContent='center'>
-                    <Grid item>
-                        <Button onClick={handleSubmit} variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
-                            Sign Up
-                        </Button>
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid >
+            </Grid >
+        </form>
     );
 }
 
