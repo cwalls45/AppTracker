@@ -62,14 +62,13 @@ const GeneralCourseInformation = ({
                     setterFunction={setCity}
                     xs={7}
                 />
-                <Grid item xs={3}>
-                    <SelectDropdown
-                        value={state}
-                        setterFunction={handleStateChange}
-                        label='State'
-                        options={states}
-                    />
-                </Grid>
+                <SelectDropdown
+                    value={state}
+                    setterFunction={handleStateChange}
+                    label='State'
+                    xs={3}
+                    options={states}
+                />
             </Grid>
         </Grid >
     )
