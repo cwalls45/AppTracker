@@ -14,18 +14,20 @@ const FormTextField = ({ label, value, setterFunction, xs, required = true, type
     const handleChange = (event) => setterFunction(event.target.value)
 
     return (
-        <Grid item xs={xs}>
-            <TextField
-                fullWidth
-                required={required}
-                label={label}
-                type={type}
-                variant='outlined'
-                value={value}
-                onChange={(event) => handleChange(event)}
-                error={false}
-                helperText={''}
-            />
+        <Grid container item xs={12} justifyContent='center'>
+            <Grid item xs={xs}>
+                <TextField
+                    fullWidth
+                    required={required}
+                    label={label}
+                    type={type}
+                    variant='outlined'
+                    value={value}
+                    onChange={(event) => handleChange(event)}
+                    error={false}
+                    helperText={''}
+                />
+            </Grid>
         </Grid>
     )
 };
