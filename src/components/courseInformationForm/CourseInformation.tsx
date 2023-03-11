@@ -18,7 +18,7 @@ const CourseInformation = () => {
 
     const handleStateChange = (event: SelectChangeEvent) => setState(event.target.value);
 
-    const handleAddCourseArea = () => {
+    const handleAddCourseArea = (event) => {
         const intialCourseArea = createInitialCourseArea();
         setCourseAreas([...courseAreas, intialCourseArea])
     };
@@ -62,7 +62,14 @@ const CourseInformation = () => {
                             </Button>
                         </Grid>
                     </Grid>
-                    {courseAreas.map((area, index) => <AreaOfCourse />)}
+                    {courseAreas.map((area, index) =>
+                        <AreaOfCourse
+                            key={index}
+                            courseAreas={courseAreas}
+                            setCourseAreas={setCourseAreas}
+                            index={index}
+                        />
+                    )}
                 </Grid>
             </Grid>
         </form>

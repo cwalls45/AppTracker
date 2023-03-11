@@ -44,13 +44,13 @@ export const turfTypeOptions = [
 export interface ICourseArea {
     area: string;
     size: string;
-    sizeUnit: 'acres' | 'sq. feet';
-    turfType: TurfType[]
+    sizeUnit: 'Acres' | 'Sq. Feet' | '';
+    turfType: TurfType | ''
 }
 
 export const createInitialCourseArea = (): ICourseArea => ({
     area: '',
     size: '',
-    sizeUnit: 'acres',
-    turfType: []
+    sizeUnit: '',
+    turfType: ''
 })
