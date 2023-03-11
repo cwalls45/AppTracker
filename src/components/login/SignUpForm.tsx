@@ -67,29 +67,26 @@ const SignUpForm = () => {
                 </Grid>
                 <Grid container justifyContent='center'>
                     <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Email'
-                                value={email}
-                                setterFunction={setEmail}
-                            />
-                        </Grid>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Password'
-                                value={password}
-                                setterFunction={setPassword}
-                                type='password'
-                            />
-                        </Grid>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Confirm Password'
-                                value={confirmPassword}
-                                setterFunction={setConfirmPassword}
-                                type='password'
-                            />
-                        </Grid>
+                        <FormTextField
+                            label='Email'
+                            value={email}
+                            setterFunction={setEmail}
+                            xs={6.5}
+                        />
+                        <FormTextField
+                            label='Password'
+                            value={password}
+                            setterFunction={setPassword}
+                            type='password'
+                            xs={6.5}
+                        />
+                        <FormTextField
+                            label='Confirm Password'
+                            value={confirmPassword}
+                            setterFunction={setConfirmPassword}
+                            type='password'
+                            xs={6.5}
+                        />
                     </Grid>
                     <Grid container item xs={12} justifyContent='center'>
                         <Grid item>

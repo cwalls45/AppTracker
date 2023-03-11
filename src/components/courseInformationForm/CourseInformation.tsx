@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { Grid, Typography, Select, MenuItem, SelectChangeEvent } from "@mui/material";
-import FormTextField from "../inventory/FormTextField";
+import { Grid, SelectChangeEvent } from "@mui/material";
 import { State } from 'country-state-city';
 import { IState } from "../../entities/environment";
-import SelectDropdown from "./SelectDropdown";
 import GeneralCourseInformation from "./GeneralCourseInformation";
 
 const CourseInformation = () => {

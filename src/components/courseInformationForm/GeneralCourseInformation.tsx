@@ -38,34 +38,30 @@ const GeneralCourseInformation = ({
                         General Course Information
                     </Typography>
                 </Grid>
-                <Grid item xs={7}>
-                    <FormTextField
-                        label='Course Name'
-                        value={courseName}
-                        setterFunction={setCourseName}
-                    />
-                </Grid>
-                <Grid item xs={7}>
-                    <FormTextField
-                        label='Address Line 1'
-                        value={addressLineOne}
-                        setterFunction={setAddressLineOne}
-                    />
-                </Grid>
-                <Grid item xs={7}>
-                    <FormTextField
-                        label='Address Line 2'
-                        value={addressLineTwo}
-                        setterFunction={setAddressLineTwo}
-                    />
-                </Grid>
-                <Grid item xs={7}>
-                    <FormTextField
-                        label='City'
-                        value={city}
-                        setterFunction={setCity}
-                    />
-                </Grid>
+                <FormTextField
+                    label='Course Name'
+                    value={courseName}
+                    setterFunction={setCourseName}
+                    xs={7}
+                />
+                <FormTextField
+                    label='Address Line 1'
+                    value={addressLineOne}
+                    setterFunction={setAddressLineOne}
+                    xs={7}
+                />
+                <FormTextField
+                    label='Address Line 2'
+                    value={addressLineTwo}
+                    setterFunction={setAddressLineTwo}
+                    xs={7}
+                />
+                <FormTextField
+                    label='City'
+                    value={city}
+                    setterFunction={setCity}
+                    xs={7}
+                />
                 <Grid item xs={3}>
                     <SelectDropdown
                         value={state}
@@ -75,7 +71,7 @@ const GeneralCourseInformation = ({
                     />
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid >
     )
 }
 

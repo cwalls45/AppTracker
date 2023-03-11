@@ -132,13 +132,12 @@ const AddInventoryForm = () => {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent='space-between' rowSpacing={4}>
-                    <Grid item xs={6}>
-                        <FormTextField
-                            label='Amount'
-                            value={amount}
-                            setterFunction={setAmount}
-                        />
-                    </Grid>
+                    <FormTextField
+                        label='Amount'
+                        value={amount}
+                        setterFunction={setAmount}
+                        xs={6}
+                    />
                     <Grid item xs={5}>
                         <AutoCompleteDropDown
                             label='Units'
@@ -150,13 +149,12 @@ const AddInventoryForm = () => {
                     </Grid>
                 </Grid>
                 <Grid container justifyContent='space-between' rowSpacing={4}>
-                    <Grid item xs={6}>
-                        <FormTextField
-                            label='Cost of Product'
-                            value={cost}
-                            setterFunction={setCost}
-                        />
-                    </Grid>
+                    <FormTextField
+                        label='Cost of Product'
+                        value={cost}
+                        setterFunction={setCost}
+                        xs={6}
+                    />
                     <Grid container item xs={5}>
                         <Typography component="div">
                             per {units || 'unit'}
