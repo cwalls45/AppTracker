@@ -31,11 +31,11 @@ const GeneralCourseInformation = ({
     states
 }: IProps) => {
     return (
-        <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: '50vw' }}>
+        <Grid container sx={{ width: '50vw' }}>
             <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                 <Grid container justifyContent='center'>
                     <Typography variant="h4" component="div">
-                        General Course Information
+                        Course Information
                     </Typography>
                 </Grid>
                 <FormTextField

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Grid, SelectChangeEvent } from "@mui/material";
+import { Button, Divider, Grid, SelectChangeEvent, Typography } from "@mui/material";
 import { State } from 'country-state-city';
 import { IState } from "../../entities/environment";
 import GeneralCourseInformation from "./GeneralCourseInformation";
@@ -27,20 +27,35 @@ const CourseInformation = () => {
 
     return (
         <form>
-            <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
-                <GeneralCourseInformation
-                    courseName={courseName}
-                    setCourseName={setCourseName}
-                    addressLineOne={addressLineOne}
-                    setAddressLineOne={setAddressLineOne}
-                    addressLineTwo={addressLineTwo}
-                    setAddressLineTwo={setAddressLineTwo}
-                    city={city}
-                    setCity={setCity}
-                    state={state}
-                    handleStateChange={handleStateChange}
-                    states={states}
-                />
+            <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: '100vh', width: 'auto' }}>
+                <Grid>
+                    <GeneralCourseInformation
+                        courseName={courseName}
+                        setCourseName={setCourseName}
+                        addressLineOne={addressLineOne}
+                        setAddressLineOne={setAddressLineOne}
+                        addressLineTwo={addressLineTwo}
+                        setAddressLineTwo={setAddressLineTwo}
+                        city={city}
+                        setCity={setCity}
+                        state={state}
+                        handleStateChange={handleStateChange}
+                        states={states}
+                    />
+                    <Divider />
+                    <Grid container justifyContent='center'>
+                        <Typography variant="h4" component="div">
+                            Course Information
+                        </Typography>
+                    </Grid>
+                    <Grid container item xs={12} justifyContent='center'>
+                        <Grid item>
+                            <Button variant='contained'>
+                                Add Area of Course
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
         </form>
     )
