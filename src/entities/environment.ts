@@ -22,27 +22,23 @@ export enum TurfType {
     CARPETGRASS = 'Carpetgrass'
 }
 
-export const turfTypeOptions = [
-    TurfType.ANNUAL_RYE,
-    TurfType.BAHIA,
-    TurfType.BENTGRASS,
-    TurfType.BERMUDA,
-    TurfType.BUFFALOGRASS,
-    TurfType.CARPETGRASS,
-    TurfType.CENTIPEDE,
-    TurfType.FINE_FESCUE,
-    TurfType.KENTUCKY_BLUEGRASS,
-    TurfType.PERENNIAL_RYE,
-    TurfType.POA_ANNUA,
-    TurfType.ROUGH_BLUEGRASS,
-    TurfType.ST_AUGUSTINE,
-    TurfType.TALL_FESCUE,
-    TurfType.ZOYSIA
-]
+export const turfTypeOptions = Object.values(TurfType);
 
+export enum AreaOfCourse {
+    GREENS = 'Greens',
+    APPROACH = 'Approach',
+    FAIRWAY = 'Fairway',
+    COLLARS = 'Collars',
+    RUNOFFS = 'Runoff',
+    INTERMEDIATE = 'Intermediate',
+    ROUGH = 'Rough',
+    NATIVE = 'Native',
+    TEES = 'Tees'
+}
 
+export const areaOfCourseOptions = Object.values(AreaOfCourse);
 export interface ICourseArea {
-    area: string;
+    area: AreaOfCourse | '';
     size: string;
     sizeUnit: 'Acres' | 'Sq. Feet' | '';
     turfType: TurfType | ''
@@ -53,4 +49,4 @@ export const createInitialCourseArea = (): ICourseArea => ({
     size: '',
     sizeUnit: '',
     turfType: ''
-})
+});

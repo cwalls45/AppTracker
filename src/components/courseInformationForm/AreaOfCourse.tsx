@@ -1,6 +1,7 @@
-import { Grid } from "@mui/material";
-import { ICourseArea, turfTypeOptions } from "../../entities/environment";
+import { Divider, Grid } from "@mui/material";
+import { areaOfCourseOptions, ICourseArea, turfTypeOptions } from "../../entities/environment";
 import CourseAreaDropdown from "./CourseAreaDropdown";
+import SizeOfArea from "./SizeOfArea";
 
 interface IProps {
     courseAreas: ICourseArea[];
@@ -15,11 +16,19 @@ const AreaOfCourse = ({ courseAreas, setCourseAreas, index }: IProps) => {
                 <CourseAreaDropdown
                     courseAreas={courseAreas}
                     setterFunction={setCourseAreas}
-                    label='Type of Turf'
+                    label='Area of Course'
                     xs={6}
-                    options={turfTypeOptions}
+                    options={areaOfCourseOptions}
                     index={index}
-                    property='turfType'
+                    property='area'
+                />
+                <SizeOfArea
+                    courseAreas={courseAreas}
+                    setterFunction={setCourseAreas}
+                    label='Size of Area'
+                    xs={6}
+                    index={index}
+                    property='size'
                 />
                 <CourseAreaDropdown
                     courseAreas={courseAreas}
@@ -30,6 +39,16 @@ const AreaOfCourse = ({ courseAreas, setCourseAreas, index }: IProps) => {
                     index={index}
                     property='sizeUnit'
                 />
+                <CourseAreaDropdown
+                    courseAreas={courseAreas}
+                    setterFunction={setCourseAreas}
+                    label='Type of Turf'
+                    xs={6}
+                    options={turfTypeOptions}
+                    index={index}
+                    property='turfType'
+                />
+                <Divider />
             </Grid>
         </Grid>
     )
