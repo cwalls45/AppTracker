@@ -26,7 +26,7 @@ const AreaOfCourse = ({ courseAreas, setCourseAreas, index }: IProps) => {
                     courseAreas={courseAreas}
                     setterFunction={setCourseAreas}
                     label='Size of Area'
-                    xs={6}
+                    xs={3}
                     index={index}
                     property='size'
                 />
