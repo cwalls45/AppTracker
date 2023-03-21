@@ -26,7 +26,13 @@ const CourseInformation = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(isValidSizeOfArea())
         console.log('COURSEAREAS: ', courseAreas)
+    }
+
+    const isValidSizeOfArea = () => {
+        // TODO: fix regex to only allow . and not other symbols
+        return courseAreas.every((courseArea) => /[0-9]/.test(courseArea.size) === true)
     }
 
     useEffect(() => {
