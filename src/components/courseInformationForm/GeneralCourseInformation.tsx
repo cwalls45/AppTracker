@@ -55,6 +55,7 @@ const GeneralCourseInformation = ({
                     value={addressLineTwo}
                     setterFunction={setAddressLineTwo}
                     xs={7}
+                    required={false}
                 />
                 <FormTextField
                     label='City'
@@ -66,7 +67,7 @@ const GeneralCourseInformation = ({
                     value={state}
                     setterFunction={handleStateChange}
                     label='State'
-                    xs={3}
+                    xs={3.5}
                     options={states}
                 />
             </Grid>

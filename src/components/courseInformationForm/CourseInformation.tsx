@@ -4,6 +4,7 @@ import { State } from 'country-state-city';
 import { createInitialCourseArea, ICourseArea, IState } from "../../entities/environment";
 import GeneralCourseInformation from "./GeneralCourseInformation";
 import AreaOfCourse from "./AreaOfCourse";
+import { isEmpty } from "lodash";
 
 const CourseInformation = () => {
     const countryCode = 'US';
@@ -23,6 +24,11 @@ const CourseInformation = () => {
         setCourseAreas([...courseAreas, intialCourseArea])
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('COURSEAREAS: ', courseAreas)
+    }
+
     useEffect(() => {
         const states = State.getStatesOfCountry(countryCode).map((state) => ({
             name: state.name,
@@ -33,7 +39,7 @@ const CourseInformation = () => {
     }, []);
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: '100vh', width: 'auto' }}>
                 <Grid>
                     <GeneralCourseInformation
@@ -70,6 +76,14 @@ const CourseInformation = () => {
                             index={index}
                         />
                     )}
+                    {!isEmpty(courseAreas) &&
+                    <Grid container item xs={12} justifyContent='center'>
+                        <Grid item>
+                            <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
+                                Finish Signing Up
+                            </Button>
+                        </Grid>
+                    </Grid>}
                 </Grid>
             </Grid>
         </form>
