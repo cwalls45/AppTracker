@@ -26,13 +26,15 @@ const CourseInformation = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(isValidSizeOfArea())
-        console.log('COURSEAREAS: ', courseAreas)
+        if (!isValidSizeOfArea()) {
+            console.log('Area of course is not valid: ', courseAreas);
+            return;
+        }
+
     }
 
     const isValidSizeOfArea = () => {
-        // TODO: fix regex to only allow . and not other symbols
-        return courseAreas.every((courseArea) => /[0-9]/.test(courseArea.size) === true)
+        return courseAreas.every((courseArea) => /^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(courseArea.size) === true)
     }
 
     useEffect(() => {
@@ -83,13 +85,13 @@ const CourseInformation = () => {
                         />
                     )}
                     {!isEmpty(courseAreas) &&
-                    <Grid container item xs={12} justifyContent='center'>
-                        <Grid item>
-                            <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
-                                Finish Signing Up
-                            </Button>
-                        </Grid>
-                    </Grid>}
+                        <Grid container item xs={12} justifyContent='center'>
+                            <Grid item>
+                                <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
+                                    Finish Signing Up
+                                </Button>
+                            </Grid>
+                        </Grid>}
                 </Grid>
             </Grid>
         </form>
