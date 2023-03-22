@@ -11,6 +11,8 @@ const SignUpForm = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch();
@@ -21,15 +23,17 @@ const SignUpForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const isValidFirstName = validateName(firstName);
+        const isValidLastName = validateName(lastName)
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
 
-        // if (!isEmailValid || !passwordIsValidated) {
+        // if (!isEmailValid || !passwordIsValidated || !isValidFirstName || !isValidLastName) {
         //     console.log('email or password is invalid: ', passwordValidations);
         //     return;
         // };
 
-        signUpUser(email, password, navigateToCourseInformation);
+        signUpUser(firstName, lastName, email, password, navigateToCourseInformation);
     }
 
     const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);
@@ -57,6 +61,10 @@ const SignUpForm = () => {
         }
     }
 
+    const validateName = (name: string) => {
+        return /[a-zA-Z]/.test(name);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
@@ -68,24 +76,36 @@ const SignUpForm = () => {
                 <Grid container justifyContent='center'>
                     <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                         <FormTextField
+                            label='First Name'
+                            value={firstName}
+                            setterFunction={setFirstName}
+                            xs={4}
+                        />
+                        <FormTextField
+                            label='Last Name'
+                            value={lastName}
+                            setterFunction={setLastName}
+                            xs={4}
+                        />
+                        <FormTextField
                             label='Email'
                             value={email}
                             setterFunction={setEmail}
-                            xs={6.5}
+                            xs={4}
                         />
                         <FormTextField
                             label='Password'
                             value={password}
                             setterFunction={setPassword}
                             type='password'
-                            xs={6.5}
+                            xs={4}
                         />
                         <FormTextField
                             label='Confirm Password'
                             value={confirmPassword}
                             setterFunction={setConfirmPassword}
                             type='password'
-                            xs={6.5}
+                            xs={4}
                         />
                     </Grid>
                     <Grid container item xs={12} justifyContent='center'>

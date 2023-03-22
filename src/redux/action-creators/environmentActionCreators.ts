@@ -18,13 +18,15 @@ export const setAccountId = (accountId: string) => {
     });
 }
 
-export const signUpUser = (email: string, password: string, navigateToCourseInformation: () => void) => {
+export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void) => {
     return async (dispatch: Dispatch<EnvironmentActions>, getState: () => State) => {
         try {
             const { environment } = getState();
 
             // const response = await axios.post(`${environment.apiUrl}/auth/signUp`, {
             //     signUp: {
+            //         firstName,
+            //         lastName,
             //         email,
             //         password
             //     }
