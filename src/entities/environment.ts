@@ -37,6 +37,7 @@ export enum AreaOfCourse {
 }
 
 export const areaOfCourseOptions = Object.values(AreaOfCourse);
+
 export interface ICourseArea {
     area: AreaOfCourse | '';
     size: string;
