@@ -11,13 +11,6 @@ export const setAPIUrl = () => {
     });
 }
 
-export const setAccountId = (accountId: string) => {
-    return (dispatch: Dispatch<EnvironmentActions>) => dispatch({
-        type: EnvironmentActionsTypes.SET_ACCOUNT_ID,
-        payload: accountId
-    });
-}
-
 export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void) => {
     return async (dispatch: Dispatch<EnvironmentActions>, getState: () => State) => {
         try {

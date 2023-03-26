@@ -11,7 +11,7 @@ import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { environmentActionCreators } from './redux';
+import { accountActionCreators, environmentActionCreators } from './redux';
 import { useCookies } from 'react-cookie';
 import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
@@ -22,7 +22,8 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const dispatch = useDispatch();
-    const { setAPIUrl, setAccountId } = bindActionCreators(environmentActionCreators, dispatch);
+    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
+    const { setAccountId } = bindActionCreators(accountActionCreators, dispatch);
 
     const [cookies] = useCookies();
 
