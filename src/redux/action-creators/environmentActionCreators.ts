@@ -23,7 +23,7 @@ export const signUpUser = (firstName: string, lastName: string, email: string, p
         try {
             const { environment } = getState();
 
-            // const response = await axios.post(`${environment.apiUrl}/auth/signUp`, {
+            // const response = await axios.post(`${environment.apiUrl}/auth/createUser`, {
             //     signUp: {
             //         firstName,
             //         lastName,
