@@ -1,5 +1,5 @@
 import { Divider, Grid } from "@mui/material";
-import { areaOfCourseOptions, ICourseArea, turfTypeOptions } from "../../entities/environment";
+import { areaOfCourseOptions, ICourseArea, turfTypeOptions } from "../../entities/account";
 import CourseAreaDropdown from "./CourseAreaDropdown";
 import SizeOfArea from "./SizeOfArea";
 

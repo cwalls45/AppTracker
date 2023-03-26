@@ -1,3 +1,15 @@
+export interface IAccount {
+    accountId: string;
+    user: IUser;
+    courseAreas: ICourseArea[];
+}
+
+export interface IUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export interface IState {
     name: string;
     abbreviation: string;

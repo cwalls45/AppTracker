@@ -1,5 +1,5 @@
 import { MenuItem, SelectChangeEvent, Select, FormControl, InputLabel, Grid } from "@mui/material"
-import { IState } from "../../entities/environment";
+import { IState } from "../../entities/account";
 
 interface IProps {
     value: string;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Divider, Grid, SelectChangeEvent, Typography } from "@mui/material";
 import { State } from 'country-state-city';
-import { createInitialCourseArea, ICourseArea, IState } from "../../entities/environment";
+import { createInitialCourseArea, ICourseArea, IState } from "../../entities/account";
 import GeneralCourseInformation from "./GeneralCourseInformation";
 import AreaOfCourse from "./AreaOfCourse";
 import { isEmpty } from "lodash";

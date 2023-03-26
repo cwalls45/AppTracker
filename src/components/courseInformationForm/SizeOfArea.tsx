@@ -1,5 +1,5 @@
 import { Grid, TextField } from "@mui/material";
-import { ICourseArea } from "../../entities/environment";
+import { ICourseArea } from "../../entities/account";
 
 interface IProps {
   courseAreas: ICourseArea[];
@@ -10,7 +10,7 @@ interface IProps {
   property: string
 }
 
-const SizeOfArea = ({courseAreas, setterFunction, label, xs, index, property}: IProps) => {
+const SizeOfArea = ({ courseAreas, setterFunction, label, xs, index, property }: IProps) => {
 
   const handleChange = (event) => {
     const updatedArea = { ...courseAreas[index], [property]: event.target.value }

@@ -1,5 +1,5 @@
 import { Grid, SelectChangeEvent, Typography } from "@mui/material";
-import { IState } from "../../entities/environment";
+import { IState } from "../../entities/account";
 import FormTextField from "../inventory/FormTextField";
 import SelectDropdown from "./SelectDropdown";
 

@@ -1,5 +1,5 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { ICourseArea } from "../../entities/environment";
+import { ICourseArea } from "../../entities/account";
 
 interface IProps {
     courseAreas: ICourseArea[];
