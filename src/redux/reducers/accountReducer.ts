@@ -15,6 +15,8 @@ const initialState: IAccount = {
 const accountReducer = (state = initialState, action: AcccountActions): IAccount => {
     if (action.type === AccountActionTypes.SET_ACCOUNT_ID) {
         return { ...state, accountId: action.payload }
+    } else if (action.type === AccountActionTypes.SET_USER) {
+        return { ...state, user: action.payload }
     } else {
         return state;
     }
