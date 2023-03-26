@@ -15,9 +15,9 @@ export const addInventory = (inventory: IInventory) => {
 export const postInventory = (inventory: IInventory) => {
     return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
         try {
-            const { environment } = getState();
+            const { environment, account } = getState();
 
-            const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: environment.accountId });
+            const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: account.accountId });
             const formattedInventory: IInventory = response.data;
 
             dispatch({
@@ -34,9 +34,9 @@ export const postInventory = (inventory: IInventory) => {
 export const getAllInventory = () => {
     return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
         try {
-            const { environment } = getState();
+            const { environment, account } = getState();
 
-            const response = await axios.get(`${environment.apiUrl}/api/getAllInventory/${environment.accountId}`);
+            const response = await axios.get(`${environment.apiUrl}/api/getAllInventory/${account.accountId}`);
             const formattedInventory: IInventory[] = response.data;
 
             dispatch({

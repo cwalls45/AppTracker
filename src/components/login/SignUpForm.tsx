@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Paths } from "../../entities/paths";
-import { environmentActionCreators } from "../../redux";
+import { accountActionCreators, environmentActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
 const SignUpForm = () => {
@@ -16,7 +16,7 @@ const SignUpForm = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch();
-    const { signUpUser } = bindActionCreators(environmentActionCreators, dispatch);
+    const { signUpUser } = bindActionCreators(accountActionCreators, dispatch);
 
     const navigate = useNavigate()
 
