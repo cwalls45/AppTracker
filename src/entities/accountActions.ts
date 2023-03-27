@@ -3,7 +3,8 @@ import { ICourseInfo, IUser } from "./account";
 
 export type AcccountActions =
     ISetAccountId |
-    ISetUser
+    ISetUser |
+    ISetCourseInfo
 
 export interface ISetAccountId {
     type: AccountActionTypes.SET_ACCOUNT_ID,
