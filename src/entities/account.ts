@@ -17,7 +17,7 @@ export interface ICourseInfo {
     address2: string;
     city: string;
     zipCode: string;
-    state: string
+    state: string;
 }
 
 export interface IState {

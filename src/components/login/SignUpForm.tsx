@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Paths } from "../../entities/paths";
-import { accountActionCreators, environmentActionCreators } from "../../redux";
+import { accountActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
 const SignUpForm = () => {

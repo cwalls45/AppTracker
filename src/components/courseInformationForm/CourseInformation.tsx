@@ -5,6 +5,9 @@ import { createInitialCourseArea, ICourseArea, IState } from "../../entities/acc
 import GeneralCourseInformation from "./GeneralCourseInformation";
 import AreaOfCourse from "./AreaOfCourse";
 import { isEmpty } from "lodash";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { accountActionCreators } from "../../redux";
 
 const CourseInformation = () => {
     const countryCode = 'US';
@@ -17,6 +20,9 @@ const CourseInformation = () => {
     const [zipCode, setZipCode] = useState('');
     const [state, setState] = useState('');
     const [courseAreas, setCourseAreas] = useState<ICourseArea[]>([]);
+
+    const dispatch = useDispatch();
+    const { addCourseInfo } = bindActionCreators(accountActionCreators, dispatch);
 
     const handleStateChange = (event: SelectChangeEvent) => setState(event.target.value);
 
@@ -31,7 +37,16 @@ const CourseInformation = () => {
             console.log('Area of course is not valid: ', courseAreas);
             return;
         }
+        const courseInfo = {
+            courseName,
+            address1: addressLineOne,
+            address2: addressLineTwo,
+            city,
+            zipCode,
+            state
+        };
 
+        addCourseInfo(courseInfo);
     }
 
     const isValidSizeOfArea = () => {
@@ -91,7 +106,7 @@ const CourseInformation = () => {
                         <Grid container item xs={12} justifyContent='center'>
                             <Grid item>
                                 <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
-                                    Finish Signing Up
+                                    Submit Course Information
                                 </Button>
                             </Grid>
                         </Grid>}
