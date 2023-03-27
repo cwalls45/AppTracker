@@ -1,5 +1,5 @@
 import { AccountActionTypes } from "../redux/action-types/accountActionTypes";
-import { IUser } from "./account";
+import { ICourseInfo, IUser } from "./account";
 
 export type AcccountActions =
     ISetAccountId |
@@ -14,3 +14,9 @@ export interface ISetUser {
     type: AccountActionTypes.SET_USER,
     payload: IUser
 }
+
+export interface ISetCourseInfo {
+    type: AccountActionTypes.SET_COURSE_INFO,
+    payload: ICourseInfo
+}
+

@@ -12,6 +12,8 @@ interface IProps {
     setAddressLineTwo: React.Dispatch<React.SetStateAction<string>>;
     city: string;
     setCity: React.Dispatch<React.SetStateAction<string>>;
+    zipCode: string;
+    setZipCode: React.Dispatch<React.SetStateAction<string>>;
     state: string;
     handleStateChange: React.Dispatch<SelectChangeEvent<string>>;
     states: IState[];
@@ -26,6 +28,8 @@ const GeneralCourseInformation = ({
     setAddressLineTwo,
     city,
     setCity,
+    zipCode,
+    setZipCode,
     state,
     handleStateChange,
     states
@@ -62,6 +66,12 @@ const GeneralCourseInformation = ({
                     value={city}
                     setterFunction={setCity}
                     xs={7}
+                />
+                <FormTextField
+                    label='Zip Code'
+                    value={zipCode}
+                    setterFunction={setZipCode}
+                    xs={3.5}
                 />
                 <SelectDropdown
                     value={state}

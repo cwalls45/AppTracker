@@ -14,6 +14,7 @@ const CourseInformation = () => {
     const [addressLineOne, setAddressLineOne] = useState('');
     const [addressLineTwo, setAddressLineTwo] = useState('');
     const [city, setCity] = useState('');
+    const [zipCode, setZipCode] = useState('');
     const [state, setState] = useState('');
     const [courseAreas, setCourseAreas] = useState<ICourseArea[]>([]);
 
@@ -59,6 +60,8 @@ const CourseInformation = () => {
                         setAddressLineTwo={setAddressLineTwo}
                         city={city}
                         setCity={setCity}
+                        zipCode={zipCode}
+                        setZipCode={setZipCode}
                         state={state}
                         handleStateChange={handleStateChange}
                         states={states}

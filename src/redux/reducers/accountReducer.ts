@@ -9,6 +9,14 @@ const initialState: IAccount = {
         lastName: '',
         email: '',
     },
+    courseInfo: {
+        courseName: '',
+        address1: '',
+        address2: '',
+        city: '',
+        zipCode: '',
+        state: ''
+    },
     courseAreas: []
 }
 

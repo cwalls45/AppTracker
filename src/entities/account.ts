@@ -1,6 +1,7 @@
 export interface IAccount {
     accountId: string;
     user: IUser;
+    courseInfo: ICourseInfo;
     courseAreas: ICourseArea[];
 }
 
@@ -8,6 +9,15 @@ export interface IUser {
     firstName: string;
     lastName: string;
     email: string;
+}
+
+export interface ICourseInfo {
+    courseName: string;
+    address1: string;
+    address2: string;
+    city: string;
+    zipCode: string;
+    state: string
 }
 
 export interface IState {
