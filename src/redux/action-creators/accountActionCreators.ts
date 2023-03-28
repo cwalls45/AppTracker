@@ -17,24 +17,24 @@ export const signUpUser = (firstName: string, lastName: string, email: string, p
         try {
             const { environment } = getState();
 
-            // const response = await axios.post(`${environment.apiUrl}/auth/createUser`, {
-            //     signUp: {
-            //         firstName,
-            //         lastName,
-            //         email,
-            //         password
-            //     }
-            // });
+            const response = await axios.post(`${environment.apiUrl}/auth/createUser`, {
+                signUp: {
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                }
+            });
 
-            // dispatch({
-            //     type: AccountActionTypes.SET_ACCOUNT_ID,
-            //     payload: response.data.accountInfo.accountId
-            // });
+            dispatch({
+                type: AccountActionTypes.SET_ACCOUNT_ID,
+                payload: response.data.accountInfo.accountId
+            });
 
-            // dispatch({
-            //     type: AccountActionTypes.SET_USER,
-            //     payload: response.data.accountInfo.user
-            // });
+            dispatch({
+                type: AccountActionTypes.SET_USER,
+                payload: response.data.accountInfo.user
+            });
 
             navigateToCourseInformation();
         } catch (error) {
@@ -49,6 +49,12 @@ export const addCourseInfo = (courseInfo: ICourseInfo) => {
         const { environment, account } = getState();
 
         try {
+
+            await axios.post(`${environment.apiUrl}/auth/addCourseInfo`, {
+                courseInfo,
+                accountId: account.accountId,
+                email: account.user.email
+            });
 
             dispatch({
                 type: AccountActionTypes.SET_COURSE_INFO,
