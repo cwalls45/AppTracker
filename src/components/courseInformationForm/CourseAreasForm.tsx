@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid"
-import { createInitialCourseArea, ICourseArea } from "../../entities/account";
+import { createInitialCourseArea, ICourseArea, AreaOfCourse as AreaOfCourseEnum } from "../../entities/account";
 import AreaOfCourse from "./AreaOfCourse";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -25,7 +25,24 @@ const CourseAreasForm = () => {
 
   const isValidSizeOfArea = () => {
     return courseAreas.every((courseArea) => /^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(courseArea.size) === true)
-  }
+  };
+
+  const createInitialAreas = () => {
+    const areas = [AreaOfCourseEnum.GREENS, AreaOfCourseEnum.FAIRWAY, AreaOfCourseEnum.TEES];
+    const initialAreas = areas.map(area => {
+      const courseAreaShell = createInitialCourseArea();
+      courseAreaShell.area = area;
+      return courseAreaShell;
+    });
+
+    return initialAreas;
+  };
+
+  useEffect(() => {
+    const initialAreas = createInitialAreas();
+    setCourseAreas(initialAreas);
+  }, []);
+
 
   return (
     <form onSubmit={handleSubmit}>
@@ -36,13 +53,6 @@ const CourseAreasForm = () => {
                     Course Area Information
                 </Typography>
             </Grid>
-            <Grid container item xs={12} justifyContent='center'>
-                <Grid item>
-                    <Button variant='contained' onClick={handleAddCourseArea}>
-                        Add Area of Course
-                    </Button>
-                </Grid>
-            </Grid>
             {courseAreas.map((area, index) =>
               <AreaOfCourse
                 key={index}
@@ -51,6 +61,13 @@ const CourseAreasForm = () => {
                 index={index}
               />
             )}
+            <Grid container item xs={12} justifyContent='center'>
+                <Grid item>
+                    <Button variant='contained' onClick={handleAddCourseArea}>
+                        Add Area of Course
+                    </Button>
+                </Grid>
+            </Grid>
             </Grid>
         </Grid>
       </form>
