@@ -2,11 +2,13 @@ import { EnvironmentActions } from "../../entities/environmentActions";
 import { EnvironmentActionsTypes } from "../action-types/environmentActionTypes";
 
 export interface IEnvironment {
-    apiUrl: string
+    apiUrl: string,
+    isLoading: boolean
 }
 
 const initialState: IEnvironment = {
-    apiUrl: ''
+    apiUrl: '',
+    isLoading: false
 };
 
 const environmentReducer = (state = initialState, action: EnvironmentActions): IEnvironment => {
@@ -14,6 +16,8 @@ const environmentReducer = (state = initialState, action: EnvironmentActions): I
         console.log('process', process.env.API_URL)
         //TODO: ensure there is always a url
         return { ...state, apiUrl: process.env.API_URL || 'could not find url' }
+    } else if (action.type === EnvironmentActionsTypes.IS_LOADING) {
+        return { ...state, isLoading: action.payload}
     } else {
         return state
     }

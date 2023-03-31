@@ -9,3 +9,10 @@ export const setAPIUrl = () => {
     });
 }
 
+export const setIsLoading = (isLoading: boolean) => {
+    return (dispatch: Dispatch<EnvironmentActions>) => dispatch({
+        type: EnvironmentActionsTypes.IS_LOADING,
+        payload: isLoading
+    });
+}
+
