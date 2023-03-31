@@ -4,7 +4,7 @@
   "description": "Application for tracking chemical applications",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env webpack serve --open --env stage=dev",
+    "start": "cross-env webpack serve --open --env stage=dev",
     "start:local": "cross-env webpack serve --open --env stage=local",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

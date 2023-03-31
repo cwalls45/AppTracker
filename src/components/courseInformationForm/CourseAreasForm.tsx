@@ -4,10 +4,16 @@ import { createInitialCourseArea, ICourseArea, AreaOfCourse as AreaOfCourseEnum 
 import AreaOfCourse from "./AreaOfCourse";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { accountActionCreators } from "../../redux";
 
 const CourseAreasForm = () => {
 
   const [courseAreas, setCourseAreas] = useState<ICourseArea[]>([]);
+
+  const dispatch = useDispatch();
+  const { addCourseAreas } = bindActionCreators(accountActionCreators, dispatch);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,7 +21,7 @@ const CourseAreasForm = () => {
       console.log('Area of course is not valid: ', courseAreas);
       return;
     }
-    console.log('submited')
+    addCourseAreas(courseAreas);
   }
 
   const handleAddCourseArea = (event) => {

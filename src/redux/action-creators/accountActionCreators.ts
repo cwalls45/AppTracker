@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { ICourseInfo } from "../../entities/account";
+import { ICourseArea, ICourseInfo } from "../../entities/account";
 import { AcccountActions } from "../../entities/accountActions";
 import { AccountActionTypes } from "../action-types/accountActionTypes";
 import { State } from "../reducers";
@@ -65,6 +65,30 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
 
         } catch (error) {
             console.log(`Error adding courseInfo to account ${account.accountId}: ${error} : ${courseInfo}`)
+        }
+    };
+}
+
+export const addCourseAreas = (courseAreas: ICourseArea[]) => {
+    return async (dispatch: Dispatch<AcccountActions>, getState: () => State) => {
+
+        const { environment, account } = getState();
+
+        try {
+
+            // const courseAreasResponse = await axios.post(`${environment.apiUrl}/auth/addCourseAreas`, {
+            //     courseAreas,
+            //     accountId: account.accountId,
+            //     email: account.user.email
+            // });
+
+            // dispatch({
+            //     type: AccountActionTypes.SET_COURSE_AREAS,
+            //     payload: courseAreasResponse.data.courseAreas
+            // });
+
+        } catch (error) {
+            console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null , 2)}`)
         }
     };
 }

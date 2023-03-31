@@ -27,6 +27,8 @@ const accountReducer = (state = initialState, action: AcccountActions): IAccount
         return { ...state, user: action.payload }
     } else if (action.type === AccountActionTypes.SET_COURSE_INFO) {
         return { ...state, courseInfo: action.payload }
+    } else if (action.type === AccountActionTypes.SET_COURSE_AREAS) {
+        return { ...state, courseAreas: action.payload}
     } else {
         return state;
     }
