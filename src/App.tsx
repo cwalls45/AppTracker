@@ -15,6 +15,7 @@ import { accountActionCreators, environmentActionCreators } from './redux';
 import { useCookies } from 'react-cookie';
 import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
+import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 
 
 const App = () => {
@@ -79,6 +80,7 @@ const App = () => {
                     <Route path={Paths.LOGIN} element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path={Paths.SIGNUP} element={<SignUpForm />} />
                     <Route path={Paths.COURSE_INFO} element={<CourseInformation />} />
+                    <Route path={Paths.COURSE_AREAS} element={<CourseAreasForm />} />
                 </Routes>
             </Router>
         </ThemeProvider >

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Button, Divider, Grid, SelectChangeEvent, Typography } from "@mui/material";
+import { Button, Grid, SelectChangeEvent } from "@mui/material";
 import { State } from 'country-state-city';
-import { createInitialCourseArea, ICourseArea, IState } from "../../entities/account";
+import { IState } from "../../entities/account";
 import GeneralCourseInformation from "./GeneralCourseInformation";
-import AreaOfCourse from "./AreaOfCourse";
-import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { accountActionCreators } from "../../redux";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../../entities/paths";
 
 const CourseInformation = () => {
     const countryCode = 'US';
@@ -19,24 +19,18 @@ const CourseInformation = () => {
     const [city, setCity] = useState('');
     const [zipCode, setZipCode] = useState('');
     const [state, setState] = useState('');
-    const [courseAreas, setCourseAreas] = useState<ICourseArea[]>([]);
 
     const dispatch = useDispatch();
     const { addCourseInfo } = bindActionCreators(accountActionCreators, dispatch);
 
-    const handleStateChange = (event: SelectChangeEvent) => setState(event.target.value);
+    const navigate = useNavigate();
+    const navigateToCourseAreas = () => navigate(Paths.COURSE_AREAS);
 
-    const handleAddCourseArea = (event) => {
-        const intialCourseArea = createInitialCourseArea();
-        setCourseAreas([...courseAreas, intialCourseArea])
-    };
+    const handleStateChange = (event: SelectChangeEvent) => setState(event.target.value);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!isValidSizeOfArea()) {
-            console.log('Area of course is not valid: ', courseAreas);
-            return;
-        }
+
         const courseInfo = {
             courseName,
             address1: addressLineOne,
@@ -46,11 +40,7 @@ const CourseInformation = () => {
             state
         };
 
-        addCourseInfo(courseInfo);
-    }
-
-    const isValidSizeOfArea = () => {
-        return courseAreas.every((courseArea) => /^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/.test(courseArea.size) === true)
+        addCourseInfo(courseInfo, navigateToCourseAreas);
     }
 
     useEffect(() => {
@@ -81,35 +71,13 @@ const CourseInformation = () => {
                         handleStateChange={handleStateChange}
                         states={states}
                     />
-                    <Divider />
-                    <Grid container justifyContent='center'>
-                        <Typography variant="h4" component="div">
-                            Course Area Information
-                        </Typography>
-                    </Grid>
-                    <Grid container item xs={12} justifyContent='center'>
-                        <Grid item>
-                            <Button variant='contained' onClick={handleAddCourseArea}>
-                                Add Area of Course
-                            </Button>
-                        </Grid>
-                    </Grid>
-                    {courseAreas.map((area, index) =>
-                        <AreaOfCourse
-                            key={index}
-                            courseAreas={courseAreas}
-                            setCourseAreas={setCourseAreas}
-                            index={index}
-                        />
-                    )}
-                    {!isEmpty(courseAreas) &&
                         <Grid container item xs={12} justifyContent='center'>
                             <Grid item>
                                 <Button type='submit' variant='contained' sx={{ flexGrow: 1, width: '15em' }}>
                                     Submit Course Information
                                 </Button>
                             </Grid>
-                        </Grid>}
+                        </Grid>
                 </Grid>
             </Grid>
         </form>
