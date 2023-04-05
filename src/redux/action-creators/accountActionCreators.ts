@@ -5,6 +5,8 @@ import { AcccountActions } from "../../entities/accountActions";
 import { AccountActionTypes } from "../action-types/accountActionTypes";
 import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
+import { EnvironmentActionsTypes } from "../action-types/environmentActionTypes";
+import { EnvironmentActions } from "../../entities/environmentActions";
 
 export const setAccountId = (accountId: string) => {
     return (dispatch: Dispatch<AcccountActions>) => dispatch({
@@ -14,9 +16,14 @@ export const setAccountId = (accountId: string) => {
 }
 
 export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void, setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void)) => {
-    return async (dispatch: Dispatch<AcccountActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
         try {
             const { environment } = getState();
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: true
+            });
 
             const { data } = await axios.post(`${environment.apiUrl}/auth/createUser`, {
                 signUp: {
@@ -43,8 +50,19 @@ export const signUpUser = (firstName: string, lastName: string, email: string, p
             });
 
             navigateToCourseInformation();
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+
         } catch (error) {
-            console.log(`Error signing up ${email}: ${error}`)
+            console.log(`Error signing up ${email}: ${error}`);
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
         }
     };
 }
