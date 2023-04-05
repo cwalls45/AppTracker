@@ -17,7 +17,6 @@ import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
 import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 
-
 const App = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,7 +37,6 @@ const App = () => {
         }
 
     }, []);
-
 
     return (
         <ThemeProvider theme={theme}>
