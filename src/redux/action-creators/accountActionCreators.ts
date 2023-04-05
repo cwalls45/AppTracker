@@ -4,6 +4,7 @@ import { ICourseArea, ICourseInfo } from "../../entities/account";
 import { AcccountActions } from "../../entities/accountActions";
 import { AccountActionTypes } from "../action-types/accountActionTypes";
 import { State } from "../reducers";
+import { CookieSetOptions } from 'universal-cookie';
 
 export const setAccountId = (accountId: string) => {
     return (dispatch: Dispatch<AcccountActions>) => dispatch({
@@ -12,29 +13,34 @@ export const setAccountId = (accountId: string) => {
     });
 }
 
-export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void) => {
+export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void, setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void)) => {
     return async (dispatch: Dispatch<AcccountActions>, getState: () => State) => {
         try {
             const { environment } = getState();
 
-            // const response = await axios.post(`${environment.apiUrl}/auth/createUser`, {
-            //     signUp: {
-            //         firstName,
-            //         lastName,
-            //         email,
-            //         password
-            //     }
-            // });
+            const { data } = await axios.post(`${environment.apiUrl}/auth/createUser`, {
+                signUp: {
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                }
+            });
 
-            // dispatch({
-            //     type: AccountActionTypes.SET_ACCOUNT_ID,
-            //     payload: response.data.accountInfo.accountId
-            // });
+            const { AccessToken, RefreshToken, ExpiresIn } = data.user;
 
-            // dispatch({
-            //     type: AccountActionTypes.SET_USER,
-            //     payload: response.data.accountInfo.user
-            // });
+            setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
+            setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
+
+            dispatch({
+                type: AccountActionTypes.SET_ACCOUNT_ID,
+                payload: data.accountInfo.accountId
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_USER,
+                payload: data.accountInfo.user
+            });
 
             navigateToCourseInformation();
         } catch (error) {
@@ -50,11 +56,11 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
 
         try {
 
-            // await axios.post(`${environment.apiUrl}/auth/addCourseInfo`, {
-            //     courseInfo,
-            //     accountId: account.accountId,
-            //     email: account.user.email
-            // });
+            await axios.post(`${environment.apiUrl}/auth/addCourseInfo`, {
+                courseInfo,
+                accountId: account.accountId,
+                email: account.user.email
+            });
 
             dispatch({
                 type: AccountActionTypes.SET_COURSE_INFO,
@@ -76,16 +82,16 @@ export const addCourseAreas = (courseAreas: ICourseArea[]) => {
 
         try {
 
-            // const courseAreasResponse = await axios.post(`${environment.apiUrl}/auth/addCourseAreas`, {
-            //     courseAreas,
-            //     accountId: account.accountId,
-            //     email: account.user.email
-            // });
+            const courseAreasResponse = await axios.post(`${environment.apiUrl}/auth/addCourseAreas`, {
+                courseAreas,
+                accountId: account.accountId,
+                email: account.user.email
+            });
 
-            // dispatch({
-            //     type: AccountActionTypes.SET_COURSE_AREAS,
-            //     payload: courseAreasResponse.data.courseAreas
-            // });
+            dispatch({
+                type: AccountActionTypes.SET_COURSE_AREAS,
+                payload: courseAreasResponse.data.courseAreas
+            });
 
         } catch (error) {
             console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null , 2)}`)

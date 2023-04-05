@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -18,7 +19,9 @@ const SignUpForm = () => {
     const dispatch = useDispatch();
     const { signUpUser } = bindActionCreators(accountActionCreators, dispatch);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const [cookies, setCookies] = useCookies();
 
 
     const handleSubmit = (event) => {
@@ -33,7 +36,7 @@ const SignUpForm = () => {
         //     return;
         // };
 
-        signUpUser(firstName, lastName, email, password, navigateToCourseInformation);
+        signUpUser(firstName, lastName, email, password, navigateToCourseInformation, setCookies);
     }
 
     const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);
