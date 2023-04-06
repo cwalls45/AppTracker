@@ -8,7 +8,12 @@ import { Paths } from "../../entities/paths";
 import { accountActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
-const SignUpForm = () => {
+interface IProps {
+    isLoggedIn: boolean;
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUpForm = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,7 +41,7 @@ const SignUpForm = () => {
         //     return;
         // };
 
-        signUpUser(firstName, lastName, email, password, navigateToCourseInformation, setCookies);
+        signUpUser(firstName, lastName, email, password, navigateToCourseInformation, setCookies, setIsLoggedIn);
     }
 
     const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);

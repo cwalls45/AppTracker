@@ -77,11 +77,11 @@ const App = () => {
                         }
                     />
                     <Route path={Paths.LOGIN} element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-                    <Route path={Paths.SIGNUP} element={<SignUpForm />} />
+                    <Route path={Paths.SIGNUP} element={<SignUpForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path={Paths.COURSE_INFO} element={<CourseInformation />} />
                     <Route path={Paths.COURSE_AREAS} element={<CourseAreasForm />} />
                 </Routes>
-                <Loading/>
+                <Loading />
             </Router>
         </ThemeProvider >
     );

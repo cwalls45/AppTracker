@@ -15,7 +15,15 @@ export const setAccountId = (accountId: string) => {
     });
 }
 
-export const signUpUser = (firstName: string, lastName: string, email: string, password: string, navigateToCourseInformation: () => void, setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void)) => {
+export const signUpUser = (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    navigateToCourseInformation: () => void,
+    setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void),
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+) => {
     return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
         try {
             const { environment } = getState();
@@ -38,6 +46,7 @@ export const signUpUser = (firstName: string, lastName: string, email: string, p
 
             setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
             setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
+            setIsLoggedIn(true);
 
             dispatch({
                 type: AccountActionTypes.SET_ACCOUNT_ID,
@@ -68,11 +77,16 @@ export const signUpUser = (firstName: string, lastName: string, email: string, p
 }
 
 export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: () => void) => {
-    return async (dispatch: Dispatch<AcccountActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
 
         const { environment, account } = getState();
 
         try {
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: true
+            });
 
             await axios.post(`${environment.apiUrl}/auth/addCourseInfo`, {
                 courseInfo,
@@ -87,18 +101,33 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
 
             navigateToCourseAreas();
 
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+
         } catch (error) {
-            console.log(`Error adding courseInfo to account ${account.accountId}: ${error} : ${courseInfo}`)
+            console.log(`Error adding courseInfo to account ${account.accountId}: ${error} : ${courseInfo}`);
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
         }
     };
 }
 
-export const addCourseAreas = (courseAreas: ICourseArea[]) => {
-    return async (dispatch: Dispatch<AcccountActions>, getState: () => State) => {
+export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: () => void) => {
+    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
 
         const { environment, account } = getState();
 
         try {
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: true
+            });
 
             const courseAreasResponse = await axios.post(`${environment.apiUrl}/auth/addCourseAreas`, {
                 courseAreas,
@@ -111,8 +140,20 @@ export const addCourseAreas = (courseAreas: ICourseArea[]) => {
                 payload: courseAreasResponse.data.courseAreas
             });
 
+            navigateToCalendar();
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+
         } catch (error) {
-            console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null , 2)}`)
+            console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null, 2)}`);
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
         }
     };
 }
