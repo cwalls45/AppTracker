@@ -16,11 +16,11 @@ export const addApplication = (application: IApplication) => {
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
-            const { environment } = getState();
+            const { environment, account } = getState();
 
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
                 application,
-                accountId: environment.accountId
+                accountId: account.accountId
             });
 
             let formattedApplicationEvent: IApplication = response.data;
@@ -45,9 +45,9 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
 export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
         try {
-            const { environment } = getState();
+            const { environment, account } = getState();
 
-            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${environment.accountId}`);
+            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
 
             let applicationEvents: IApplication[] = response.data;
 

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import accountReducer from './accountReducer';
 import applicationsReducer from './applicationsReducer';
 import chemicalApplicationReducer from './chemicalApplicationReducer';
 import environmentReducer from './environementReducer';
@@ -8,7 +9,8 @@ const reducers = combineReducers({
     environment: environmentReducer,
     chemicalApplication: chemicalApplicationReducer,
     applications: applicationsReducer,
-    inventory: inventoryReducer
+    inventory: inventoryReducer,
+    account: accountReducer
 });
 
 export default reducers;

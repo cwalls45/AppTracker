@@ -9,20 +9,22 @@ import Login from './components/login/Login';
 import { Paths } from './entities/paths';
 import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { environmentActionCreators } from './redux';
+import { accountActionCreators, environmentActionCreators, State } from './redux';
 import { useCookies } from 'react-cookie';
 import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
-
+import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
+import Loading from './components/loading/Loading';
 
 const App = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const dispatch = useDispatch();
-    const { setAPIUrl, setAccountId } = bindActionCreators(environmentActionCreators, dispatch);
+    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
+    const { setAccountId } = bindActionCreators(accountActionCreators, dispatch);
 
     const [cookies] = useCookies();
 
@@ -36,7 +38,6 @@ const App = () => {
         }
 
     }, []);
-
 
     return (
         <ThemeProvider theme={theme}>
@@ -76,9 +77,11 @@ const App = () => {
                         }
                     />
                     <Route path={Paths.LOGIN} element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-                    <Route path={Paths.SIGNUP} element={<SignUpForm />} />
+                    <Route path={Paths.SIGNUP} element={<SignUpForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path={Paths.COURSE_INFO} element={<CourseInformation />} />
+                    <Route path={Paths.COURSE_AREAS} element={<CourseAreasForm />} />
                 </Routes>
+                <Loading />
             </Router>
         </ThemeProvider >
     );

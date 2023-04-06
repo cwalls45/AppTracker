@@ -2,13 +2,13 @@ import { EnvironmentActionsTypes } from "../redux/action-types/environmentAction
 
 export type EnvironmentActions =
     ISetAPIUrl |
-    ISetAccountId;
+    ISetIsLoading
 
 export interface ISetAPIUrl {
     type: EnvironmentActionsTypes.SET_API_URL,
 };
 
-export interface ISetAccountId {
-    type: EnvironmentActionsTypes.SET_ACCOUNT_ID,
-    payload: string
+export interface ISetIsLoading {
+    type: EnvironmentActionsTypes.IS_LOADING,
+    payload: boolean
 }

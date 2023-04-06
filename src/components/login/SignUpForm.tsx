@@ -1,35 +1,47 @@
 import { Button, Grid, Typography } from "@mui/material";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Paths } from "../../entities/paths";
-import { environmentActionCreators } from "../../redux";
+import { accountActionCreators } from "../../redux";
 import FormTextField from "../inventory/FormTextField";
 
-const SignUpForm = () => {
+interface IProps {
+    isLoggedIn: boolean;
+    setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignUpForm = ({ isLoggedIn, setIsLoggedIn }: IProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch();
-    const { signUpUser } = bindActionCreators(environmentActionCreators, dispatch);
+    const { signUpUser } = bindActionCreators(accountActionCreators, dispatch);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const [cookies, setCookies] = useCookies();
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const isValidFirstName = validateName(firstName);
+        const isValidLastName = validateName(lastName)
         const isEmailValid = validateEmail();
         const { passwordValidations, passwordIsValidated } = validatePasswords();
 
-        if (!isEmailValid || !passwordIsValidated) {
-            console.log('email or password is invalid: ', passwordValidations);
-            return;
-        };
+        // if (!isEmailValid || !passwordIsValidated || !isValidFirstName || !isValidLastName) {
+        //     console.log('email or password is invalid: ', passwordValidations);
+        //     return;
+        // };
 
-        signUpUser(email, password, navigateToCourseInformation);
+        signUpUser(firstName, lastName, email, password, navigateToCourseInformation, setCookies, setIsLoggedIn);
     }
 
     const navigateToCourseInformation = () => navigate(Paths.COURSE_INFO);
@@ -57,6 +69,10 @@ const SignUpForm = () => {
         }
     }
 
+    const validateName = (name: string) => {
+        return /[a-zA-Z]/.test(name);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
@@ -67,29 +83,38 @@ const SignUpForm = () => {
                 </Grid>
                 <Grid container justifyContent='center'>
                     <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Email'
-                                value={email}
-                                setterFunction={setEmail}
-                            />
-                        </Grid>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Password'
-                                value={password}
-                                setterFunction={setPassword}
-                                type='password'
-                            />
-                        </Grid>
-                        <Grid item xs={6.5}>
-                            <FormTextField
-                                label='Confirm Password'
-                                value={confirmPassword}
-                                setterFunction={setConfirmPassword}
-                                type='password'
-                            />
-                        </Grid>
+                        <FormTextField
+                            label='First Name'
+                            value={firstName}
+                            setterFunction={setFirstName}
+                            xs={4}
+                        />
+                        <FormTextField
+                            label='Last Name'
+                            value={lastName}
+                            setterFunction={setLastName}
+                            xs={4}
+                        />
+                        <FormTextField
+                            label='Email'
+                            value={email}
+                            setterFunction={setEmail}
+                            xs={4}
+                        />
+                        <FormTextField
+                            label='Password'
+                            value={password}
+                            setterFunction={setPassword}
+                            type='password'
+                            xs={4}
+                        />
+                        <FormTextField
+                            label='Confirm Password'
+                            value={confirmPassword}
+                            setterFunction={setConfirmPassword}
+                            type='password'
+                            xs={4}
+                        />
                     </Grid>
                     <Grid container item xs={12} justifyContent='center'>
                         <Grid item>

@@ -90,6 +90,13 @@ export const theme = createTheme({
                     },
                 },
             ],
+        },
+        MuiDivider: {
+            styleOverrides: {
+                root: {
+                    margin: '1.75rem'
+                }
+            }
         }
     },
 });

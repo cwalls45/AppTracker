@@ -60,21 +60,19 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
                 </Typography>
             </Grid>
             <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                <Grid item xs={6.5}>
-                    <FormTextField
-                        label='Email'
-                        value={email}
-                        setterFunction={setEmail}
-                    />
-                </Grid>
-                <Grid item xs={6.5}>
-                    <FormTextField
-                        label='Password'
-                        value={password}
-                        setterFunction={setPassword}
-                        type='password'
-                    />
-                </Grid>
+                <FormTextField
+                    label='Email'
+                    value={email}
+                    setterFunction={setEmail}
+                    xs={6.5}
+                />
+                <FormTextField
+                    label='Password'
+                    value={password}
+                    setterFunction={setPassword}
+                    type='password'
+                    xs={6.5}
+                />
             </Grid>
             <Grid container item xs={12} justifyContent='center'>
                 <Grid item>
