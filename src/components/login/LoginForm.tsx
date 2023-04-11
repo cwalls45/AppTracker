@@ -9,7 +9,7 @@ import { loginUser } from "../../utils/authenticateUser";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { accountActionCreators } from "../../redux";
+import { accountActionCreators, environmentActionCreators } from "../../redux";
 
 interface IProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +22,7 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const dispatch = useDispatch();
     const { setUser, setAccountId, setCourseInfo, setCourseAreas } = bindActionCreators(accountActionCreators, dispatch);
+    const { setIsLoading } = bindActionCreators(environmentActionCreators, dispatch);
 
     const navigate = useNavigate();
 
@@ -29,12 +30,14 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
         const isAuthenticated = await authenticateUser(email, password);
         setIsLoggedIn(isAuthenticated);
         if (isAuthenticated) {
             navigateToCalendar();
         }
         resetPassword();
+        setIsLoading(false);
     };
 
     const authenticateUser = async (email: string, password: string) => {
