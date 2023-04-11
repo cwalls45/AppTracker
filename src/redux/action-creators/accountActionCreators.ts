@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { ICourseArea, ICourseInfo } from "../../entities/account";
+import { ICourseArea, ICourseInfo, IUser } from "../../entities/account";
 import { AcccountActions } from "../../entities/accountActions";
 import { AccountActionTypes } from "../action-types/accountActionTypes";
 import { State } from "../reducers";
@@ -13,6 +13,27 @@ export const setAccountId = (accountId: string) => {
         type: AccountActionTypes.SET_ACCOUNT_ID,
         payload: accountId
     });
+}
+
+export const setUser = (user: IUser) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_USER,
+        payload: user
+    })
+}
+
+export const setCourseInfo = (courseInfo: ICourseInfo) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_COURSE_INFO,
+        payload: courseInfo
+    })
+}
+
+export const setCourseAreas = (courseAreas: ICourseArea[]) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_COURSE_AREAS,
+        payload: courseAreas
+    })
 }
 
 export const signUpUser = (
