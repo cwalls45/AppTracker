@@ -178,3 +178,54 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
         }
     };
 }
+
+export const getUserByUserName = (userName: string) => {
+    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+
+        const { environment } = getState();
+
+        try {
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: true
+            });
+
+            const response = await axios.get(`${environment.apiUrl}/auth/user/${userName}`);
+
+            dispatch({
+                type: AccountActionTypes.SET_ACCOUNT_ID,
+                payload: response.data.user.accountId
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_USER,
+                payload: response.data.user.user
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_COURSE_INFO,
+                payload: response.data.user.courseInfo
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_COURSE_AREAS,
+                payload: response.data.user.courseAreas
+            });
+
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+
+        } catch (error) {
+            console.log(`Error getting user ${userName}: ${error}`);
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+        }
+    };
+}
