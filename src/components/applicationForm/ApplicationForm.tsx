@@ -48,63 +48,62 @@ const ApplicationForm = () => {
     }
 
     return (
-        <Container>
-            <form onSubmit={handleSubmit} >
+
+        <form onSubmit={handleSubmit} >
+            <Grid container justifyContent='space-around'>
                 <Grid container justifyContent='space-around'>
-                    <Grid container justifyContent='space-around'>
-                        <Grid>
-                            <DatePickerCalendar
-                                label='Date of Application'
-                                property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={4}>
-                            <MultiSelect
-                                label='Target Pests'
-                                property={ChemicalApplicationFormProperty.TARGET_PESTS}
-                                options={targetPests}
-                            />
-                        </Grid>
+                    <Grid>
+                        <DatePickerCalendar
+                            label='Date of Application'
+                            property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
+                        />
                     </Grid>
-                    <Grid container justifyContent='space-evenly'>
-                        <Grid container item xs={11} md={6}>
-                            <Grid item justifyContent='space-evenly' xs={12}>
-                                <MultiSelect
-                                    label='Area of Application'
-                                    property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
-                                    options={areaOfApplication}
-                                />
-                            </Grid>
-                        </Grid>
-                        <SizeOfAppArea
+                    <Grid item xs={12} md={4}>
+                        <MultiSelect
+                            label='Target Pests'
+                            property={ChemicalApplicationFormProperty.TARGET_PESTS}
+                            options={targetPests}
                         />
                     </Grid>
                 </Grid>
-                {state.chemicalApplication.chemicals.map((chemical, index) => (
-                    <ChemicalInformationInput
-                        key={index}
-                        index={index}
+                <Grid container justifyContent='space-evenly'>
+                    <Grid container item xs={11} md={6}>
+                        <Grid item justifyContent='space-evenly' xs={12}>
+                            <MultiSelect
+                                label='Area of Application'
+                                property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
+                                options={areaOfApplication}
+                            />
+                        </Grid>
+                    </Grid>
+                    <SizeOfAppArea
                     />
-                ))}
-                <Grid container justifyContent='center' alignItems='center'>
-                    <Checkbox size='medium' checked={attestForm} onChange={handleAttestFormToggle} />
-                    I attest that the above information is correct.
                 </Grid>
-                <Grid container justifyContent='center'>
-                    <Button onClick={addChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
-                        Add
+            </Grid>
+            {state.chemicalApplication.chemicals.map((chemical, index) => (
+                <ChemicalInformationInput
+                    key={index}
+                    index={index}
+                />
+            ))}
+            <Grid container justifyContent='center' alignItems='center'>
+                <Checkbox size='medium' checked={attestForm} onChange={handleAttestFormToggle} />
+                I attest that the above information is correct.
+            </Grid>
+            <Grid container justifyContent='center'>
+                <Button onClick={addChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
+                    Add
+                </Button>
+                {state.chemicalApplication.chemicals.length > 1 &&
+                    <Button onClick={removeChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
+                        Remove
                     </Button>
-                    {state.chemicalApplication.chemicals.length > 1 &&
-                        <Button onClick={removeChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
-                            Remove
-                        </Button>
-                    }
-                    <Button variant='contained' type='submit' disabled={!attestForm} sx={{ width: '15em' }}>
-                        Submit
-                    </Button>
-                </Grid>
-            </form >
-        </Container >
+                }
+                <Button variant='contained' type='submit' disabled={!attestForm} sx={{ width: '15em' }}>
+                    Submit
+                </Button>
+            </Grid>
+        </form >
     );
 }
 
