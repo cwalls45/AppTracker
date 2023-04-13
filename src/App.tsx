@@ -17,6 +17,7 @@ import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
 import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 import Loading from './components/loading/Loading';
+import { getUserEmailWithAccessToken } from './utils/authenticateUser';
 
 const App = () => {
 
@@ -24,17 +25,25 @@ const App = () => {
 
     const dispatch = useDispatch();
     const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
-    const { setAccountId } = bindActionCreators(accountActionCreators, dispatch);
+    const { getUserByUserName } = bindActionCreators(accountActionCreators, dispatch);
 
     const [cookies] = useCookies();
 
     useEffect(() => {
 
+        const fetchUser = async (token: string) => {
+            const user = await getUserEmailWithAccessToken(token)
+            return user;
+        }
+
         setAPIUrl();
 
         if (cookies.TurfTrackerAccessToken && cookies.TurfTrackerRefreshToken) {
+            fetchUser(cookies.TurfTrackerAccessToken)
+                .then(res => {
+                    getUserByUserName(res.userName);
+                });
             setIsLoggedIn(true);
-            setAccountId('accountId-123');
         }
 
     }, []);

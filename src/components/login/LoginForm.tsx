@@ -7,6 +7,9 @@ import { Paths } from "../../entities/paths";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../utils/authenticateUser";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { accountActionCreators, environmentActionCreators } from "../../redux";
 
 interface IProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,18 +20,24 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const dispatch = useDispatch();
+    const { setUser, setAccountId, setCourseInfo, setCourseAreas } = bindActionCreators(accountActionCreators, dispatch);
+    const { setIsLoading } = bindActionCreators(environmentActionCreators, dispatch);
+
     const navigate = useNavigate();
 
     const [cookies, setCookies] = useCookies();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsLoading(true);
         const isAuthenticated = await authenticateUser(email, password);
         setIsLoggedIn(isAuthenticated);
         if (isAuthenticated) {
             navigateToCalendar();
         }
         resetPassword();
+        setIsLoading(false);
     };
 
     const authenticateUser = async (email: string, password: string) => {
@@ -37,8 +46,13 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
             return false
         }
 
+        setUser(isLoggedIn.account.user);
+        setAccountId(isLoggedIn.account.accountId);
+        setCourseInfo(isLoggedIn.account.courseInfo);
+        setCourseAreas(isLoggedIn.account.courseAreas);
+
         // TODO: Dont forget to remove cookies and make cookie name more specific
-        const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn;
+        const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn.credentials;
         setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
         setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import { ICourseArea, ICourseInfo } from "../../entities/account";
+import { ICourseArea, ICourseInfo, IUser } from "../../entities/account";
 import { AcccountActions } from "../../entities/accountActions";
 import { AccountActionTypes } from "../action-types/accountActionTypes";
 import { State } from "../reducers";
@@ -13,6 +13,27 @@ export const setAccountId = (accountId: string) => {
         type: AccountActionTypes.SET_ACCOUNT_ID,
         payload: accountId
     });
+}
+
+export const setUser = (user: IUser) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_USER,
+        payload: user
+    })
+}
+
+export const setCourseInfo = (courseInfo: ICourseInfo) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_COURSE_INFO,
+        payload: courseInfo
+    })
+}
+
+export const setCourseAreas = (courseAreas: ICourseArea[]) => {
+    return (dispatch: Dispatch<AcccountActions>) => dispatch({
+        type: AccountActionTypes.SET_COURSE_AREAS,
+        payload: courseAreas
+    })
 }
 
 export const signUpUser = (
@@ -149,6 +170,57 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
 
         } catch (error) {
             console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null, 2)}`);
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+        }
+    };
+}
+
+export const getUserByUserName = (userName: string) => {
+    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+
+        const { environment } = getState();
+
+        try {
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: true
+            });
+
+            const response = await axios.get(`${environment.apiUrl}/auth/user/${userName}`);
+
+            dispatch({
+                type: AccountActionTypes.SET_ACCOUNT_ID,
+                payload: response.data.user.accountId
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_USER,
+                payload: response.data.user.user
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_COURSE_INFO,
+                payload: response.data.user.courseInfo
+            });
+
+            dispatch({
+                type: AccountActionTypes.SET_COURSE_AREAS,
+                payload: response.data.user.courseAreas
+            });
+
+
+            dispatch({
+                type: EnvironmentActionsTypes.IS_LOADING,
+                payload: false
+            });
+
+        } catch (error) {
+            console.log(`Error getting user ${userName}: ${error}`);
 
             dispatch({
                 type: EnvironmentActionsTypes.IS_LOADING,

@@ -5,6 +5,8 @@ import { ApplicationsActions } from "../action-types/applicationsActionTypes";
 import axios from 'axios';
 import { IApplication } from "../../entities/applications";
 import { State } from "../reducers";
+import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
+import { ChemicalApplicationFormActions } from "../../entities/chemicalApplicationFormActions";
 
 export const addApplication = (application: IApplication) => {
     return (dispatch: Dispatch<ApplicationActionsType>) => dispatch({
@@ -14,9 +16,12 @@ export const addApplication = (application: IApplication) => {
 };
 
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
-    return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
+    return async (dispatch: Dispatch<ApplicationActionsType | ChemicalApplicationFormActions>, getState: () => State) => {
+
+        const { environment, account } = getState();
+
         try {
-            const { environment, account } = getState();
+
 
             const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
                 application,
@@ -36,6 +41,11 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
                 type: ApplicationsActions.ADD_APPLICATION,
                 payload: formattedApplicationEvent
             });
+
+            dispatch({
+                type: ChemicalApplicationActions.RESET_CHEMICAL_APPLICATION_FORM
+            });
+
         } catch (error) {
             console.log('ERROR creating chemical application: ', error.response.data)
         }
