@@ -43,6 +43,8 @@ const chemicalApplicationReducer = (state: IChemicalApplicationForm = initialSta
         const lastChemicalIndex = state.chemicals.length - 1;
         const removeLastChemical = state.chemicals.slice(0, lastChemicalIndex);
         return { ...state, chemicals: removeLastChemical };
+    } else if (action.type === ChemicalApplicationActions.RESET_CHEMICAL_APPLICATION_FORM) {
+        return initialState
     } else {
         return state;
     }
