@@ -47,7 +47,7 @@ const ApplicationForm = () => {
     return (
 
         <form onSubmit={handleSubmit} >
-            <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: '100vh', width: 'auto' }}>
+            <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: 'auto', width: 'auto' }}>
                 <Grid container sx={{ width: '50vw' }}>
                     <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                         <Grid container item xs={11} md={6}>
