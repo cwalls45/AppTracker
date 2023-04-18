@@ -70,7 +70,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
 
 
     return (
-        <Grid container justifyContent='space-around'>
+        <Grid container justifyContent='space-around' rowSpacing={2}>
             <Grid item xs={12}>
                 <ChemicalSelect
                     index={index}

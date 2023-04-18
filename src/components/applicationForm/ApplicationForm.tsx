@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
@@ -15,6 +11,7 @@ import { applicationsActionCreators, chemicalApplicationFormActionCreators, Stat
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../entities/paths';
+import { Button, Checkbox, Grid } from '@mui/material';
 
 const ApplicationForm = () => {
 
@@ -85,7 +82,7 @@ const ApplicationForm = () => {
                         />
                     </Grid>
                     <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
-                        <Grid container item xs={11} md={6}>
+                        <Grid container item xs={11} md={6} rowSpacing={10}>
                             {state.chemicalApplication.chemicals.map((chemical, index) => (
                                 <ChemicalInformationInput
                                     key={index}
