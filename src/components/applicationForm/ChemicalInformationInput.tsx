@@ -71,7 +71,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
 
     return (
         <Grid container justifyContent='space-around'>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12}>
                 <ChemicalSelect
                     index={index}
                     property={ChemicalProperties.CHEMICAL_NAME}
@@ -81,7 +81,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     isDisabled={false}
                 />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12}>
                 <ChemicalSelect
                     index={index}
                     property={ChemicalProperties.CHEMICAL_COMPANY}
@@ -91,14 +91,14 @@ const ChemicalInformationInput = ({ index }: IProps) => {
                     isDisabled={chemicalApplication.chemicals[index].chemicalName === ''}
                 />
             </Grid>
-            <Grid item xs={6} md={1}>
+            <Grid item xs={6}>
                 <FormInputText
                     index={index}
                     property={ChemicalProperties.AMOUNT}
                     label='Amount'
                 />
             </Grid>
-            <Grid item xs={6} md={1}>
+            <Grid item xs={6}>
                 <ChemicalSelect
                     index={index}
                     property={ChemicalProperties.UNITS}
