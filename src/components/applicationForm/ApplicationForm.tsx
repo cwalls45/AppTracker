@@ -1,8 +1,4 @@
 import { useState } from 'react';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
@@ -15,6 +11,7 @@ import { applicationsActionCreators, chemicalApplicationFormActionCreators, Stat
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../entities/paths';
+import { Button, Checkbox, Grid } from '@mui/material';
 
 const ApplicationForm = () => {
 
@@ -50,58 +47,72 @@ const ApplicationForm = () => {
     return (
 
         <form onSubmit={handleSubmit} >
-            <Grid container justifyContent='space-around'>
-                <Grid container justifyContent='space-around'>
-                    <Grid>
-                        <DatePickerCalendar
-                            label='Date of Application'
-                            property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
-                        />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                        <MultiSelect
-                            label='Target Pests'
-                            property={ChemicalApplicationFormProperty.TARGET_PESTS}
-                            options={targetPests}
-                        />
-                    </Grid>
-                </Grid>
-                <Grid container justifyContent='space-evenly'>
-                    <Grid container item xs={11} md={6}>
-                        <Grid item justifyContent='space-evenly' xs={12}>
-                            <MultiSelect
-                                label='Area of Application'
-                                property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
-                                options={areaOfApplication}
-                            />
+            <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: 'auto', width: 'auto' }}>
+                <Grid container sx={{ width: '50vw' }}>
+                    <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
+                        <Grid container item xs={11} md={6}>
+                            <Grid container justifyContent='center'>
+                                <DatePickerCalendar
+                                    label='Date of Application'
+                                    property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={11} md={6}>
+                            <Grid item justifyContent='space-evenly' xs={12}>
+                                <MultiSelect
+                                    label='Target Pests'
+                                    property={ChemicalApplicationFormProperty.TARGET_PESTS}
+                                    options={targetPests}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <SizeOfAppArea
-                    />
+                    <Grid container item xs={12} justifyContent='center' rowSpacing={2}>
+                        <Grid container item xs={7}>
+                            <Grid item justifyContent='space-evenly' xs={12}>
+                                <MultiSelect
+                                    label='Area of Application'
+                                    property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
+                                    options={areaOfApplication}
+                                />
+                            </Grid>
+                        </Grid>
+                        <SizeOfAppArea
+                        />
+                    </Grid>
+                    <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
+                        <Grid container item xs={11} md={6} rowSpacing={10}>
+                            {state.chemicalApplication.chemicals.map((chemical, index) => (
+                                <ChemicalInformationInput
+                                    key={index}
+                                    index={index}
+                                />
+                            ))}
+                        </Grid>
+                    </Grid>
+                    <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
+                        <Grid container item xs={11} md={6}>
+                            <Grid container justifyContent='center' alignItems='center'>
+                                <Checkbox size='medium' checked={attestForm} onChange={handleAttestFormToggle} />
+                                I attest that the above information is correct.
+                            </Grid>
+                            <Grid container justifyContent='center'>
+                                <Button onClick={addChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
+                                    Add
+                                </Button>
+                                {state.chemicalApplication.chemicals.length > 1 &&
+                                    <Button onClick={removeChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
+                                        Remove
+                                    </Button>
+                                }
+                                <Button variant='contained' type='submit' disabled={!attestForm} sx={{ width: '15em' }}>
+                                    Submit
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </Grid>
-            {state.chemicalApplication.chemicals.map((chemical, index) => (
-                <ChemicalInformationInput
-                    key={index}
-                    index={index}
-                />
-            ))}
-            <Grid container justifyContent='center' alignItems='center'>
-                <Checkbox size='medium' checked={attestForm} onChange={handleAttestFormToggle} />
-                I attest that the above information is correct.
-            </Grid>
-            <Grid container justifyContent='center'>
-                <Button onClick={addChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
-                    Add
-                </Button>
-                {state.chemicalApplication.chemicals.length > 1 &&
-                    <Button onClick={removeChemicalEvent} variant='outlined' color='inherit' sx={{ width: '8em' }}>
-                        Remove
-                    </Button>
-                }
-                <Button variant='contained' type='submit' disabled={!attestForm} sx={{ width: '15em' }}>
-                    Submit
-                </Button>
             </Grid>
         </form >
     );

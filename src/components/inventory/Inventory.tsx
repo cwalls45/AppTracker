@@ -18,9 +18,9 @@ const Inventory = () => {
     }, []);
 
     return (
-        <Grid container sx={{ width: 'auto' }}>
+        <Grid container sx={{ height: '100%', width: 'auto' }}>
             <Grid container justifyContent='center'>
-                <Typography variant="h2" component="div">
+                <Typography variant="h3" component="div">
                     Inventory Dashboard
                 </Typography>
             </Grid>
