@@ -1,14 +1,13 @@
-import { Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import { Grid } from "@mui/material";
+import ReportTabs from "./ReportTabs";
 
 const Reports = () => {
+    const [selectedTab, setSelectedTab] = useState(0);
 
     return (
-        <Grid container sx={{ height: '100%', width: 'auto' }}>
-            <Grid container justifyContent='center'>
-                <Typography variant="h3" component="div">
-                    Reports
-                </Typography>
-            </Grid>
+        <Grid container justifyContent='center' sx={{ height: '100%', width: 'auto' }}>
+            <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         </Grid>
     )
 };
