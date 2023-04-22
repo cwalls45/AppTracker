@@ -7,7 +7,8 @@ const NavigationButtons = () => {
     const routes = [
         { path: Paths.CALENDAR, text: 'Calendar' },
         { path: Paths.CREATE_APPLICATION, text: 'Create Application' },
-        { path: Paths.INVENTORY, text: 'Inventory' }
+        { path: Paths.INVENTORY, text: 'Inventory' },
+        { path: Paths.REPORTS, text: 'Reports' }
     ];
 
     return (

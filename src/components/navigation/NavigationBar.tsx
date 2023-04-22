@@ -8,7 +8,7 @@ import NavigationButtons from './NavigationButtons';
 const NavigationBar = () => {
 
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Toolbar>
                 <IconButton
                     size="large"
