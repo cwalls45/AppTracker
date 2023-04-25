@@ -8,7 +8,6 @@ interface IProps {
 const ReportTabs = ({ selectedTab, setSelectedTab }: IProps) => {
 
     const handleChange = (event: React.SyntheticEvent, newTab: number) => {
-        console.log(newTab)
         setSelectedTab(newTab);
     };
     return (
