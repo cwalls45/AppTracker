@@ -15,7 +15,7 @@ export interface IChemical {
     units: string
 };
 
-export enum ChemicalApplicationFormProperty {
+export enum ApplicationProperty {
     ID = 'id',
     DATE_OF_APPLICATION = 'dateOfApplication',
     AREA_OF_APPLICATION = 'areaOfApplication',
