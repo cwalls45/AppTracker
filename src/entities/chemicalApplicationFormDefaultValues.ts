@@ -1,4 +1,4 @@
-export interface IChemicalApplicationForm {
+export interface IApplication {
     id?: string;
     dateOfApplication: string;
     areaOfApplication: string[];

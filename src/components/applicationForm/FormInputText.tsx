@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ChemicalApplicationFormProperty, ChemicalProperties, IApplication } from '../../entities/chemicalApplicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';

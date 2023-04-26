@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { ApplicationSummaryActionsType } from "../../entities/applicationsActions";
-import { IChemicalApplicationForm } from "../../entities/chemicalApplicationFormDefaultValues";
+import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
 import { ApplicationSummaryActions } from "../action-types/applicationsActionTypes";
 import axios from 'axios';
 import { IApplicationSummary } from "../../entities/applications";
@@ -15,7 +15,7 @@ export const addApplication = (application: IApplicationSummary) => {
     })
 };
 
-export const postChemicalApplication = (application: IChemicalApplicationForm) => {
+export const postChemicalApplication = (application: IApplication) => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsType | ChemicalApplicationFormActions>, getState: () => State) => {
 
         const { environment, account } = getState();
