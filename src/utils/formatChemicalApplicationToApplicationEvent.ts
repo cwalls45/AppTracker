@@ -1,8 +1,8 @@
 import { IChemicalApplicationForm } from "../entities/chemicalApplicationFormDefaultValues";
-import { IApplication } from "../entities/applications";
+import { IApplicationSummary } from "../entities/applications";
 import { v4 as uuidv4 } from 'uuid';
 
-export const formatChemicalApplicationToApplicationEvent = (chemApp: IChemicalApplicationForm): IApplication => {
+export const formatChemicalApplicationToApplicationEvent = (chemApp: IChemicalApplicationForm): IApplicationSummary => {
     const event_id = `application-${uuidv4()}`
     const applicationDate = new Date(chemApp.dateOfApplication);
     return {

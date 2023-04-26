@@ -1,22 +1,22 @@
 import { Dispatch } from "redux";
-import { ApplicationActionsType } from "../../entities/applicationsActions";
+import { ApplicationSummaryActionsType } from "../../entities/applicationsActions";
 import { IChemicalApplicationForm } from "../../entities/chemicalApplicationFormDefaultValues";
-import { ApplicationsActions } from "../action-types/applicationsActionTypes";
+import { ApplicationSummaryActions } from "../action-types/applicationsActionTypes";
 import axios from 'axios';
-import { IApplication } from "../../entities/applications";
+import { IApplicationSummary } from "../../entities/applications";
 import { State } from "../reducers";
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 import { ChemicalApplicationFormActions } from "../../entities/chemicalApplicationFormActions";
 
-export const addApplication = (application: IApplication) => {
-    return (dispatch: Dispatch<ApplicationActionsType>) => dispatch({
-        type: ApplicationsActions.ADD_APPLICATION,
+export const addApplication = (application: IApplicationSummary) => {
+    return (dispatch: Dispatch<ApplicationSummaryActionsType>) => dispatch({
+        type: ApplicationSummaryActions.ADD_APPLICATION_SUMMARY,
         payload: application
     })
 };
 
 export const postChemicalApplication = (application: IChemicalApplicationForm) => {
-    return async (dispatch: Dispatch<ApplicationActionsType | ChemicalApplicationFormActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<ApplicationSummaryActionsType | ChemicalApplicationFormActions>, getState: () => State) => {
 
         const { environment, account } = getState();
 
@@ -28,7 +28,7 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
                 accountId: account.accountId
             });
 
-            let formattedApplicationEvent: IApplication = response.data;
+            let formattedApplicationEvent: IApplicationSummary = response.data;
 
             formattedApplicationEvent = {
                 event_id: formattedApplicationEvent.event_id,
@@ -38,7 +38,7 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
             };
 
             dispatch({
-                type: ApplicationsActions.ADD_APPLICATION,
+                type: ApplicationSummaryActions.ADD_APPLICATION_SUMMARY,
                 payload: formattedApplicationEvent
             });
 
@@ -53,13 +53,13 @@ export const postChemicalApplication = (application: IChemicalApplicationForm) =
 };
 
 export const fetchApplicationEvents = () => {
-    return async (dispatch: Dispatch<ApplicationActionsType>, getState: () => State) => {
+    return async (dispatch: Dispatch<ApplicationSummaryActionsType>, getState: () => State) => {
         try {
             const { environment, account } = getState();
 
             const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
 
-            let applicationEvents: IApplication[] = response.data;
+            let applicationEvents: IApplicationSummary[] = response.data;
 
             applicationEvents = applicationEvents.map((event) => ({
                 event_id: event.event_id,
@@ -69,7 +69,7 @@ export const fetchApplicationEvents = () => {
             }));
 
             dispatch({
-                type: ApplicationsActions.SET_APPLICATION_EVENTS,
+                type: ApplicationSummaryActions.SET_APPLICATION_EVENTS,
                 payload: applicationEvents
             });
         } catch (error) {
