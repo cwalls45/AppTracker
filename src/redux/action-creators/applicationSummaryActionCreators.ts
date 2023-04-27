@@ -5,8 +5,8 @@ import { ApplicationSummaryActions } from "../action-types/applicationSummaryAct
 import axios from 'axios';
 import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
-import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
-import { ChemicalApplicationFormActions } from "../../entities/chemicalApplicationFormActions";
+import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActions";
+import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
 
 export const addApplication = (application: IApplicationSummary) => {
     return (dispatch: Dispatch<ApplicationSummaryActionsTypes>) => dispatch({
@@ -16,7 +16,7 @@ export const addApplication = (application: IApplicationSummary) => {
 };
 
 export const postChemicalApplication = (application: IApplication) => {
-    return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | ChemicalApplicationFormActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | ChemicalApplicationFormActionTypes>, getState: () => State) => {
 
         const { environment, account } = getState();
 
