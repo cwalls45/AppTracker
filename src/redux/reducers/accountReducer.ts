@@ -1,6 +1,6 @@
 import { IAccount } from "../../entities/account";
 import { AcccountActionTypes } from "../../entities/accountActions";
-import { AccountActions } from "../action-types/accountActions";
+import { AccountActions } from "../actions/accountActions";
 
 const initialState: IAccount = {
     accountId: '',

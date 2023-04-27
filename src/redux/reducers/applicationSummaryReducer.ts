@@ -1,6 +1,6 @@
 import { IApplicationSummary } from "../../entities/applicationSummary";
 import { ApplicationSummaryActionsTypes } from "../../entities/applicationSummaryActionTypes";
-import { ApplicationSummaryActions } from "../action-types/applicationSummaryActions";
+import { ApplicationSummaryActions } from "../actions/applicationSummaryActions";
 
 const initialState: IApplicationSummary[] = [];
 

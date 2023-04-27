@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
-import { ApplicationActions } from "../action-types/applicationsActions";
+import { ApplicationActions } from "../actions/applicationsActions";
 import { ApplicationsActionsTypes } from "../../entities/applicationsActionTypes";
 
 export const setAllApplications = (applications: IApplication[]) => {

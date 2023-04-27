@@ -1,7 +1,7 @@
 import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
 import { chemicalListDefaultValues } from "../../utils/applicationFormDefaultValues";
-import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActions";
+import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 
 
 const initialState: IApplication = {

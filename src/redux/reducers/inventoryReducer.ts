@@ -1,7 +1,7 @@
 import { IInventory } from "../../entities/inventory";
 import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
 import { removeDuplicateInventory, sortInventoryByCompany } from "../../utils/inventoryUtils";
-import { InventoryActions } from "../action-types/inventoryActions";
+import { InventoryActions } from "../actions/inventoryActions";
 
 const initialState: IInventory[] = [];
 

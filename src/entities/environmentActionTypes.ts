@@ -1,4 +1,4 @@
-import { EnvironmentActions } from "../redux/action-types/environmentActions";
+import { EnvironmentActions } from "../redux/actions/environmentActions";
 
 export type EnvironmentActionTypes =
     ISetAPIUrl |

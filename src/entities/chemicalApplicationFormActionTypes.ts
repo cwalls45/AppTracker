@@ -1,4 +1,4 @@
-import { ChemicalApplicationActions } from "../redux/action-types/chemicalApplicationActions";
+import { ChemicalApplicationActions } from "../redux/actions/chemicalApplicationActions";
 import { IChemical } from "./chemicalApplicationFormDefaultValues";
 
 export type ChemicalApplicationFormActionTypes =

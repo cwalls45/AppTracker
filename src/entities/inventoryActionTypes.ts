@@ -1,4 +1,4 @@
-import { InventoryActions } from "../redux/action-types/inventoryActions";
+import { InventoryActions } from "../redux/actions/inventoryActions";
 import { IInventory } from "./inventory";
 
 export type InventoryActionTypes =

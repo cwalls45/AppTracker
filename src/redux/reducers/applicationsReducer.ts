@@ -1,6 +1,6 @@
 import { ApplicationsActionsTypes } from "../../entities/applicationsActionTypes";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
-import { ApplicationActions } from "../action-types/applicationsActions";
+import { ApplicationActions } from "../actions/applicationsActions";
 
 const intialState: IApplication[] = [];
 

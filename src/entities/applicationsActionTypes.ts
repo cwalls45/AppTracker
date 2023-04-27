@@ -1,4 +1,4 @@
-import { ApplicationActions } from "../redux/action-types/applicationsActions"
+import { ApplicationActions } from "../redux/actions/applicationsActions"
 import { IApplication } from "./chemicalApplicationFormDefaultValues"
 
 export type ApplicationsActionsTypes = ISetApplications

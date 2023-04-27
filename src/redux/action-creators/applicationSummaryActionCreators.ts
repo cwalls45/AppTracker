@@ -1,11 +1,11 @@
 import { Dispatch } from "redux";
 import { ApplicationSummaryActionsTypes } from "../../entities/applicationSummaryActionTypes";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
-import { ApplicationSummaryActions } from "../action-types/applicationSummaryActions";
+import { ApplicationSummaryActions } from "../actions/applicationSummaryActions";
 import axios from 'axios';
 import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
-import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActions";
+import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
 
 export const addApplication = (application: IApplicationSummary) => {

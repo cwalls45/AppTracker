@@ -1,4 +1,4 @@
-import { ApplicationSummaryActions } from "../redux/action-types/applicationSummaryActions";
+import { ApplicationSummaryActions } from "../redux/actions/applicationSummaryActions";
 import { IApplicationSummary } from "./applicationSummary";
 
 export type ApplicationSummaryActionsTypes =

@@ -1,4 +1,4 @@
-import { AccountActions } from "../redux/action-types/accountActions";
+import { AccountActions } from "../redux/actions/accountActions";
 import { ICourseArea, ICourseInfo, IUser } from "./account";
 
 export type AcccountActionTypes =

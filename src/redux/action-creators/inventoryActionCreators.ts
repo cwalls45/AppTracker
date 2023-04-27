@@ -2,7 +2,7 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { IInventory } from "../../entities/inventory";
 import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
-import { InventoryActions } from "../action-types/inventoryActions";
+import { InventoryActions } from "../actions/inventoryActions";
 import { State } from "../reducers";
 
 export const addInventory = (inventory: IInventory) => {

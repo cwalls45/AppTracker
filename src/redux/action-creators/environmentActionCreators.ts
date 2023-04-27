@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import { EnvironmentActionTypes } from "../../entities/environmentActionTypes"
-import { EnvironmentActions } from "../action-types/environmentActions"
+import { EnvironmentActions } from "../actions/environmentActions"
 
 
 export const setAPIUrl = () => {

@@ -2,10 +2,10 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ICourseArea, ICourseInfo, IUser } from "../../entities/account";
 import { AcccountActionTypes } from "../../entities/accountActions";
-import { AccountActions } from "../action-types/accountActions";
+import { AccountActions } from "../actions/accountActions";
 import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
-import { EnvironmentActions } from "../action-types/environmentActions";
+import { EnvironmentActions } from "../actions/environmentActions";
 import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
 
 export const setAccountId = (accountId: string) => {

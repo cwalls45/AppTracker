@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { ChemicalApplicationFormActionTypes, IChemicalsPayload, IStringArrayPayload, IStringPayload } from '../../entities/chemicalApplicationFormActionTypes';
-import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActions";
+import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 
 export const addAreaOfApplication = (addAreaOfApplication: IStringArrayPayload) => {
     return (dispatch: Dispatch<ChemicalApplicationFormActionTypes>) => dispatch({
