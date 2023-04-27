@@ -1,5 +1,5 @@
 import { IApplication } from "../entities/chemicalApplicationFormDefaultValues";
-import { IApplicationSummary } from "../entities/applications";
+import { IApplicationSummary } from "../entities/applicationSummary";
 import { v4 as uuidv4 } from 'uuid';
 
 export const formatApplicationToApplicationEvent = (chemApp: IApplication): IApplicationSummary => {

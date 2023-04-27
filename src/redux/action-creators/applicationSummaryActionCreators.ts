@@ -3,7 +3,7 @@ import { ApplicationSummaryActionsType } from "../../entities/applicationSummary
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
 import { ApplicationSummaryActions } from "../action-types/applicationSummaryActionTypes";
 import axios from 'axios';
-import { IApplicationSummary } from "../../entities/applications";
+import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
 import { ChemicalApplicationActions } from "../action-types/chemicalApplicationActionTypes";
 import { ChemicalApplicationFormActions } from "../../entities/chemicalApplicationFormActions";

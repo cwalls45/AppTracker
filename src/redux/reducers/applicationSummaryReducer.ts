@@ -1,4 +1,4 @@
-import { IApplicationSummary } from "../../entities/applications";
+import { IApplicationSummary } from "../../entities/applicationSummary";
 import { ApplicationSummaryActionsType } from "../../entities/applicationSummaryActions";
 import { ApplicationSummaryActions } from "../action-types/applicationSummaryActionTypes";
 

@@ -1,5 +1,5 @@
 import { ApplicationSummaryActions } from "../redux/action-types/applicationSummaryActionTypes";
-import { IApplicationSummary } from "./applications";
+import { IApplicationSummary } from "./applicationSummary";
 
 export type ApplicationSummaryActionsType =
     IAddApplicationSummary
