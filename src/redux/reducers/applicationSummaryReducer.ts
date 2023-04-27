@@ -1,10 +1,10 @@
 import { IApplicationSummary } from "../../entities/applications";
-import { ApplicationSummaryActionsType } from "../../entities/applicationsActions";
-import { ApplicationSummaryActions } from "../action-types/applicationsActionTypes";
+import { ApplicationSummaryActionsType } from "../../entities/applicationSummaryActions";
+import { ApplicationSummaryActions } from "../action-types/applicationSummaryActionTypes";
 
 const initialState: IApplicationSummary[] = [];
 
-const applicationsReducer = (state = initialState, action: ApplicationSummaryActionsType): IApplicationSummary[] => {
+const applicationSummaryReducer = (state = initialState, action: ApplicationSummaryActionsType): IApplicationSummary[] => {
     if (action.type === ApplicationSummaryActions.ADD_APPLICATION_SUMMARY) {
         return [...state, action.payload];
     } else if (action.type === ApplicationSummaryActions.SET_APPLICATION_EVENTS) {
@@ -14,4 +14,4 @@ const applicationsReducer = (state = initialState, action: ApplicationSummaryAct
     }
 }
 
-export default applicationsReducer;
+export default applicationSummaryReducer;

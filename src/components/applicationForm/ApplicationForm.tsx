@@ -7,7 +7,7 @@ import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
-import { applicationsActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
+import { applicationSummaryActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../entities/paths';
@@ -17,7 +17,7 @@ const ApplicationForm = () => {
 
     const dispatch = useDispatch();
     const { addChemical, removeChemical } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
-    const { postChemicalApplication } = bindActionCreators(applicationsActionCreators, dispatch);
+    const { postChemicalApplication } = bindActionCreators(applicationSummaryActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const [attestForm, setAttestForm] = useState<boolean>(false);

@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
-import { ApplicationSummaryActionsType } from "../../entities/applicationsActions";
+import { ApplicationSummaryActionsType } from "../../entities/applicationSummaryActions";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
-import { ApplicationSummaryActions } from "../action-types/applicationsActionTypes";
+import { ApplicationSummaryActions } from "../action-types/applicationSummaryActionTypes";
 import axios from 'axios';
 import { IApplicationSummary } from "../../entities/applications";
 import { State } from "../reducers";
