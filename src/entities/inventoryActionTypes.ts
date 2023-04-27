@@ -1,22 +1,22 @@
-import { InventoryActionTypes } from "../redux/action-types/inventoryActionTypes";
+import { InventoryActions } from "../redux/action-types/inventoryActions";
 import { IInventory } from "./inventory";
 
-export type InventoryActions =
+export type InventoryActionTypes =
     IAddInventory
     | IPostInventory
     | IUpdateAllInventory
 
 export interface IAddInventory {
-    type: InventoryActionTypes.ADD_INVENTORY;
+    type: InventoryActions.ADD_INVENTORY;
     payload: IInventory
 }
 
 export interface IPostInventory {
-    type: InventoryActionTypes.POST_INVENTORY;
+    type: InventoryActions.POST_INVENTORY;
     payload: IInventory
 }
 
 export interface IUpdateAllInventory {
-    type: InventoryActionTypes.UPDATE_ALL_INVENTORY;
+    type: InventoryActions.UPDATE_ALL_INVENTORY;
     payload: IInventory[]
 }

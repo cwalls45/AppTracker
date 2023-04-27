@@ -1,19 +1,19 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { IInventory } from "../../entities/inventory";
-import { InventoryActions } from "../../entities/inventoryActions";
-import { InventoryActionTypes } from "../action-types/inventoryActionTypes";
+import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
+import { InventoryActions } from "../action-types/inventoryActions";
 import { State } from "../reducers";
 
 export const addInventory = (inventory: IInventory) => {
-    return (dispatch: Dispatch<InventoryActions>) => dispatch({
-        type: InventoryActionTypes.ADD_INVENTORY,
+    return (dispatch: Dispatch<InventoryActionTypes>) => dispatch({
+        type: InventoryActions.ADD_INVENTORY,
         payload: inventory
     });
 }
 
 export const postInventory = (inventory: IInventory) => {
-    return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<InventoryActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
 
@@ -21,7 +21,7 @@ export const postInventory = (inventory: IInventory) => {
             const formattedInventory: IInventory = response.data;
 
             dispatch({
-                type: InventoryActionTypes.ADD_INVENTORY,
+                type: InventoryActions.ADD_INVENTORY,
                 payload: formattedInventory
             });
 
@@ -32,7 +32,7 @@ export const postInventory = (inventory: IInventory) => {
 }
 
 export const getAllInventory = () => {
-    return async (dispatch: Dispatch<InventoryActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<InventoryActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
 
@@ -40,7 +40,7 @@ export const getAllInventory = () => {
             const formattedInventory: IInventory[] = response.data;
 
             dispatch({
-                type: InventoryActionTypes.UPDATE_ALL_INVENTORY,
+                type: InventoryActions.UPDATE_ALL_INVENTORY,
                 payload: formattedInventory
             });
 

@@ -1,4 +1,4 @@
-export enum InventoryActionTypes {
+export enum InventoryActions {
     ADD_INVENTORY = 'ADD_INVENTORY',
     POST_INVENTORY = 'POST_INVENTORY',
     UPDATE_ALL_INVENTORY = 'UPDATE_ALL_INVENTORY'
