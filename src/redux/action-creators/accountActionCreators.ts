@@ -5,8 +5,8 @@ import { AcccountActionTypes } from "../../entities/accountActions";
 import { AccountActions } from "../action-types/accountActions";
 import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
-import { EnvironmentActionsTypes } from "../action-types/environmentActionTypes";
-import { EnvironmentActions } from "../../entities/environmentActions";
+import { EnvironmentActions } from "../action-types/environmentActions";
+import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
 
 export const setAccountId = (accountId: string) => {
     return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
@@ -45,12 +45,12 @@ export const signUpUser = (
     setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void),
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment } = getState();
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: true
             });
 
@@ -82,7 +82,7 @@ export const signUpUser = (
             navigateToCourseInformation();
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
 
@@ -90,7 +90,7 @@ export const signUpUser = (
             console.log(`Error signing up ${email}: ${error}`);
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
         }
@@ -98,14 +98,14 @@ export const signUpUser = (
 }
 
 export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: () => void) => {
-    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActionTypes>, getState: () => State) => {
 
         const { environment, account } = getState();
 
         try {
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: true
             });
 
@@ -123,7 +123,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
             navigateToCourseAreas();
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
 
@@ -131,7 +131,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
             console.log(`Error adding courseInfo to account ${account.accountId}: ${error} : ${courseInfo}`);
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
         }
@@ -139,14 +139,14 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
 }
 
 export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: () => void) => {
-    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActionTypes>, getState: () => State) => {
 
         const { environment, account } = getState();
 
         try {
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: true
             });
 
@@ -164,7 +164,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
             navigateToCalendar();
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
 
@@ -172,7 +172,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
             console.log(`Error adding courseAreas to account ${account.accountId}: ${error} : ${JSON.stringify(courseAreas, null, 2)}`);
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
         }
@@ -180,14 +180,14 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
 }
 
 export const getUserByUserName = (userName: string) => {
-    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActionTypes>, getState: () => State) => {
 
         const { environment } = getState();
 
         try {
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: true
             });
 
@@ -215,7 +215,7 @@ export const getUserByUserName = (userName: string) => {
 
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
 
@@ -223,7 +223,7 @@ export const getUserByUserName = (userName: string) => {
             console.log(`Error getting user ${userName}: ${error}`);
 
             dispatch({
-                type: EnvironmentActionsTypes.IS_LOADING,
+                type: EnvironmentActions.IS_LOADING,
                 payload: false
             });
         }
