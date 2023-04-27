@@ -1,7 +1,7 @@
-import { ApplicationSummaryActions } from "../redux/action-types/applicationSummaryActionTypes";
+import { ApplicationSummaryActions } from "../redux/action-types/applicationSummaryActions";
 import { IApplicationSummary } from "./applicationSummary";
 
-export type ApplicationSummaryActionsType =
+export type ApplicationSummaryActionsTypes =
     IAddApplicationSummary
     | IFetchApplicationEvents
     | ISetApplicationEvents;
