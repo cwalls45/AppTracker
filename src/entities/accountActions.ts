@@ -1,29 +1,29 @@
-import { AccountActionTypes } from "../redux/action-types/accountActionTypes";
+import { AccountActions } from "../redux/action-types/accountActions";
 import { ICourseArea, ICourseInfo, IUser } from "./account";
 
-export type AcccountActions =
+export type AcccountActionTypes =
     ISetAccountId |
     ISetUser |
     ISetCourseInfo |
     ISetCourseAreas
 
 export interface ISetAccountId {
-    type: AccountActionTypes.SET_ACCOUNT_ID,
+    type: AccountActions.SET_ACCOUNT_ID,
     payload: string
 }
 
 export interface ISetUser {
-    type: AccountActionTypes.SET_USER,
+    type: AccountActions.SET_USER,
     payload: IUser
 }
 
 export interface ISetCourseInfo {
-    type: AccountActionTypes.SET_COURSE_INFO,
+    type: AccountActions.SET_COURSE_INFO,
     payload: ICourseInfo
 }
 
 export interface ISetCourseAreas {
-    type: AccountActionTypes.SET_COURSE_AREAS,
+    type: AccountActions.SET_COURSE_AREAS,
     payload: ICourseArea[]
 }
 

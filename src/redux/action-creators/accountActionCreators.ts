@@ -1,37 +1,37 @@
 import axios from "axios";
 import { Dispatch } from "redux";
 import { ICourseArea, ICourseInfo, IUser } from "../../entities/account";
-import { AcccountActions } from "../../entities/accountActions";
-import { AccountActionTypes } from "../action-types/accountActionTypes";
+import { AcccountActionTypes } from "../../entities/accountActions";
+import { AccountActions } from "../action-types/accountActions";
 import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
 import { EnvironmentActionsTypes } from "../action-types/environmentActionTypes";
 import { EnvironmentActions } from "../../entities/environmentActions";
 
 export const setAccountId = (accountId: string) => {
-    return (dispatch: Dispatch<AcccountActions>) => dispatch({
-        type: AccountActionTypes.SET_ACCOUNT_ID,
+    return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
+        type: AccountActions.SET_ACCOUNT_ID,
         payload: accountId
     });
 }
 
 export const setUser = (user: IUser) => {
-    return (dispatch: Dispatch<AcccountActions>) => dispatch({
-        type: AccountActionTypes.SET_USER,
+    return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
+        type: AccountActions.SET_USER,
         payload: user
     })
 }
 
 export const setCourseInfo = (courseInfo: ICourseInfo) => {
-    return (dispatch: Dispatch<AcccountActions>) => dispatch({
-        type: AccountActionTypes.SET_COURSE_INFO,
+    return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
+        type: AccountActions.SET_COURSE_INFO,
         payload: courseInfo
     })
 }
 
 export const setCourseAreas = (courseAreas: ICourseArea[]) => {
-    return (dispatch: Dispatch<AcccountActions>) => dispatch({
-        type: AccountActionTypes.SET_COURSE_AREAS,
+    return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
+        type: AccountActions.SET_COURSE_AREAS,
         payload: courseAreas
     })
 }
@@ -45,7 +45,7 @@ export const signUpUser = (
     setCookies: ((name: string, value: any, options?: CookieSetOptions | undefined) => void),
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
         try {
             const { environment } = getState();
 
@@ -70,12 +70,12 @@ export const signUpUser = (
             setIsLoggedIn(true);
 
             dispatch({
-                type: AccountActionTypes.SET_ACCOUNT_ID,
+                type: AccountActions.SET_ACCOUNT_ID,
                 payload: data.accountInfo.accountId
             });
 
             dispatch({
-                type: AccountActionTypes.SET_USER,
+                type: AccountActions.SET_USER,
                 payload: data.accountInfo.user
             });
 
@@ -98,7 +98,7 @@ export const signUpUser = (
 }
 
 export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: () => void) => {
-    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
 
         const { environment, account } = getState();
 
@@ -116,7 +116,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
             });
 
             dispatch({
-                type: AccountActionTypes.SET_COURSE_INFO,
+                type: AccountActions.SET_COURSE_INFO,
                 payload: courseInfo
             });
 
@@ -139,7 +139,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
 }
 
 export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: () => void) => {
-    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
 
         const { environment, account } = getState();
 
@@ -157,7 +157,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
             });
 
             dispatch({
-                type: AccountActionTypes.SET_COURSE_AREAS,
+                type: AccountActions.SET_COURSE_AREAS,
                 payload: courseAreasResponse.data.courseAreas
             });
 
@@ -180,7 +180,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
 }
 
 export const getUserByUserName = (userName: string) => {
-    return async (dispatch: Dispatch<AcccountActions | EnvironmentActions>, getState: () => State) => {
+    return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActions>, getState: () => State) => {
 
         const { environment } = getState();
 
@@ -194,22 +194,22 @@ export const getUserByUserName = (userName: string) => {
             const response = await axios.get(`${environment.apiUrl}/auth/user/${userName}`);
 
             dispatch({
-                type: AccountActionTypes.SET_ACCOUNT_ID,
+                type: AccountActions.SET_ACCOUNT_ID,
                 payload: response.data.user.accountId
             });
 
             dispatch({
-                type: AccountActionTypes.SET_USER,
+                type: AccountActions.SET_USER,
                 payload: response.data.user.user
             });
 
             dispatch({
-                type: AccountActionTypes.SET_COURSE_INFO,
+                type: AccountActions.SET_COURSE_INFO,
                 payload: response.data.user.courseInfo
             });
 
             dispatch({
-                type: AccountActionTypes.SET_COURSE_AREAS,
+                type: AccountActions.SET_COURSE_AREAS,
                 payload: response.data.user.courseAreas
             });
 
