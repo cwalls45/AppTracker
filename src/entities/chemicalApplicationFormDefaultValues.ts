@@ -12,8 +12,15 @@ export interface IChemical {
     chemicalCompany: string;
     chemicalName: string;
     amount: string;
-    units: string
+    units: string;
 };
+
+export interface IApplicationAndChemical extends Omit<IApplication, 'chemicals' | 'id'> {
+    chemicalCompany: string;
+    chemicalName: string;
+    amount: string;
+    units: string;
+}
 
 export enum ApplicationProperty {
     ID = 'id',
