@@ -18,15 +18,15 @@ const Reports = () => {
     const [year, setYear] = useState(dayjs().year());
     const [chemicalsApplied, setChemicalsApplied] = useState<IApplicationAndChemical[]>([]);
     const columns: GridColDef[] = [
-        { field: ApplicationProperty.DATE_OF_APPLICATION, headerName: 'Date of Application', width: 200 },
-        { field: ApplicationProperty.AREA_OF_APPLICATION, headerName: 'Area(s) of Application', width: 200 },
-        { field: ApplicationProperty.TOTAL_AREA_OF_APP, headerName: 'Total Area of Application', width: 200 },
-        { field: ApplicationProperty.TOTAL_AREA_OF_APP_UNIT, headerName: 'Units', width: 100 },
-        { field: ApplicationProperty.TARGET_PESTS, headerName: 'Target Pests', width: 150 },
-        { field: ChemicalProperties.CHEMICAL_COMPANY, headerName: 'Company Name', width: 150 },
-        { field: ChemicalProperties.CHEMICAL_NAME, headerName: 'Chemical Name', width: 150 },
-        { field: ChemicalProperties.AMOUNT, headerName: 'Amount Applied', width: 150 },
-        { field: ChemicalProperties.UNITS, headerName: 'Units', width: 100 },
+        { field: ApplicationProperty.DATE_OF_APPLICATION, headerName: 'Date of Application', minWidth: 200, flex: 1 },
+        { field: ApplicationProperty.AREA_OF_APPLICATION, headerName: 'Area(s) of Application', minWidth: 200, flex: 1 },
+        { field: ApplicationProperty.TOTAL_AREA_OF_APP, headerName: 'Total Area of Application', minWidth: 200, flex: 1 },
+        { field: ApplicationProperty.TOTAL_AREA_OF_APP_UNIT, headerName: 'Units', minWidth: 100, flex: 1 },
+        { field: ApplicationProperty.TARGET_PESTS, headerName: 'Target Pests', minWidth: 150, flex: 1 },
+        { field: ChemicalProperties.CHEMICAL_COMPANY, headerName: 'Company Name', minWidth: 150, flex: 1 },
+        { field: ChemicalProperties.CHEMICAL_NAME, headerName: 'Chemical Name', minWidth: 150, flex: 1 },
+        { field: ChemicalProperties.AMOUNT, headerName: 'Amount Applied', minWidth: 150, flex: 1 },
+        { field: ChemicalProperties.UNITS, headerName: 'Units', minWidth: 100, flex: 1 },
     ];
 
     const dispatch = useDispatch();
