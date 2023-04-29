@@ -11,7 +11,6 @@ const ReportTabs = ({ selectedTab, setSelectedTab }: IProps) => {
         setSelectedTab(newTab);
     };
 
-    //TODO: get rid of static height
     return (
         <Box sx={{ width: '100%', borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={selectedTab} onChange={handleChange} aria-label="Report Tabs" centered>
