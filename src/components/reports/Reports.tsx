@@ -32,6 +32,10 @@ const Reports = () => {
     const { setAllApplications: getAllApplications } = bindActionCreators(applicationsActionCreators, dispatch);
     const { applications } = useSelector((state: State) => state);
 
+    const displayAllChemicals = (chemicals: IApplicationAndChemical[]) => chemicals;
+    const displayFertilizersOnly = (chemicals: IApplicationAndChemical[]) => [];
+    const displayPesticidesOnly = (chemicals: IApplicationAndChemical[]) => [];
+
     useEffect(() => {
         //TODO: create dropdown for year
         getApplications(year).then((apps) => {
@@ -60,9 +64,9 @@ const Reports = () => {
             <Grid container sx={{ height: '100%', width: '50vw' }}>
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                    <TabDisplay children={<DataTable columns={columns} rows={chemicalsApplied} />} selectedTab={selectedTab} index={0} />
-                    <TabDisplay children={<DataTable columns={columns} rows={[]} />} selectedTab={selectedTab} index={1} />
-                    <TabDisplay children={<DataTable columns={columns} rows={[]} />} selectedTab={selectedTab} index={2} />
+                    <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayAllChemicals} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={0} />
+                    <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayPesticidesOnly} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={1} />
+                    <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayFertilizersOnly} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={2} />
                 </Grid>
             </Grid>
         </Grid>
