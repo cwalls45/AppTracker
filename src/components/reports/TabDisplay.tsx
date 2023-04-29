@@ -10,7 +10,7 @@ const TabDisplay = ({ children, selectedTab, index }: IProps) => {
     return (
         <>
             {selectedTab === index &&
-                (<Grid>
+                (<Grid sx={{ height: '100%', width: '100%' }}>
                     {children}
                 </Grid >)
             }

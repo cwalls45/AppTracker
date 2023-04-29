@@ -18,7 +18,7 @@ function DataTable<T>({ columns, rowData, formatRowDataFunc }: IProps<T>) {
     }, [rowData]);
 
     return (
-        <DataGrid columns={columns} rows={rows} />
+        <DataGrid autoHeight columns={columns} rows={rows} />
     );
 }
 

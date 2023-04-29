@@ -60,9 +60,9 @@ const Reports = () => {
     }, [applications]);
 
     return (
-        <Grid container id='test' justifyContent='center' alignItems='flex-start' sx={{ height: '100vh', width: 'auto' }}>
-            <Grid container sx={{ height: '100%', width: '50vw' }}>
-                <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
+        <Grid container justifyContent='center' alignItems='flex-start' sx={{ height: '100vh', width: 'auto' }}>
+            <Grid container alignContent='flex-start' sx={{ height: '100%', width: '100vw' }}>
+                <Grid container item xs={12} justifyContent='center' rowSpacing={3} >
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                     <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayAllChemicals} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={0} />
                     <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayPesticidesOnly} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={1} />
