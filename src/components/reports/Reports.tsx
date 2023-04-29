@@ -11,10 +11,11 @@ import { getApplications } from "../../utils/applicationRequests";
 import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from 'uuid';
+import YearSelector from "./YearSelector";
 
 const Reports = () => {
     const [selectedTab, setSelectedTab] = useState(0);
-    const [year, setYear] = useState(dayjs().year().toString());
+    const [year, setYear] = useState(dayjs().year());
     const [chemicalsApplied, setChemicalsApplied] = useState<IApplicationAndChemical[]>([]);
     const columns: GridColDef[] = [
         { field: ApplicationProperty.DATE_OF_APPLICATION, headerName: 'Date of Application', width: 200 },
@@ -37,8 +38,7 @@ const Reports = () => {
     const displayPesticidesOnly = (chemicals: IApplicationAndChemical[]) => [];
 
     useEffect(() => {
-        //TODO: create dropdown for year
-        getApplications(year).then((apps) => {
+        getApplications(year.toString()).then((apps) => {
             getAllApplications(apps);
         });
     }, [year]);
@@ -64,6 +64,7 @@ const Reports = () => {
             <Grid container alignContent='flex-start' sx={{ height: '100%', width: '100vw' }}>
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3} >
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+                    <YearSelector year={year} handleChangeYear={setYear} />
                     <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayAllChemicals} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={0} />
                     <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayPesticidesOnly} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={1} />
                     <TabDisplay children={<DataTable columns={columns} formatRowDataFunc={displayFertilizersOnly} rowData={chemicalsApplied} />} selectedTab={selectedTab} index={2} />
