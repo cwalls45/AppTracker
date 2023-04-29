@@ -2,15 +2,15 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 
 
-interface IProps {
+interface IProps<T> {
     columns: GridColDef[];
-    rowData: any[];
-    formatRowDataFunc: (rowData: any[]) => any[];
+    rowData: T[];
+    formatRowDataFunc: (rowData: T[]) => T[];
 }
 
-const DataTable = ({ columns, rowData, formatRowDataFunc }: IProps) => {
+function DataTable<T>({ columns, rowData, formatRowDataFunc }: IProps<T>) {
 
-    const [rows, setRows] = useState<any[]>([]);
+    const [rows, setRows] = useState<T[]>([]);
 
     useEffect(() => {
         const dataToDisplayInRow = formatRowDataFunc(rowData);
