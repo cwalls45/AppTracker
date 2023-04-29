@@ -60,7 +60,7 @@ const Reports = () => {
     }, [applications]);
 
     return (
-        <Grid container justifyContent='center' alignItems='flex-start' xs={12}>
+        <Grid container item justifyContent='center' alignItems='flex-start' xs={12}>
             <Grid container alignContent='flex-start' sx={{ height: '100%', width: '100vw' }}>
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3} >
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
