@@ -6,18 +6,27 @@ import DataTable from "./DataTable";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { State, applicationsActionCreators } from "../../redux";
-import { IApplicationAndChemical } from "../../entities/chemicalApplicationFormDefaultValues";
+import { ApplicationProperty, ChemicalProperties, IApplicationAndChemical } from "../../entities/chemicalApplicationFormDefaultValues";
 import { getApplications } from "../../utils/applicationRequests";
 import { GridColDef } from "@mui/x-data-grid";
+import dayjs from "dayjs";
+import { v4 as uuidv4 } from 'uuid';
 
 const Reports = () => {
     const [selectedTab, setSelectedTab] = useState(0);
-    const [year, setYear] = useState('2023');
+    const [year, setYear] = useState(dayjs().year().toString());
     const [chemicalsApplied, setChemicalsApplied] = useState<IApplicationAndChemical[]>([]);
     const columns: GridColDef[] = [
-        { field: 'col1', headerName: 'Column 1', width: 150 },
-        { field: 'col2', headerName: 'Column 2', width: 150 },
-    ]
+        { field: ApplicationProperty.DATE_OF_APPLICATION, headerName: 'Date of Application', width: 200 },
+        { field: ApplicationProperty.AREA_OF_APPLICATION, headerName: 'Area(s) of Application', width: 200 },
+        { field: ApplicationProperty.TOTAL_AREA_OF_APP, headerName: 'Total Area of Application', width: 200 },
+        { field: ApplicationProperty.TOTAL_AREA_OF_APP_UNIT, headerName: 'Units', width: 100 },
+        { field: ApplicationProperty.TARGET_PESTS, headerName: 'Target Pests', width: 150 },
+        { field: ChemicalProperties.CHEMICAL_COMPANY, headerName: 'Company Name', width: 150 },
+        { field: ChemicalProperties.CHEMICAL_NAME, headerName: 'Chemical Name', width: 150 },
+        { field: ChemicalProperties.AMOUNT, headerName: 'Amount Applied', width: 150 },
+        { field: ChemicalProperties.UNITS, headerName: 'Units', width: 100 },
+    ];
 
     const dispatch = useDispatch();
     const { setAllApplications: getAllApplications } = bindActionCreators(applicationsActionCreators, dispatch);
@@ -28,16 +37,17 @@ const Reports = () => {
         getApplications(year).then((apps) => {
             getAllApplications(apps);
         });
-    }, []);
+    }, [year]);
 
     useEffect(() => {
         const chemicals: IApplicationAndChemical[] = applications.map((app) => {
             return app.chemicals.map((chemical) => ({
-                dateOfApplication: app.dateOfApplication,
-                areaOfApplication: app.areaOfApplication,
-                totalAreaOfApp: app.totalAreaOfApp,
-                totalAreaOfAppUnit: app.totalAreaOfAppUnit,
-                targetPests: app.targetPests,
+                [ApplicationProperty.ID]: uuidv4(),
+                [ApplicationProperty.DATE_OF_APPLICATION]: app.dateOfApplication,
+                [ApplicationProperty.AREA_OF_APPLICATION]: app.areaOfApplication,
+                [ApplicationProperty.TOTAL_AREA_OF_APP]: app.totalAreaOfApp,
+                [ApplicationProperty.TOTAL_AREA_OF_APP_UNIT]: app.totalAreaOfAppUnit,
+                [ApplicationProperty.TARGET_PESTS]: app.targetPests,
                 ...chemical
             }))
         }).flat();
@@ -50,7 +60,7 @@ const Reports = () => {
             <Grid container sx={{ height: '100%', width: '50vw' }}>
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3}>
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                    <TabDisplay children={<DataTable columns={columns} rows={[]} />} selectedTab={selectedTab} index={0} />
+                    <TabDisplay children={<DataTable columns={columns} rows={chemicalsApplied} />} selectedTab={selectedTab} index={0} />
                     <TabDisplay children={<DataTable columns={columns} rows={[]} />} selectedTab={selectedTab} index={1} />
                     <TabDisplay children={<DataTable columns={columns} rows={[]} />} selectedTab={selectedTab} index={2} />
                 </Grid>

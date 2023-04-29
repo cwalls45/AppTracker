@@ -9,7 +9,7 @@ interface IProps {
 const DataTable = ({ columns, rows }: IProps) => {
 
     return (
-        <DataGrid columns={columns} rows={[]} />
+        <DataGrid columns={columns} rows={rows} />
     );
 }
 

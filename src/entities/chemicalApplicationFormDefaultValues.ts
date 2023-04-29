@@ -15,7 +15,7 @@ export interface IChemical {
     units: string;
 };
 
-export interface IApplicationAndChemical extends Omit<IApplication, 'chemicals' | 'id'> {
+export interface IApplicationAndChemical extends Omit<IApplication, 'chemicals'> {
     chemicalCompany: string;
     chemicalName: string;
     amount: string;
