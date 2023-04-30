@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import { ChemicalApplicationFormProperty, ChemicalProperties, IChemicalApplicationForm } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ApplicationProperty, ChemicalProperties, IApplication } from '../../entities/chemicalApplicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
@@ -17,7 +17,7 @@ const FormInputText = ({ property, label, index }: IProps) => {
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {
-        if (property === ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP) {
+        if (property === ApplicationProperty.TOTAL_AREA_OF_APP) {
             updateTotalAreaOfApp({
                 data,
                 property

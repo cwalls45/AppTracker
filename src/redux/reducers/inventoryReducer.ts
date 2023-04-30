@@ -1,15 +1,15 @@
 import { IInventory } from "../../entities/inventory";
-import { InventoryActions } from "../../entities/inventoryActions";
+import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
 import { removeDuplicateInventory, sortInventoryByCompany } from "../../utils/inventoryUtils";
-import { InventoryActionTypes } from "../action-types/inventoryActionTypes";
+import { InventoryActions } from "../actions/inventoryActions";
 
 const initialState: IInventory[] = [];
 
-const inventoryReducer = (state = initialState, action: InventoryActions): IInventory[] => {
-    if (action.type === InventoryActionTypes.ADD_INVENTORY) {
+const inventoryReducer = (state = initialState, action: InventoryActionTypes): IInventory[] => {
+    if (action.type === InventoryActions.ADD_INVENTORY) {
         const inventoryWithoutUpdatedItem = state.filter((inventory) => removeDuplicateInventory(inventory, action.payload));
         return sortInventoryByCompany([...inventoryWithoutUpdatedItem, action.payload]);
-    } else if (action.type === InventoryActionTypes.UPDATE_ALL_INVENTORY) {
+    } else if (action.type === InventoryActions.UPDATE_ALL_INVENTORY) {
         return action.payload
     } else {
         return state;

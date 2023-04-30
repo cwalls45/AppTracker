@@ -1,4 +1,4 @@
-export interface IApplication {
+export interface IApplicationSummary {
     event_id: string;
     title: string;
     start: Date;

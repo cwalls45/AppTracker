@@ -2,12 +2,12 @@ import { useState } from 'react';
 import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
-import { ChemicalApplicationFormProperty } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ApplicationProperty } from '../../entities/chemicalApplicationFormDefaultValues';
 import { areaOfApplication } from '../../dummyData/areaOfApplication';
 import { targetPests } from '../../dummyData/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
-import { applicationsActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
+import { applicationSummaryActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
 import { bindActionCreators } from 'redux';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '../../entities/paths';
@@ -17,7 +17,7 @@ const ApplicationForm = () => {
 
     const dispatch = useDispatch();
     const { addChemical, removeChemical } = bindActionCreators(chemicalApplicationFormActionCreators, dispatch);
-    const { postChemicalApplication } = bindActionCreators(applicationsActionCreators, dispatch);
+    const { postChemicalApplication } = bindActionCreators(applicationSummaryActionCreators, dispatch);
     const state = useSelector((state: State) => state);
 
     const [attestForm, setAttestForm] = useState<boolean>(false);
@@ -54,7 +54,7 @@ const ApplicationForm = () => {
                             <Grid container justifyContent='center'>
                                 <DatePickerCalendar
                                     label='Date of Application'
-                                    property={ChemicalApplicationFormProperty.DATE_OF_APPLICATION}
+                                    property={ApplicationProperty.DATE_OF_APPLICATION}
                                 />
                             </Grid>
                         </Grid>
@@ -62,7 +62,7 @@ const ApplicationForm = () => {
                             <Grid item justifyContent='space-evenly' xs={12}>
                                 <MultiSelect
                                     label='Target Pests'
-                                    property={ChemicalApplicationFormProperty.TARGET_PESTS}
+                                    property={ApplicationProperty.TARGET_PESTS}
                                     options={targetPests}
                                 />
                             </Grid>
@@ -73,7 +73,7 @@ const ApplicationForm = () => {
                             <Grid item justifyContent='space-evenly' xs={12}>
                                 <MultiSelect
                                     label='Area of Application'
-                                    property={ChemicalApplicationFormProperty.AREA_OF_APPLICATION}
+                                    property={ApplicationProperty.AREA_OF_APPLICATION}
                                     options={areaOfApplication}
                                 />
                             </Grid>

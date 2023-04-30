@@ -18,6 +18,7 @@ import CourseInformation from './components/courseInformationForm/CourseInformat
 import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 import Loading from './components/loading/Loading';
 import { getUserEmailWithAccessToken } from './utils/authenticateUser';
+import Reports from './components/reports/Reports';
 
 const App = () => {
 
@@ -82,6 +83,14 @@ const App = () => {
                         element={
                             <ProtectedWrapper isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                                 <Inventory />
+                            </ProtectedWrapper>
+                        }
+                    />
+                    <Route
+                        path={Paths.REPORTS}
+                        element={
+                            <ProtectedWrapper isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
+                                <Reports />
                             </ProtectedWrapper>
                         }
                     />

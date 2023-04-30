@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators, State } from '../../redux';
-import { ChemicalApplicationFormProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ApplicationProperty, ChemicalProperties } from '../../entities/chemicalApplicationFormDefaultValues';
 
 interface IProps {
     property: string;
@@ -25,7 +25,7 @@ const ChemicalSelect = ({ property, label, options, isSearching, isDisabled, ind
     const state = useSelector((state: State) => state);
 
     const actionCreatorFactory = (data, property: string) => {
-        if (property === ChemicalApplicationFormProperty.TOTAL_AREA_OF_APP_UNIT) {
+        if (property === ApplicationProperty.TOTAL_AREA_OF_APP_UNIT) {
             updateTotalAreaOfAppUnits({
                 data,
                 property

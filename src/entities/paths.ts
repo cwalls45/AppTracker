@@ -6,5 +6,6 @@ export enum Paths {
     INVENTORY = '/inventory',
     SIGNUP = '/signUp',
     COURSE_INFO = '/signUp/courseInformation',
-    COURSE_AREAS = '/signUp/courseArea'
+    COURSE_AREAS = '/signUp/courseArea',
+    REPORTS = '/reports'
 };

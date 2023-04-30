@@ -1,4 +1,4 @@
-export interface IChemicalApplicationForm {
+export interface IApplication {
     id?: string;
     dateOfApplication: string;
     areaOfApplication: string[];
@@ -12,10 +12,17 @@ export interface IChemical {
     chemicalCompany: string;
     chemicalName: string;
     amount: string;
-    units: string
+    units: string;
 };
 
-export enum ChemicalApplicationFormProperty {
+export interface IApplicationAndChemical extends Omit<IApplication, 'chemicals'> {
+    chemicalCompany: string;
+    chemicalName: string;
+    amount: string;
+    units: string;
+}
+
+export enum ApplicationProperty {
     ID = 'id',
     DATE_OF_APPLICATION = 'dateOfApplication',
     AREA_OF_APPLICATION = 'areaOfApplication',

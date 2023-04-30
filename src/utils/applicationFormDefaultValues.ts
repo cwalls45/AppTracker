@@ -1,6 +1,6 @@
-import { IChemical, IChemicalApplicationForm } from "../entities/chemicalApplicationFormDefaultValues";
+import { IChemical, IApplication } from "../entities/chemicalApplicationFormDefaultValues";
 
-export const defaultValues = (): IChemicalApplicationForm => ({
+export const defaultValues = (): IApplication => ({
     dateOfApplication: '',
     areaOfApplication: [],
     totalAreaOfApp: '',

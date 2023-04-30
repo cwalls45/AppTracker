@@ -1,16 +1,14 @@
-import { IApplication } from "../../entities/applications";
-import { ApplicationActionsType } from "../../entities/applicationsActions";
-import { ApplicationsActions } from "../action-types/applicationsActionTypes";
+import { ApplicationsActionsTypes } from "../../entities/applicationsActionTypes";
+import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
+import { ApplicationActions } from "../actions/applicationsActions";
 
-const initialState: IApplication[] = [];
+const intialState: IApplication[] = [];
 
-const applicationsReducer = (state = initialState, action: ApplicationActionsType): IApplication[] => {
-    if (action.type === ApplicationsActions.ADD_APPLICATION) {
-        return [...state, action.payload];
-    } else if (action.type === ApplicationsActions.SET_APPLICATION_EVENTS) {
-        return action.payload;
+const applicationsReducer = (state = intialState, action: ApplicationsActionsTypes): IApplication[] => {
+    if (action.type === ApplicationActions.SET_ALL_APPLICATIONS) {
+        return action.payload
     } else {
-        return state;
+        return intialState
     }
 }
 

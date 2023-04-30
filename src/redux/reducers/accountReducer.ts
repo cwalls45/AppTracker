@@ -1,6 +1,6 @@
 import { IAccount } from "../../entities/account";
-import { AcccountActions } from "../../entities/accountActions";
-import { AccountActionTypes } from "../action-types/accountActionTypes";
+import { AcccountActionTypes } from "../../entities/accountActions";
+import { AccountActions } from "../actions/accountActions";
 
 const initialState: IAccount = {
     accountId: '',
@@ -20,15 +20,15 @@ const initialState: IAccount = {
     courseAreas: []
 }
 
-const accountReducer = (state = initialState, action: AcccountActions): IAccount => {
-    if (action.type === AccountActionTypes.SET_ACCOUNT_ID) {
+const accountReducer = (state = initialState, action: AcccountActionTypes): IAccount => {
+    if (action.type === AccountActions.SET_ACCOUNT_ID) {
         return { ...state, accountId: action.payload }
-    } else if (action.type === AccountActionTypes.SET_USER) {
+    } else if (action.type === AccountActions.SET_USER) {
         return { ...state, user: action.payload }
-    } else if (action.type === AccountActionTypes.SET_COURSE_INFO) {
+    } else if (action.type === AccountActions.SET_COURSE_INFO) {
         return { ...state, courseInfo: action.payload }
-    } else if (action.type === AccountActionTypes.SET_COURSE_AREAS) {
-        return { ...state, courseAreas: action.payload}
+    } else if (action.type === AccountActions.SET_COURSE_AREAS) {
+        return { ...state, courseAreas: action.payload }
     } else {
         return state;
     }

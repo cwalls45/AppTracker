@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { ChemicalApplicationFormProperty } from '../../entities/chemicalApplicationFormDefaultValues';
+import { ApplicationProperty } from '../../entities/chemicalApplicationFormDefaultValues';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators } from '../../redux';
@@ -21,12 +21,12 @@ const MultiSelect = ({ label, property, options }: IProps) => {
     const [inputValue, setInputValue] = useState('');
 
     const actionCreatorFactory = (data, property: string) => {
-        if (property === ChemicalApplicationFormProperty.AREA_OF_APPLICATION) {
+        if (property === ApplicationProperty.AREA_OF_APPLICATION) {
             addAreaOfApplication({
                 data,
                 property
             });
-        } else if (property === ChemicalApplicationFormProperty.TARGET_PESTS) {
+        } else if (property === ApplicationProperty.TARGET_PESTS) {
             updateTargetPests({
                 data,
                 property
