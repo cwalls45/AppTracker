@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 //import MenuIcon from '@mui/icons-material/Menu';
 import NavigationButtons from './NavigationButtons';
+import Menu from './Menu';
 
 const NavigationBar = () => {
 
@@ -22,7 +23,8 @@ const NavigationBar = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     LOGO
                 </Typography>
-                <NavigationButtons />
+                {/* <NavigationButtons /> */}
+                <Menu />
             </Toolbar>
         </AppBar>
     );
