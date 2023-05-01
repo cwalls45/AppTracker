@@ -42,7 +42,7 @@ const Menu = () => {
                 size="medium"
                 aria-label='Main Menu Button'
             >
-                <Avatar sx={{ width: 45, height: 45 }} variant="rounded">{abbreviation}</Avatar>
+                <Avatar variant="rounded">{abbreviation}</Avatar>
             </IconButton>
             <MenuMUI
                 open={open}

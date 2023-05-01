@@ -102,7 +102,11 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     backgroundColor: '#fefefe',
-                    color: '#6EA243'
+                    color: '#6EA243',
+                    height: '2.4em',
+                    width: '2.4em',
+                    minHeight: '40px',
+                    minWidth: '40px'
                 }
             }
         },
