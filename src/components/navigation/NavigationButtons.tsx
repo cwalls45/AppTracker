@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
-import Button from "@mui/material/Button";
 import { Paths } from '../../entities/paths';
+import { MenuItem } from '@mui/material';
 
-const NavigationButtons = () => {
+interface IProps {
+    clickFunction: (...args: any) => void;
+}
+
+const NavigationButtons = ({ clickFunction }: IProps) => {
 
     const routes = [
         { path: Paths.CALENDAR, text: 'Calendar' },
@@ -15,9 +18,9 @@ const NavigationButtons = () => {
         <>
             {
                 routes.map(route => (
-                    <Button component={Link} to={route.path} variant='outlined' color='inherit' key={route.path}>
+                    <MenuItem onClick={() => clickFunction(route.path)} key={route.path} aria-label={`${route.text} Menu Tab`}>
                         {route.text}
-                    </Button>
+                    </MenuItem>
                 ))
             }
         </>
