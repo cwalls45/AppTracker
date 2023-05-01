@@ -1,4 +1,4 @@
-import { Avatar, IconButton, Menu as MenuMUI, Tooltip } from "@mui/material";
+import { Avatar, IconButton, Menu as MenuMUI } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
