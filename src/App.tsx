@@ -9,7 +9,7 @@ import Login from './components/login/Login';
 import { Paths } from './entities/paths';
 import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { accountActionCreators, environmentActionCreators, State } from './redux';
 import { useCookies } from 'react-cookie';

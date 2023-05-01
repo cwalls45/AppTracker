@@ -1,11 +1,15 @@
 import { Avatar, IconButton, Menu as MenuMUI, Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
+import { State } from "../../redux";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+    const [abbreviation, setAbbreviation] = useState<string | null>(null);
+    const state = useSelector((state: State) => state);
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
 
@@ -16,17 +20,29 @@ const Menu = () => {
     const handleMenuItemClick = (route: string) => {
         navigate(route);
         handleClose();
-    }
+    };
+
+    const nameAbbreviation = () => {
+        if (!state.account.user.firstName || !state.account.user.lastName) {
+            return null;
+        }
+        console.log('abbreviation: ', `${state.account.user.firstName[0].toUpperCase()} ${state.account.user.lastName[0].toUpperCase()}`)
+        return `${state.account.user.firstName[0].toUpperCase()}${state.account.user.lastName[0].toUpperCase()}`
+    };
+
+    useEffect(() => {
+        const initails = nameAbbreviation();
+        setAbbreviation(initails);
+    }, [state.account.user])
 
     return (
         <>
             <IconButton
                 onClick={handleClick}
                 size="medium"
-                sx={{ ml: 2 }}
                 aria-label='Main Menu Button'
             >
-                <Avatar sx={{ width: 45, height: 45 }} variant="rounded">M</Avatar>
+                <Avatar sx={{ width: 45, height: 45 }} variant="rounded">{abbreviation}</Avatar>
             </IconButton>
             <MenuMUI
                 open={open}

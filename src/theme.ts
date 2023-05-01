@@ -97,6 +97,14 @@ export const theme = createTheme({
                     margin: '1.75rem'
                 }
             }
-        }
+        },
+        MuiAvatar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#fefefe',
+                    color: '#6EA243'
+                }
+            }
+        },
     },
 });
