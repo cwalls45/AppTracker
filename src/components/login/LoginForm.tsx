@@ -19,6 +19,7 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const dispatch = useDispatch();
     const { setUser, setAccountId, setCourseInfo, setCourseAreas } = bindActionCreators(accountActionCreators, dispatch);
@@ -28,8 +29,19 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
     const [cookies, setCookies] = useCookies();
 
+    const handleEnterKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit(event);
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!email || !password) {
+            return;
+        };
+
         setIsLoading(true);
         const isAuthenticated = await authenticateUser(email, password);
         setIsLoggedIn(isAuthenticated);
@@ -79,6 +91,7 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
                     value={email}
                     setterFunction={setEmail}
                     xs={6.5}
+                    handleKeyDown={handleEnterKeyDown}
                 />
                 <FormTextField
                     label='Password'
@@ -86,14 +99,15 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
                     setterFunction={setPassword}
                     type='password'
                     xs={6.5}
+                    handleKeyDown={handleEnterKeyDown}
                 />
             </Grid>
             <Grid container item xs={12} justifyContent='center'>
                 <Grid item>
-                    <Button variant='contained' onClick={handleSubmit} sx={{
-                        flexGrow: 1,
-                        width: '15em'
-                    }}
+                    <Button
+                        variant='contained'
+                        onClick={handleSubmit}
+                        sx={{ flexGrow: 1, width: '15em' }}
                     >
                         Sign In
                     </Button>

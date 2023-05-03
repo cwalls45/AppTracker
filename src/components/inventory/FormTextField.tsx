@@ -5,11 +5,12 @@ interface IProps {
     value: string;
     setterFunction: React.Dispatch<React.SetStateAction<string>>;
     xs: number;
+    handleKeyDown?: (event: React.KeyboardEvent<HTMLDivElement>) => void;
     required?: boolean;
     type?: string
 };
 
-const FormTextField = ({ label, value, setterFunction, xs, required = true, type }: IProps) => {
+const FormTextField = ({ label, value, setterFunction, xs, handleKeyDown, required = true, type }: IProps) => {
 
     const handleChange = (event) => setterFunction(event.target.value)
 
@@ -26,6 +27,7 @@ const FormTextField = ({ label, value, setterFunction, xs, required = true, type
                     onChange={(event) => handleChange(event)}
                     error={false}
                     helperText={''}
+                    onKeyDown={handleKeyDown}
                 />
             </Grid>
         </Grid>
