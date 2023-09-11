@@ -1,12 +1,10 @@
 import { useEffect } from "react";
-import { useCookies } from "react-cookie";
+import Cookies from 'js-cookie';
 
 export const useSetCookies = (accessToken: string, refreshToken: string, expiresIn: number) => {
 
-  const [cookies, setCookies] = useCookies();
-
   useEffect(() => {
-      setCookies("TurfTrackerAccessToken", accessToken, { maxAge: expiresIn });
-      setCookies("TurfTrackerRefreshToken", refreshToken, { maxAge: expiresIn });
+    Cookies.set('TurfTrackerAccessToken', accessToken);
+    Cookies.set('TurfTrackerRefreshToken', refreshToken);
   }, [accessToken, refreshToken, expiresIn]);
 }

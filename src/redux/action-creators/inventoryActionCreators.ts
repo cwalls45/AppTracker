@@ -4,6 +4,7 @@ import { IInventory } from "../../entities/inventory";
 import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
 import { InventoryActions } from "../actions/inventoryActions";
 import { State } from "../reducers";
+import { apiGet, apiPost } from "../../utils/apiRequests";
 
 export const addInventory = (inventory: IInventory) => {
     return (dispatch: Dispatch<InventoryActionTypes>) => dispatch({
@@ -17,7 +18,7 @@ export const postInventory = (inventory: IInventory) => {
         try {
             const { environment, account } = getState();
 
-            const response = await axios.post(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: account.accountId });
+            const response = await apiPost(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: account.accountId });
             const formattedInventory: IInventory = response.data;
 
             dispatch({
@@ -36,7 +37,7 @@ export const getAllInventory = () => {
         try {
             const { environment, account } = getState();
 
-            const response = await axios.get(`${environment.apiUrl}/api/getAllInventory/${account.accountId}`);
+            const response = await apiGet(`${environment.apiUrl}/api/getAllInventory/${account.accountId}`);
             const formattedInventory: IInventory[] = response.data;
 
             dispatch({

@@ -11,7 +11,7 @@ import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { accountActionCreators, environmentActionCreators, State } from './redux';
+import { accountActionCreators, environmentActionCreators } from './redux';
 import { useCookies } from 'react-cookie';
 import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
