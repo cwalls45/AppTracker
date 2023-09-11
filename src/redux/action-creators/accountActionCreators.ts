@@ -7,6 +7,7 @@ import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
 import { EnvironmentActions } from "../actions/environmentActions";
 import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
+import { apiGet } from "../../utils/apiRequests";
 
 export const setAccountId = (accountId: string) => {
     return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
@@ -191,7 +192,7 @@ export const getUserByUserName = (userName: string) => {
                 payload: true
             });
 
-            const response = await axios.get(`${environment.apiUrl}/auth/user/${userName}`);
+            const response = await apiGet(`${environment.apiUrl}/auth/user/${userName}`);
 
             dispatch({
                 type: AccountActions.SET_ACCOUNT_ID,

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { IAccount, IUser } from '../entities/account';
 import { AuthenticateResponse } from '../entities/auth';
 import { store } from '../redux/store';
+import { apiGet } from './apiRequests';
 
 export const loginUser = async (email: string, password: string)
     : Promise<{
@@ -28,7 +29,7 @@ export const getUserEmailWithAccessToken = async (accessToken: string): Promise<
     const { environment } = store.getState();
     try {
         const { data }: { data: { userName: string } } =
-            await axios.get(`${environment.apiUrl}/auth/user/token/${accessToken}`);
+            await apiGet(`${environment.apiUrl}/auth/user/token/${accessToken}`);
 
         return data;
     } catch (error) {

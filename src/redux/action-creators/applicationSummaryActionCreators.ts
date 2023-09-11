@@ -7,6 +7,7 @@ import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
 import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
+import { apiGet } from "../../utils/apiRequests";
 
 export const addApplication = (application: IApplicationSummary) => {
     return (dispatch: Dispatch<ApplicationSummaryActionsTypes>) => dispatch({
@@ -56,8 +57,7 @@ export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
-
-            const response = await axios.get(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
+            const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
 
             let applicationEvents: IApplicationSummary[] = response.data;
 
