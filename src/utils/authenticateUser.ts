@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IAccount, IUser } from '../entities/account';
 import { AuthenticateResponse } from '../entities/auth';
 import { store } from '../redux/store';
-import { apiGet } from './apiRequests';
+import { apiGet, apiPost } from './apiRequests';
 
 export const loginUser = async (email: string, password: string)
     : Promise<{
@@ -12,7 +12,7 @@ export const loginUser = async (email: string, password: string)
     const { environment } = store.getState();
     try {
         const { data }: { data: { credentials: AuthenticateResponse, account: IAccount } } =
-            await axios.post(`${environment.apiUrl}/auth/login`, {
+            await apiPost(`${environment.apiUrl}/auth/login`, {
                 user: {
                     email,
                     password

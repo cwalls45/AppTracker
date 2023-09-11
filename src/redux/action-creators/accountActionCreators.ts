@@ -7,7 +7,7 @@ import { State } from "../reducers";
 import { CookieSetOptions } from 'universal-cookie';
 import { EnvironmentActions } from "../actions/environmentActions";
 import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
-import { apiGet } from "../../utils/apiRequests";
+import { apiGet, apiPost } from "../../utils/apiRequests";
 
 export const setAccountId = (accountId: string) => {
     return (dispatch: Dispatch<AcccountActionTypes>) => dispatch({
@@ -55,7 +55,7 @@ export const signUpUser = (
                 payload: true
             });
 
-            const { data } = await axios.post(`${environment.apiUrl}/auth/createUser`, {
+            const { data } = await apiPost(`${environment.apiUrl}/auth/createUser`, {
                 signUp: {
                     firstName,
                     lastName,
@@ -110,7 +110,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
                 payload: true
             });
 
-            await axios.post(`${environment.apiUrl}/auth/addCourseInfo`, {
+            await apiPost(`${environment.apiUrl}/auth/addCourseInfo`, {
                 courseInfo,
                 accountId: account.accountId,
                 email: account.user.email
@@ -151,7 +151,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
                 payload: true
             });
 
-            const courseAreasResponse = await axios.post(`${environment.apiUrl}/auth/addCourseAreas`, {
+            const courseAreasResponse = await apiPost(`${environment.apiUrl}/auth/addCourseAreas`, {
                 courseAreas,
                 accountId: account.accountId,
                 email: account.user.email

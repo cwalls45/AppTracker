@@ -7,7 +7,7 @@ import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
 import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
-import { apiGet } from "../../utils/apiRequests";
+import { apiGet, apiPost } from "../../utils/apiRequests";
 
 export const addApplication = (application: IApplicationSummary) => {
     return (dispatch: Dispatch<ApplicationSummaryActionsTypes>) => dispatch({
@@ -24,7 +24,7 @@ export const postChemicalApplication = (application: IApplication) => {
         try {
 
 
-            const response = await axios.post(`${environment.apiUrl}/api/createApplication`, {
+            const response = await apiPost(`${environment.apiUrl}/api/createApplication`, {
                 application,
                 accountId: account.accountId
             });

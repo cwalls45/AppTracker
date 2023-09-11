@@ -3,7 +3,7 @@ import { IChemicalCompanySummary, IProductSummary } from '../entities/chemicalAp
 import { store } from '../redux/store';
 import Cookies from 'js-cookie';
 
-export const apiGet = async (url) => {
+export const apiGet = async (url: string) => {
     const authToken = Cookies.get('TurfTrackerAccessToken');
     const config = {
         headers: {
@@ -11,6 +11,19 @@ export const apiGet = async (url) => {
         },
     }
     const response = await axios.get(url, config);
+    return response;
+};
+
+export const apiPost = async (url: string, body) => {
+    console.log('body', body)
+    const authToken = Cookies.get('TurfTrackerAccessToken');
+    const config = {
+        headers: {
+            "X-Amz-Security-Token": authToken,
+        },
+        ...(body && body)
+    }
+    const response = await axios.post(url, config);
     return response;
 }
 
