@@ -15,7 +15,6 @@ export const apiGet = async (url: string) => {
 };
 
 export const apiPost = async (url: string, body) => {
-    console.log('body', body)
     const authToken = Cookies.get('TurfTrackerAccessToken');
     const config = {
         headers: {

@@ -16,3 +16,10 @@ export const setIsLoading = (isLoading: boolean) => {
     });
 }
 
+export const setIsError = (isError: boolean) => {
+    return (dispatch: Dispatch<EnvironmentActionTypes>) => dispatch({
+        type: EnvironmentActions.IS_ERROR,
+        payload: isError
+    });
+}
+
