@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '../entities/paths';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { applicationSummaryActionCreators, State } from '../redux';
-
+import { applicationSummaryActionCreators, environmentActionCreators, State } from '../redux';
+import SnackBarBanner from './snackBar/snackBarBanner';
 
 const Calendar = () => {
 
@@ -25,6 +25,9 @@ const Calendar = () => {
 
     return (
         <Container>
+            <SnackBarBanner
+                message='There was an error getting applications.'
+            />
             <Scheduler
                 view='month'
                 events={state.applicationSummaries}
