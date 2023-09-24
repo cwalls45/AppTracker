@@ -2,7 +2,6 @@ import Snackbar from "@mui/material/Snackbar"
 import { State, environmentActionCreators } from "../../redux";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import Alert from "@mui/material/Alert";
 import SnackBarAlert from "./SnackBarAlert";
 
 interface IProps {
@@ -19,18 +18,18 @@ const SnackBarBanner = ({ message }: IProps) => {
     return (
         <Snackbar
             open={state.environment.isError}
-            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             autoHideDuration={10000}
             onClose={handleSnackBarClose}
-            action={
+        >
+            <div>
                 <SnackBarAlert
                     message={message}
                     onCloseFunc={handleSnackBarClose}
                     severity='error'
                 />
-            }
-        />
+            </div>
+        </Snackbar>
     )
 };
-
 export default SnackBarBanner;

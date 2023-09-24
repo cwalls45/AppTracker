@@ -1,4 +1,4 @@
-import Alert, { AlertColor } from "@mui/material/Alert";
+import Alert, { AlertColor } from '@mui/material/Alert';
 
 interface IProps {
     message: string;
@@ -11,6 +11,7 @@ const SnackBarAlert = ({ message, onCloseFunc, severity }: IProps) => {
         <Alert
             onClose={onCloseFunc}
             severity={severity}
+            sx={{ width: '100%' }}
         >
             {message}
         </Alert>

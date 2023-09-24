@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { Paths } from '../entities/paths';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { applicationSummaryActionCreators, environmentActionCreators, State } from '../redux';
-import SnackBarBanner from './snackBar/snackBarBanner';
+import { applicationSummaryActionCreators, State } from '../redux';
+import SnackBarBanner from './snackBar/SnackBarBanner';
 
 const Calendar = () => {
 
