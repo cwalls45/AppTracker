@@ -1,4 +1,3 @@
-import axios from "axios";
 import { IApplication } from "../entities/chemicalApplicationFormDefaultValues";
 import { store } from "../redux/store";
 import { apiGet } from "./apiRequests";

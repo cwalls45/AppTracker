@@ -78,8 +78,6 @@ export const fetchApplicationEvents = () => {
                 type: EnvironmentActions.SET_ERROR,
                 payload: true
             });
-
-            console.log('ERROR fetching application events: ', error.response)
         }
     }
 }

@@ -12,6 +12,7 @@ import { GridColDef } from "@mui/x-data-grid";
 import dayjs from "dayjs";
 import { v4 as uuidv4 } from 'uuid';
 import YearSelector from "./YearSelector";
+import SnackBarBanner from "../snackBar/SnackBarBanner";
 
 const Reports = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -62,6 +63,9 @@ const Reports = () => {
     return (
         <Grid container item justifyContent='center' alignItems='flex-start' xs={12}>
             <Grid container alignContent='flex-start' sx={{ height: '100%', width: '100vw' }}>
+                <SnackBarBanner
+                    message='There was an error getting pesticides in your inventory.'
+                />
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3} >
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                     <YearSelector year={year} handleChangeYear={setYear} />
