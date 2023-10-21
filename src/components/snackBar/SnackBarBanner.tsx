@@ -4,27 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import SnackBarAlert from "./SnackBarAlert";
 
-interface IProps {
-    message: string
-}
-
-const SnackBarBanner = ({ message }: IProps) => {
+const SnackBarBanner = () => {
     const dispatch = useDispatch();
     const state = useSelector((state: State) => state);
     const { setError } = bindActionCreators(environmentActionCreators, dispatch);
     const handleSnackBarClose = (event: React.SyntheticEvent) => {
-        setError(false);
+        setError(false, '');
     }
     return (
         <Snackbar
-            open={state.environment.isError}
+            open={state.environment.isError.isError}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             autoHideDuration={10000}
             onClose={handleSnackBarClose}
         >
             <div>
                 <SnackBarAlert
-                    message={message}
+                    message={state.environment.isError.message}
                     onCloseFunc={handleSnackBarClose}
                     severity='error'
                 />

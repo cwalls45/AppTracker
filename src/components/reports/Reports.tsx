@@ -63,9 +63,7 @@ const Reports = () => {
     return (
         <Grid container item justifyContent='center' alignItems='flex-start' xs={12}>
             <Grid container alignContent='flex-start' sx={{ height: '100%', width: '100vw' }}>
-                <SnackBarBanner
-                    message='There was an error getting pesticides in your inventory.'
-                />
+                <SnackBarBanner />
                 <Grid container item xs={12} justifyContent='center' rowSpacing={3} >
                     <ReportTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
                     <YearSelector year={year} handleChangeYear={setYear} />

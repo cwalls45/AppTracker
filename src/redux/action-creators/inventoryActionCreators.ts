@@ -31,7 +31,10 @@ export const postInventory = (inventory: IInventory) => {
         } catch (error) {
             dispatch({
                 type: EnvironmentActions.SET_ERROR,
-                payload: true
+                payload: {
+                    isError: true,
+                    message: 'There was an error adding to your inventory.'
+                }
             });
             console.log('ERROR creating inventory: ', JSON.stringify(error, null, 2))
         }
@@ -52,10 +55,12 @@ export const getAllInventory = () => {
             });
 
         } catch (error) {
-            console.log('error')
             dispatch({
                 type: EnvironmentActions.SET_ERROR,
-                payload: true
+                payload: {
+                    isError: true,
+                    message: 'There was an error retrieving your inventory.'
+                }
             });
         }
     }

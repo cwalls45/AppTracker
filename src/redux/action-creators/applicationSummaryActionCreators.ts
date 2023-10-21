@@ -59,7 +59,6 @@ export const fetchApplicationEvents = () => {
         try {
             const { environment, account } = getState();
             const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
-
             let applicationEvents: IApplicationSummary[] = response.data;
 
             applicationEvents = applicationEvents.map((event) => ({
@@ -76,7 +75,10 @@ export const fetchApplicationEvents = () => {
         } catch (error) {
             dispatch({
                 type: EnvironmentActions.SET_ERROR,
-                payload: true
+                payload: {
+                    isError: true,
+                    message: 'There was an error fecthing appilcations.'
+                }
             });
         }
     }

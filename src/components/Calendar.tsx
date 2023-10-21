@@ -25,9 +25,7 @@ const Calendar = () => {
 
     return (
         <Container>
-            <SnackBarBanner
-                message='There was an error getting applications to dislay in calendar.'
-            />
+            <SnackBarBanner />
             <Scheduler
                 view='month'
                 events={state.applicationSummaries}

@@ -15,14 +15,12 @@ const Inventory = () => {
     const { inventory } = useSelector((state: State) => state);
 
     useEffect(() => {
-        getAllInventory()
+        getAllInventory();
     }, []);
 
     return (
         <Grid container sx={{ height: '100%', width: 'auto' }}>
-            <SnackBarBanner
-                message='There was an error generating reports.'
-            />
+            <SnackBarBanner />
             <Grid container justifyContent='center'>
                 <Typography variant="h3" component="div">
                     Inventory Dashboard
