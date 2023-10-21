@@ -3,12 +3,21 @@ import { EnvironmentActions } from "../actions/environmentActions";
 
 export interface IEnvironment {
     apiUrl: string,
-    isLoading: boolean
+    isLoading: boolean,
+    isError: {
+        isError: boolean;
+        message: string;
+    }
+
 }
 
 const initialState: IEnvironment = {
     apiUrl: '',
-    isLoading: false
+    isLoading: false,
+    isError: {
+        isError: false,
+        message: ''
+    }
 };
 
 const environmentReducer = (state = initialState, action: EnvironmentActionTypes): IEnvironment => {
@@ -18,6 +27,8 @@ const environmentReducer = (state = initialState, action: EnvironmentActionTypes
         return { ...state, apiUrl: process.env.API_URL || 'could not find url' }
     } else if (action.type === EnvironmentActions.IS_LOADING) {
         return { ...state, isLoading: action.payload }
+    } else if (action.type === EnvironmentActions.SET_ERROR) {
+        return { ...state, isError: action.payload }
     } else {
         return state
     }

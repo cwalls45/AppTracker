@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { inventoryActionCreators, State } from "../../redux";
 import { bindActionCreators } from "redux";
 import InventoryBoard from "./InventoryBoard";
+import SnackBarBanner from "../snackBar/SnackBarBanner";
 
 const Inventory = () => {
 
@@ -14,11 +15,12 @@ const Inventory = () => {
     const { inventory } = useSelector((state: State) => state);
 
     useEffect(() => {
-        getAllInventory()
+        getAllInventory();
     }, []);
 
     return (
         <Grid container sx={{ height: '100%', width: 'auto' }}>
+            <SnackBarBanner />
             <Grid container justifyContent='center'>
                 <Typography variant="h3" component="div">
                     Inventory Dashboard

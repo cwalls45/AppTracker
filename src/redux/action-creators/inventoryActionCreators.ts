@@ -5,6 +5,8 @@ import { InventoryActionTypes } from "../../entities/inventoryActionTypes";
 import { InventoryActions } from "../actions/inventoryActions";
 import { State } from "../reducers";
 import { apiGet, apiPost } from "../../utils/apiRequests";
+import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
+import { EnvironmentActions } from "../actions/environmentActions";
 
 export const addInventory = (inventory: IInventory) => {
     return (dispatch: Dispatch<InventoryActionTypes>) => dispatch({
@@ -14,7 +16,7 @@ export const addInventory = (inventory: IInventory) => {
 }
 
 export const postInventory = (inventory: IInventory) => {
-    return async (dispatch: Dispatch<InventoryActionTypes>, getState: () => State) => {
+    return async (dispatch: Dispatch<InventoryActionTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
 
@@ -27,13 +29,20 @@ export const postInventory = (inventory: IInventory) => {
             });
 
         } catch (error) {
+            dispatch({
+                type: EnvironmentActions.SET_ERROR,
+                payload: {
+                    isError: true,
+                    message: 'There was an error adding to your inventory.'
+                }
+            });
             console.log('ERROR creating inventory: ', JSON.stringify(error, null, 2))
         }
     }
 }
 
 export const getAllInventory = () => {
-    return async (dispatch: Dispatch<InventoryActionTypes>, getState: () => State) => {
+    return async (dispatch: Dispatch<InventoryActionTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
 
@@ -46,7 +55,13 @@ export const getAllInventory = () => {
             });
 
         } catch (error) {
-            console.log('ERROR creating inventory: ', JSON.stringify(error, null, 2))
+            dispatch({
+                type: EnvironmentActions.SET_ERROR,
+                payload: {
+                    isError: true,
+                    message: 'There was an error retrieving your inventory.'
+                }
+            });
         }
     }
 }

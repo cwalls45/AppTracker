@@ -7,7 +7,7 @@ import { Paths } from '../entities/paths';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { applicationSummaryActionCreators, State } from '../redux';
-
+import SnackBarBanner from './snackBar/SnackBarBanner';
 
 const Calendar = () => {
 
@@ -25,6 +25,7 @@ const Calendar = () => {
 
     return (
         <Container>
+            <SnackBarBanner />
             <Scheduler
                 view='month'
                 events={state.applicationSummaries}

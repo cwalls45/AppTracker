@@ -2,12 +2,13 @@ import { Dispatch } from "redux";
 import { ApplicationSummaryActionsTypes } from "../../entities/applicationSummaryActionTypes";
 import { IApplication } from "../../entities/chemicalApplicationFormDefaultValues";
 import { ApplicationSummaryActions } from "../actions/applicationSummaryActions";
-import axios from 'axios';
 import { IApplicationSummary } from "../../entities/applicationSummary";
 import { State } from "../reducers";
 import { ChemicalApplicationActions } from "../actions/chemicalApplicationActions";
 import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalApplicationFormActionTypes";
 import { apiGet, apiPost } from "../../utils/apiRequests";
+import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
+import { EnvironmentActions } from "../actions/environmentActions";
 
 export const addApplication = (application: IApplicationSummary) => {
     return (dispatch: Dispatch<ApplicationSummaryActionsTypes>) => dispatch({
@@ -54,11 +55,10 @@ export const postChemicalApplication = (application: IApplication) => {
 };
 
 export const fetchApplicationEvents = () => {
-    return async (dispatch: Dispatch<ApplicationSummaryActionsTypes>, getState: () => State) => {
+    return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
             const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
-
             let applicationEvents: IApplicationSummary[] = response.data;
 
             applicationEvents = applicationEvents.map((event) => ({
@@ -73,7 +73,13 @@ export const fetchApplicationEvents = () => {
                 payload: applicationEvents
             });
         } catch (error) {
-            console.log('ERROR fetching application events: ', error.response)
+            dispatch({
+                type: EnvironmentActions.SET_ERROR,
+                payload: {
+                    isError: true,
+                    message: 'There was an error fecthing appilcations.'
+                }
+            });
         }
     }
 }
