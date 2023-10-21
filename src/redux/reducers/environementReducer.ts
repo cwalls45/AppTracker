@@ -4,13 +4,20 @@ import { EnvironmentActions } from "../actions/environmentActions";
 export interface IEnvironment {
     apiUrl: string,
     isLoading: boolean,
-    isError: boolean
+    isError: {
+        isError: boolean;
+        message: string;
+    }
+
 }
 
 const initialState: IEnvironment = {
     apiUrl: '',
     isLoading: false,
-    isError: false
+    isError: {
+        isError: false,
+        message: ''
+    }
 };
 
 const environmentReducer = (state = initialState, action: EnvironmentActionTypes): IEnvironment => {

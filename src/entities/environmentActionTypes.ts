@@ -16,5 +16,8 @@ export interface ISetIsLoading {
 
 export interface ISetIsError {
     type: EnvironmentActions.SET_ERROR,
-    payload: boolean
+    payload: {
+        isError: boolean;
+        message: string;
+    }
 }
