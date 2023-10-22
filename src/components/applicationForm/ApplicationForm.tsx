@@ -3,8 +3,8 @@ import ChemicalInformationInput from './ChemicalInformationInput';
 import MultiSelect from './MultiSelect';
 import DatePickerCalendar from './DatePickerCalendar';
 import { ApplicationProperty } from '../../entities/chemicalApplicationFormDefaultValues';
-import { areaOfApplication } from '../../dummyData/areaOfApplication';
-import { targetPests } from '../../dummyData/targetPests';
+import { areaOfApplication } from '../../constants/areaOfApplication';
+import { targetPests } from '../../constants/targetPests';
 import SizeOfAppArea from './SizeOfAppArea';
 import { useSelector, useDispatch } from 'react-redux';
 import { applicationSummaryActionCreators, chemicalApplicationFormActionCreators, State } from '../../redux'
