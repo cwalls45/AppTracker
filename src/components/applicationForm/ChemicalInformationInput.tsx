@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import ChemicalSelect from "./ChemicalSelect";
 import FormInputText from "./FormInputText";
-import { ChemicalProperties, IChemicalCompanySummary, IProductSummary, units } from "../../entities/chemicalApplicationFormDefaultValues";
-import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
+import { ChemicalProperties, IProductSummary, units } from "../../entities/chemicalApplicationFormDefaultValues";
+import { searchCompanies, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
 import { useSelector } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -20,7 +20,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     const [isDisabled, setIsDisabled] = useState(false);
 
     const { chemicalApplication } = useSelector((state: State) => state);
-    const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 400);
+    const debouncedChemicalCompany = useDebounce(chemicalApplication.chemicals[index].chemicalCompany, 400);
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -31,17 +31,15 @@ const ChemicalInformationInput = ({ index }: IProps) => {
         setIsSearching(false);
     };
 
-    const fetchCompanies = async (
-        searchValue: string,
-    ) => {
-        const searchResults = await searchChemicalCompaniesByName(searchValue);
-        const chemicalNames = [...new Set(searchResults.map((chemicalCompanies: IChemicalCompanySummary) => chemicalCompanies.companyName))];
-        setCompanyOptions(chemicalNames);
+    const fetchCompanies = async () => {
+        const companyOptions = await searchCompanies();
+        const companyNames = companyOptions.map(({ companyName }) => companyName)
+        setCompanyOptions(companyNames);
         setIsSearching(false);
     };
 
     useEffect(() => {
-        if (debouncedChemicalName) {
+        if (debouncedChemicalCompany) {
             setIsSearching(true);
             fetchChemicalNames(chemicalApplication.chemicals[index].chemicalName)
                 .catch((error) => {
@@ -52,21 +50,21 @@ const ChemicalInformationInput = ({ index }: IProps) => {
             setChemicalOptions([]);
             setIsSearching(false);
         }
-    }, [debouncedChemicalName]);
+    }, [debouncedChemicalCompany]);
 
     useEffect(() => {
-        if (debouncedChemicalName) {
+        if (debouncedChemicalCompany) {
             setIsSearching(true);
-            fetchCompanies(chemicalApplication.chemicals[index].chemicalName)
+            fetchCompanies()
                 .catch((error) => {
                     setIsSearching(false);
-                    console.log('Error fetching chemical company names: ', error);
+                    console.log('Error fetching chemical companies: ', error);
                 })
         } else {
             setCompanyOptions([]);
             setIsSearching(false);
         }
-    }, [debouncedChemicalName]);
+    }, [debouncedChemicalCompany]);
 
 
     return (
@@ -74,9 +72,9 @@ const ChemicalInformationInput = ({ index }: IProps) => {
             <Grid item xs={12}>
                 <ChemicalSelect
                     index={index}
-                    property={ChemicalProperties.CHEMICAL_NAME}
-                    label='Chemical Name'
-                    options={chemicalOptions}
+                    property={ChemicalProperties.CHEMICAL_COMPANY}
+                    label='Chemical Company'
+                    options={companyOptions}
                     isSearching={isSearching}
                     isDisabled={false}
                 />
@@ -84,11 +82,11 @@ const ChemicalInformationInput = ({ index }: IProps) => {
             <Grid item xs={12}>
                 <ChemicalSelect
                     index={index}
-                    property={ChemicalProperties.CHEMICAL_COMPANY}
-                    label='Chemical Company'
-                    options={companyOptions}
+                    property={ChemicalProperties.CHEMICAL_NAME}
+                    label='Chemical Name'
+                    options={chemicalOptions}
                     isSearching={isSearching}
-                    isDisabled={chemicalApplication.chemicals[index].chemicalName === ''}
+                    isDisabled={chemicalApplication.chemicals[index].chemicalCompany === ''}
                 />
             </Grid>
             <Grid item xs={6}>

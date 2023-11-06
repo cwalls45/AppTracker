@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { IChemicalCompanySummary, IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
+import { IProductSummary } from '../entities/chemicalApplicationFormDefaultValues';
 import { store } from '../redux/store';
 import Cookies from 'js-cookie';
+import { ICompanyRecord } from '../entities/companies';
 
 export const apiGet = async (url: string) => {
     const authToken = Cookies.get('TurfTrackerAccessToken');
@@ -27,13 +28,14 @@ export const apiPost = async (url: string, body) => {
 }
 
 export const searchChemicalNames = async (queryString: string): Promise<IProductSummary[]> => {
-    const { environment } = store.getState();
-    const response = await apiGet(`${environment.apiUrl}/api/partialChemicalName/${queryString}`);
-    return response.data.chemicals;
+    // const { environment } = store.getState();
+    // const response = await apiGet(`${environment.apiUrl}/api/partialChemicalName/${queryString}`);
+    // return response.data.chemicals;
+    return []
 };
 
-export const searchChemicalCompaniesByName = async (queryString: string): Promise<IChemicalCompanySummary[]> => {
+export const searchCompanies = async (): Promise<ICompanyRecord[]> => {
     const { environment } = store.getState();
-    const response = await apiGet(`${environment.apiUrl}/api/companyNamesByProduct/${queryString}`);
-    return response.data.chemicalData;
+    const response = await apiGet(`${environment.apiUrl}/registeredPesticides/companies`);
+    return response.data;
 };
