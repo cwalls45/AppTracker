@@ -7,6 +7,8 @@ import { searchCompanies, searchChemicalNames } from "../../utils/apiRequests";
 import { State } from '../../redux';
 import { useSelector } from 'react-redux';
 import { useDebounce } from '../../hooks/useDebounce';
+import { isEmpty } from 'lodash';
+
 
 interface IProps {
     index: number;
@@ -32,16 +34,25 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     };
 
     const fetchCompanies = async () => {
-        const companyOptions = await searchCompanies();
-        const companyNames = companyOptions.map(({ companyName }) => companyName)
-        setCompanyOptions(companyNames);
-        setIsSearching(false);
+        if (!isEmpty(companyOptions)) {
+            const filteredCompanies = companyOptions.filter((company) => company.toLowerCase().includes(debouncedChemicalCompany.toLowerCase()));
+            setCompanyOptions(filteredCompanies);
+            setIsSearching(false);
+        } else {
+            const cmpyOptions = await searchCompanies();
+            const companyNames = cmpyOptions
+                .map(({ companyName }) => companyName)
+                .filter((company) => company.toLowerCase().includes(debouncedChemicalCompany.toLowerCase()));
+
+            setCompanyOptions(companyNames);
+            setIsSearching(false);
+        }
     };
 
     useEffect(() => {
         if (debouncedChemicalCompany) {
             setIsSearching(true);
-            fetchChemicalNames(chemicalApplication.chemicals[index].chemicalName)
+            fetchChemicalNames(chemicalApplication.chemicals[index].chemicalCompany)
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical Names: ', error);
@@ -53,7 +64,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     }, [debouncedChemicalCompany]);
 
     useEffect(() => {
-        if (debouncedChemicalCompany) {
+        if (debouncedChemicalCompany && chemicalApplication.chemicals[index].chemicalCompany.length >= 3) {
             setIsSearching(true);
             fetchCompanies()
                 .catch((error) => {

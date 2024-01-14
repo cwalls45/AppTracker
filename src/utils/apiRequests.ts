@@ -28,10 +28,9 @@ export const apiPost = async (url: string, body) => {
 }
 
 export const searchChemicalNames = async (queryString: string): Promise<IProductSummary[]> => {
-    // const { environment } = store.getState();
-    // const response = await apiGet(`${environment.apiUrl}/api/partialChemicalName/${queryString}`);
-    // return response.data.chemicals;
-    return []
+    const { environment } = store.getState();
+    const response = await apiGet(`${environment.apiUrl}/registeredPesticides/getPesticides/company/${queryString}`);
+    return response.data.registeredPesticides;
 };
 
 export const searchCompanies = async (): Promise<ICompanyRecord[]> => {
