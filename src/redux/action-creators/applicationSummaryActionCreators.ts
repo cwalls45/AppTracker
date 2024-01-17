@@ -21,11 +21,12 @@ export const postChemicalApplication = (application: IApplication) => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | ChemicalApplicationFormActionTypes>, getState: () => State) => {
 
         const { environment, account } = getState();
+        const accountId = account.accountId || sessionStorage.getItem('TurfTrackerAccountId');
 
         try {
             const response = await apiPost(`${environment.apiUrl}/api/createApplication`, {
                 application,
-                accountId: account.accountId
+                accountId: accountId
             });
 
             let formattedApplicationEvent: IApplicationSummary = response.data;
