@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import AutoCompleteDropDown from "./AutoCompleteDropDown";
 import { useDebounce } from "../../hooks/useDebounce";
-import { searchChemicalCompaniesByName, searchChemicalNames } from "../../utils/apiRequests";
+import { searchCompanies, searchChemicalNames } from "../../utils/apiRequests";
 import { IChemicalCompanySummary, IProductSummary, units as volumeUnits } from "../../entities/chemicalApplicationFormDefaultValues";
 import FormTextField from "./FormTextField";
 import Button from "@mui/material/Button";
@@ -62,12 +62,10 @@ const AddInventoryForm = () => {
         setIsSearching(false);
     };
 
-    const fetchCompanies = async (
-        searchValue: string,
-    ) => {
-        const searchResults = await searchChemicalCompaniesByName(searchValue);
-        const chemicalNames = [...new Set(searchResults.map((chemicalCompanies: IChemicalCompanySummary) => chemicalCompanies.companyName))];
-        setCompanyOptions(chemicalNames);
+    const fetchCompanies = async () => {
+        const companyOptions = await searchCompanies();
+        const companyNames = companyOptions.map(({ companyName }) => companyName)
+        setCompanyOptions(companyNames);
         setIsSearching(false);
     };
 
@@ -88,10 +86,10 @@ const AddInventoryForm = () => {
     useEffect(() => {
         if (debouncedChemicalName) {
             setIsSearching(true);
-            fetchCompanies(chemicalName)
+            fetchCompanies()
                 .catch((error) => {
                     setIsSearching(false);
-                    console.log('Error fetching chemical company names: ', error);
+                    console.log('Error fetching chemical companies: ', error);
                 })
         } else {
             setCompanyOptions([]);
@@ -111,19 +109,19 @@ const AddInventoryForm = () => {
                     <Grid container item xs={12} justifyContent='center' rowSpacing={2}>
                         <Grid item xs={6.5}>
                             <AutoCompleteDropDown
-                                label='Chemical Name'
-                                options={chemicalOptions}
-                                stateValue={chemicalName}
-                                setterFunction={setChemicalName}
+                                label='Company Name'
+                                options={companyOptions}
+                                stateValue={companyName}
+                                setterFunction={setCompanyName}
                                 isSearching={isSearching}
                             />
                         </Grid>
                         <Grid item xs={6.5}>
                             <AutoCompleteDropDown
-                                label='Company Name'
-                                options={companyOptions}
-                                stateValue={companyName}
-                                setterFunction={setCompanyName}
+                                label='Chemical Name'
+                                options={chemicalOptions}
+                                stateValue={chemicalName}
+                                setterFunction={setChemicalName}
                                 isSearching={isSearching}
                             />
                         </Grid>
