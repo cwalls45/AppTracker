@@ -63,10 +63,11 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
         setCourseInfo(isLoggedIn.account.courseInfo);
         setCourseAreas(isLoggedIn.account.courseAreas);
 
-        // TODO: Dont forget to remove cookies and make cookie name more specific
+        // TODO: Dont forget to remove cookies and make cookie name more specific, remove sessionStorage
         const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn.credentials;
         setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
         setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
+        sessionStorage.setItem("TurfTrackerAccountId", isLoggedIn.account.accountId);
 
         return true;
     };

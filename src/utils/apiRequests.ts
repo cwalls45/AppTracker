@@ -24,6 +24,7 @@ export const apiPost = async (url: string, body) => {
         ...(body && body)
     }
     const response = await axios.post(url, config);
+    console.log('response: ', response)
     return response;
 }
 

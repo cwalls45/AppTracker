@@ -23,8 +23,6 @@ export const postChemicalApplication = (application: IApplication) => {
         const { environment, account } = getState();
 
         try {
-
-
             const response = await apiPost(`${environment.apiUrl}/api/createApplication`, {
                 application,
                 accountId: account.accountId
@@ -58,7 +56,9 @@ export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
-            const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2023}/${account.accountId}`);
+            const accountId = account.accountId || sessionStorage.getItem('TurfTrackerAccountId');
+
+            const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2024}/${accountId}`);
             let applicationEvents: IApplicationSummary[] = response.data;
 
             applicationEvents = applicationEvents.map((event) => ({

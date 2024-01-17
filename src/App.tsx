@@ -19,6 +19,8 @@ import CourseAreasForm from './components/courseInformationForm/CourseAreasForm'
 import Loading from './components/loading/Loading';
 import { getUserEmailWithAccessToken } from './utils/authenticateUser';
 import Reports from './components/reports/Reports';
+import { setAccountId } from './redux/action-creators/accountActionCreators';
+import { isEmpty } from 'lodash';
 
 const App = () => {
 
@@ -30,11 +32,11 @@ const App = () => {
 
     const [cookies] = useCookies();
 
-    useEffect(() => {
+    const accountId = sessionStorage.getItem('TurfTrackerAccountId') || '';
 
-        const fetchUser = async (token: string) => {
-            const user = await getUserEmailWithAccessToken(token)
-            return user;
+    useEffect(() => {
+        if (!isEmpty(accountId)) {
+            setAccountId(accountId);
         }
 
         setAPIUrl();
@@ -43,11 +45,15 @@ const App = () => {
             fetchUser(cookies.TurfTrackerAccessToken)
                 .then(res => {
                     getUserByUserName(res.userName);
+                    setIsLoggedIn(true);
                 });
-            setIsLoggedIn(true);
         }
-
     }, []);
+
+    const fetchUser = async (token: string) => {
+        const user = await getUserEmailWithAccessToken(token)
+        return user;
+    }
 
     return (
         <ThemeProvider theme={theme}>
