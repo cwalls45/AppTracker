@@ -23,6 +23,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
 
     const { chemicalApplication } = useSelector((state: State) => state);
     const debouncedChemicalCompany = useDebounce(chemicalApplication.chemicals[index].chemicalCompany, 400);
+    const debouncedChemicalName = useDebounce(chemicalApplication.chemicals[index].chemicalName, 400);
 
     const fetchChemicalNames = async (
         searchValue: string,
@@ -50,23 +51,12 @@ const ChemicalInformationInput = ({ index }: IProps) => {
     };
 
     useEffect(() => {
-        if (debouncedChemicalCompany) {
-            setIsSearching(true);
-            fetchChemicalNames(chemicalApplication.chemicals[index].chemicalCompany)
-                .catch((error) => {
-                    setIsSearching(false);
-                    console.log('Error fetching chemical Names: ', error);
-                })
-        } else {
-            setChemicalOptions([]);
-            setIsSearching(false);
-        }
-    }, [debouncedChemicalCompany]);
-
-    useEffect(() => {
         if (debouncedChemicalCompany && chemicalApplication.chemicals[index].chemicalCompany.length >= 3) {
             setIsSearching(true);
             fetchCompanies()
+                .then(() => {
+                    fetchChemicalNames(chemicalApplication.chemicals[index].chemicalCompany)
+                })
                 .catch((error) => {
                     setIsSearching(false);
                     console.log('Error fetching chemical companies: ', error);
@@ -76,6 +66,11 @@ const ChemicalInformationInput = ({ index }: IProps) => {
             setIsSearching(false);
         }
     }, [debouncedChemicalCompany]);
+
+    useEffect(() => {
+        const chemicals = chemicalOptions.filter((chemical) => chemical.toLowerCase().includes(debouncedChemicalName.toLowerCase())).sort();
+        setChemicalOptions(chemicals);
+    }, [debouncedChemicalName]);
 
 
     return (
