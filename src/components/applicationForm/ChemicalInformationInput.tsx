@@ -28,7 +28,7 @@ const ChemicalInformationInput = ({ index }: IProps) => {
         searchValue: string,
     ) => {
         const searchResults = await searchChemicalNames(searchValue);
-        const chemicalNames = [...new Set(searchResults.map((chemical: IProductSummary) => chemical.productName))];
+        const chemicalNames = [...new Set(searchResults.map((chemical: IProductSummary) => chemical.productName))].sort();
         setChemicalOptions(chemicalNames);
         setIsSearching(false);
     };
