@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
 import { State } from "../../redux";
 import { useSelector } from "react-redux";
+import { Paths, actionRoutes } from "../../entities/paths";
 
 const Menu = () => {
 
@@ -17,8 +18,19 @@ const Menu = () => {
         setAnchorElement(event.currentTarget);
     };
     const handleClose = () => setAnchorElement(null);
-    const handleMenuItemClick = (route: string) => {
+    const handleActionMenuItemClick = (route: Paths) => {
+        console.log('action route: ', route);
+    };
+
+    const handleNavigateMenuItemClick = (route: Paths) => {
         navigate(route);
+    };
+    const handleMenuItemClick = (route: Paths) => {
+        if (actionRoutes.includes(route)) {
+            handleActionMenuItemClick(route);
+        } else {
+            handleNavigateMenuItemClick(route);
+        }
         handleClose();
     };
 

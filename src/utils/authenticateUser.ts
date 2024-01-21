@@ -37,3 +37,15 @@ export const getUserEmailWithAccessToken = async (accessToken: string): Promise<
         throw new Error(`ERROR: There was an error getting user with access token ${accessToken} - ${JSON.stringify(error, null, 2)}`);
     }
 };
+
+export const signOut = async (token: string): Promise<boolean> => {
+    const { environment } = store.getState();
+    try {
+        const { data }: { data: { isSignedOut: boolean } } =
+            await apiPost(`${environment.apiUrl}/auth/signOut`, { token });
+
+        return data.isSignedOut;
+    } catch (error) {
+        return false;
+    }
+};

@@ -7,5 +7,8 @@ export enum Paths {
     SIGNUP = '/signUp',
     COURSE_INFO = '/signUp/courseInformation',
     COURSE_AREAS = '/signUp/courseArea',
-    REPORTS = '/reports'
+    REPORTS = '/reports',
+    SIGNOUT = '/signOut',
 };
+
+export const actionRoutes = [Paths.SIGNOUT];
