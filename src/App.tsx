@@ -21,6 +21,7 @@ import { getUserEmailWithAccessToken } from './utils/authenticateUser';
 import Reports from './components/reports/Reports';
 import { setAccountId } from './redux/action-creators/accountActionCreators';
 import { isEmpty } from 'lodash';
+import { SessionStorageKeys } from './entities/auth';
 
 const App = () => {
 
@@ -32,7 +33,7 @@ const App = () => {
 
     const [cookies] = useCookies();
 
-    const accountId = sessionStorage.getItem('TurfTrackerAccountId') || '';
+    const accountId = sessionStorage.getItem(SessionStorageKeys.ACCOUNTID) || '';
 
     useEffect(() => {
         if (!isEmpty(accountId)) {
@@ -47,6 +48,9 @@ const App = () => {
                     getUserByUserName(res.userName);
                     setIsLoggedIn(true);
                 });
+        }
+        else {
+            setIsLoggedIn(false);
         }
     }, []);
 
