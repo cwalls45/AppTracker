@@ -5,6 +5,9 @@ import NavigationButtons from "./NavigationButtons";
 import { State } from "../../redux";
 import { useSelector } from "react-redux";
 import { Paths } from "../../entities/paths";
+import { removeCookiesAndSessionStorage, signOut } from "../../utils/authenticateUser";
+import { useCookies } from "react-cookie";
+import { CookieKeys, SessionStorageKeys } from "../../entities/auth";
 
 const Menu = () => {
 
@@ -13,7 +16,7 @@ const Menu = () => {
         { path: Paths.CREATE_APPLICATION, text: 'Create Application', clickFunction: handleNavigateMenuItemClick },
         { path: Paths.INVENTORY, text: 'Inventory', clickFunction: handleNavigateMenuItemClick },
         { path: Paths.REPORTS, text: 'Reports', clickFunction: handleNavigateMenuItemClick },
-        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleActionMenuItemClick }
+        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleSignOutMenuItemClick }
     ];
 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
@@ -21,6 +24,8 @@ const Menu = () => {
     const state = useSelector((state: State) => state);
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
+
+    const [cookies] = useCookies();
 
     function handleClick(event: React.MouseEvent<HTMLElement>) {
         setAnchorElement(event.currentTarget);
@@ -30,8 +35,13 @@ const Menu = () => {
         setAnchorElement(null);
     };
 
-    function handleActionMenuItemClick(route: Paths) {
-        console.log('action route: ', route);
+    async function handleSignOutMenuItemClick() {
+        const isSignedOut = await signOut(cookies.TurfTrackerAccessToken);
+
+        if (isSignedOut) {
+            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID]);
+            navigate(Paths.LOGIN);
+        }
     };
 
     function handleNavigateMenuItemClick(route: Paths) {
