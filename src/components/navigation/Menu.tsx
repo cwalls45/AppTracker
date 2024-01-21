@@ -8,6 +8,14 @@ import { Paths, actionRoutes } from "../../entities/paths";
 
 const Menu = () => {
 
+    const routes = [
+        { path: Paths.CALENDAR, text: 'Calendar', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.CREATE_APPLICATION, text: 'Create Application', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.INVENTORY, text: 'Inventory', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.REPORTS, text: 'Reports', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleActionMenuItemClick }
+    ];
+
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
     const [abbreviation, setAbbreviation] = useState<string | null>(null);
     const state = useSelector((state: State) => state);
@@ -18,19 +26,13 @@ const Menu = () => {
         setAnchorElement(event.currentTarget);
     };
     const handleClose = () => setAnchorElement(null);
-    const handleActionMenuItemClick = (route: Paths) => {
+
+    function handleActionMenuItemClick(route: Paths) {
         console.log('action route: ', route);
     };
 
-    const handleNavigateMenuItemClick = (route: Paths) => {
+    function handleNavigateMenuItemClick(route: Paths) {
         navigate(route);
-    };
-    const handleMenuItemClick = (route: Paths) => {
-        if (actionRoutes.includes(route)) {
-            handleActionMenuItemClick(route);
-        } else {
-            handleNavigateMenuItemClick(route);
-        }
         handleClose();
     };
 
@@ -38,7 +40,6 @@ const Menu = () => {
         if (!state.account.user.firstName || !state.account.user.lastName) {
             return null;
         }
-        console.log('abbreviation: ', `${state.account.user.firstName[0].toUpperCase()} ${state.account.user.lastName[0].toUpperCase()}`)
         return `${state.account.user.firstName[0].toUpperCase()}${state.account.user.lastName[0].toUpperCase()}`
     };
 
@@ -62,7 +63,7 @@ const Menu = () => {
                 onClose={handleClose}
                 anchorEl={anchorElement}
             >
-                <NavigationButtons clickFunction={handleMenuItemClick} />
+                <NavigationButtons routes={routes} />
             </MenuMUI>
         </>
     )
