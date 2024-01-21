@@ -5,3 +5,12 @@ export interface AuthenticateResponse {
     RefreshToken: string;
     TokenType: string;
 }
+
+export enum SessionStorageKeys {
+    ACCOUNTID = 'TurfTrackerAccountId'
+}
+
+export enum CookieKeys {
+    ACCESS_TOKEN = 'TurfTrackerAccessToken',
+    REFRESH_TOKEN = 'TurfTrackerRefreshToken'
+}

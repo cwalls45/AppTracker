@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { IAccount, IUser } from '../entities/account';
-import { AuthenticateResponse } from '../entities/auth';
+import { IAccount } from '../entities/account';
+import { AuthenticateResponse, CookieKeys, SessionStorageKeys } from '../entities/auth';
 import { store } from '../redux/store';
 import { apiGet, apiPost } from './apiRequests';
+import { removeFromCookies, removeFromSessionStorage } from './browserStorage';
 
 export const loginUser = async (email: string, password: string)
     : Promise<{
@@ -49,3 +49,9 @@ export const signOut = async (token: string): Promise<boolean> => {
         return false;
     }
 };
+
+export const removeCookiesAndSessionStorage = (cookieKeys: CookieKeys[], sessionKeys: SessionStorageKeys[]): void => {
+    removeFromCookies(cookieKeys);
+    removeFromSessionStorage(sessionKeys)
+}
+
