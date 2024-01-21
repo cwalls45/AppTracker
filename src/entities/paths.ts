@@ -10,5 +10,3 @@ export enum Paths {
     REPORTS = '/reports',
     SIGNOUT = '/signOut',
 };
-
-export const actionRoutes = [Paths.SIGNOUT];

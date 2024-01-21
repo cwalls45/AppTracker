@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
 import { State } from "../../redux";
 import { useSelector } from "react-redux";
-import { Paths, actionRoutes } from "../../entities/paths";
+import { Paths } from "../../entities/paths";
 
 const Menu = () => {
 
