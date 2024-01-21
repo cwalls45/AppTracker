@@ -22,10 +22,13 @@ const Menu = () => {
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    function handleClick(event: React.MouseEvent<HTMLElement>) {
         setAnchorElement(event.currentTarget);
     };
-    const handleClose = () => setAnchorElement(null);
+
+    function handleClose() {
+        setAnchorElement(null);
+    };
 
     function handleActionMenuItemClick(route: Paths) {
         console.log('action route: ', route);
@@ -36,7 +39,7 @@ const Menu = () => {
         handleClose();
     };
 
-    const nameAbbreviation = () => {
+    function nameAbbreviation() {
         if (!state.account.user.firstName || !state.account.user.lastName) {
             return null;
         }
