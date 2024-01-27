@@ -50,8 +50,8 @@ export const signOut = async (token: string): Promise<boolean> => {
     }
 };
 
-export const removeCookiesAndSessionStorage = (cookieKeys: CookieKeys[], sessionKeys: SessionStorageKeys[]): void => {
-    removeFromCookies(cookieKeys);
+export const removeCookiesAndSessionStorage = (cookieKeys: CookieKeys[], sessionKeys: SessionStorageKeys[], removeCookie: (key: string) => void): void => {
+    removeFromCookies(cookieKeys, removeCookie);
     removeFromSessionStorage(sessionKeys)
 }
 

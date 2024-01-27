@@ -4,9 +4,9 @@ export function removeFromSessionStorage(keys: string[]): void {
     });
 }
 
-export function removeFromCookies(keys: string[]): void {
+export function removeFromCookies(keys: string[], removeCookie: (key: string) => void): void {
     keys.forEach(key => {
-        document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+        removeCookie(key);
     });
 }
 

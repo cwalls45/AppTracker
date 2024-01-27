@@ -25,7 +25,7 @@ const Menu = () => {
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
 
-    const [cookies] = useCookies();
+    const [cookies, setCookies, removeCookie] = useCookies();
 
     function handleClick(event: React.MouseEvent<HTMLElement>) {
         setAnchorElement(event.currentTarget);
@@ -39,7 +39,7 @@ const Menu = () => {
         const isSignedOut = await signOut(cookies.TurfTrackerAccessToken);
 
         if (isSignedOut) {
-            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID]);
+            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID], removeCookie);
             navigate(Paths.LOGIN);
         }
     };
