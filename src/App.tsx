@@ -17,10 +17,11 @@ import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
 import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 import Loading from './components/loading/Loading';
-import { getUserEmailWithAccessToken } from './utils/authenticateUser';
+import { getUserEmailWithAccessToken, removeCookiesAndSessionStorage } from './utils/authenticateUser';
 import Reports from './components/reports/Reports';
 import { setAccountId } from './redux/action-creators/accountActionCreators';
 import { isEmpty } from 'lodash';
+import { CookieKeys, SessionStorageKeys } from './entities/auth';
 
 const App = () => {
 
@@ -30,9 +31,14 @@ const App = () => {
     const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
     const { getUserByUserName } = bindActionCreators(accountActionCreators, dispatch);
 
-    const [cookies] = useCookies();
+    const [cookies, , removeCookie] = useCookies();
 
-    const accountId = sessionStorage.getItem('TurfTrackerAccountId') || '';
+    const accountId = sessionStorage.getItem(SessionStorageKeys.ACCOUNTID) || '';
+
+    async function fetchUser(token: string) {
+        const user = await getUserEmailWithAccessToken(token)
+        return user;
+    }
 
     useEffect(() => {
         if (!isEmpty(accountId)) {
@@ -48,17 +54,16 @@ const App = () => {
                     setIsLoggedIn(true);
                 });
         }
-    }, []);
-
-    const fetchUser = async (token: string) => {
-        const user = await getUserEmailWithAccessToken(token)
-        return user;
-    }
+        else {
+            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID], removeCookie);
+            setIsLoggedIn(false);
+        }
+    }, [cookies.TurfTrackerAccessToken, cookies.TurfTrackerRefreshToken]);
 
     return (
         <ThemeProvider theme={theme}>
             <Router>
-                {isLoggedIn && <NavigationBar />}
+                {(cookies.TurfTrackerAccessToken && cookies.TurfTrackerRefreshToken) && <NavigationBar />}
                 <Routes>
                     <Route
                         path={Paths.ROOT}

@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { accountActionCreators, environmentActionCreators } from "../../redux";
+import { CookieKeys, SessionStorageKeys } from "../../entities/auth";
 
 interface IProps {
     setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -65,9 +66,9 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
 
         // TODO: Dont forget to remove cookies and make cookie name more specific, remove sessionStorage
         const { AccessToken, ExpiresIn, RefreshToken } = isLoggedIn.credentials;
-        setCookies("TurfTrackerAccessToken", AccessToken, { maxAge: ExpiresIn });
-        setCookies("TurfTrackerRefreshToken", RefreshToken, { maxAge: ExpiresIn });
-        sessionStorage.setItem("TurfTrackerAccountId", isLoggedIn.account.accountId);
+        setCookies(CookieKeys.ACCESS_TOKEN, AccessToken, { maxAge: ExpiresIn });
+        setCookies(CookieKeys.REFRESH_TOKEN, RefreshToken, { maxAge: ExpiresIn });
+        sessionStorage.setItem(SessionStorageKeys.ACCOUNTID, isLoggedIn.account.accountId);
 
         return true;
     };

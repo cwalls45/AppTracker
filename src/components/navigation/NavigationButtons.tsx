@@ -2,23 +2,19 @@ import { Paths } from '../../entities/paths';
 import { MenuItem } from '@mui/material';
 
 interface IProps {
+    path: Paths;
+    text: string;
     clickFunction: (...args: any) => void;
 }
 
-const NavigationButtons = ({ clickFunction }: IProps) => {
 
-    const routes = [
-        { path: Paths.CALENDAR, text: 'Calendar' },
-        { path: Paths.CREATE_APPLICATION, text: 'Create Application' },
-        { path: Paths.INVENTORY, text: 'Inventory' },
-        { path: Paths.REPORTS, text: 'Reports' }
-    ];
+const NavigationButtons = ({ routes }: { routes: IProps[] }) => {
 
     return (
         <>
             {
                 routes.map(route => (
-                    <MenuItem onClick={() => clickFunction(route.path)} key={route.path} aria-label={`${route.text} Menu Tab`}>
+                    <MenuItem onClick={() => route.clickFunction(route.path)} key={route.path} aria-label={`${route.text} Menu Tab`}>
                         {route.text}
                     </MenuItem>
                 ))

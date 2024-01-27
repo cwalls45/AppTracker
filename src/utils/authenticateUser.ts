@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { IAccount, IUser } from '../entities/account';
-import { AuthenticateResponse } from '../entities/auth';
+import { IAccount } from '../entities/account';
+import { AuthenticateResponse, CookieKeys, SessionStorageKeys } from '../entities/auth';
 import { store } from '../redux/store';
 import { apiGet, apiPost } from './apiRequests';
+import { removeFromCookies, removeFromSessionStorage } from './browserStorage';
 
 export const loginUser = async (email: string, password: string)
     : Promise<{
@@ -37,3 +37,21 @@ export const getUserEmailWithAccessToken = async (accessToken: string): Promise<
         throw new Error(`ERROR: There was an error getting user with access token ${accessToken} - ${JSON.stringify(error, null, 2)}`);
     }
 };
+
+export const signOut = async (token: string): Promise<boolean> => {
+    const { environment } = store.getState();
+    try {
+        const { data }: { data: { isSignedOut: boolean } } =
+            await apiPost(`${environment.apiUrl}/auth/signOut`, { token });
+
+        return data.isSignedOut;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const removeCookiesAndSessionStorage = (cookieKeys: CookieKeys[], sessionKeys: SessionStorageKeys[], removeCookie: (key: string) => void): void => {
+    removeFromCookies(cookieKeys, removeCookie);
+    removeFromSessionStorage(sessionKeys)
+}
+

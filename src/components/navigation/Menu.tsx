@@ -4,8 +4,20 @@ import { useNavigate } from "react-router";
 import NavigationButtons from "./NavigationButtons";
 import { State } from "../../redux";
 import { useSelector } from "react-redux";
+import { Paths } from "../../entities/paths";
+import { removeCookiesAndSessionStorage, signOut } from "../../utils/authenticateUser";
+import { useCookies } from "react-cookie";
+import { CookieKeys, SessionStorageKeys } from "../../entities/auth";
 
 const Menu = () => {
+
+    const routes = [
+        { path: Paths.CALENDAR, text: 'Calendar', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.CREATE_APPLICATION, text: 'Create Application', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.INVENTORY, text: 'Inventory', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.REPORTS, text: 'Reports', clickFunction: handleNavigateMenuItemClick },
+        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleSignOutMenuItemClick }
+    ];
 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
     const [abbreviation, setAbbreviation] = useState<string | null>(null);
@@ -13,20 +25,34 @@ const Menu = () => {
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const [cookies, setCookies, removeCookie] = useCookies();
+
+    function handleClick(event: React.MouseEvent<HTMLElement>) {
         setAnchorElement(event.currentTarget);
     };
-    const handleClose = () => setAnchorElement(null);
-    const handleMenuItemClick = (route: string) => {
+
+    function handleClose() {
+        setAnchorElement(null);
+    };
+
+    async function handleSignOutMenuItemClick() {
+        const isSignedOut = await signOut(cookies.TurfTrackerAccessToken);
+
+        if (isSignedOut) {
+            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID], removeCookie);
+            navigate(Paths.LOGIN);
+        }
+    };
+
+    function handleNavigateMenuItemClick(route: Paths) {
         navigate(route);
         handleClose();
     };
 
-    const nameAbbreviation = () => {
+    function nameAbbreviation() {
         if (!state.account.user.firstName || !state.account.user.lastName) {
             return null;
         }
-        console.log('abbreviation: ', `${state.account.user.firstName[0].toUpperCase()} ${state.account.user.lastName[0].toUpperCase()}`)
         return `${state.account.user.firstName[0].toUpperCase()}${state.account.user.lastName[0].toUpperCase()}`
     };
 
@@ -50,7 +76,7 @@ const Menu = () => {
                 onClose={handleClose}
                 anchorEl={anchorElement}
             >
-                <NavigationButtons clickFunction={handleMenuItemClick} />
+                <NavigationButtons routes={routes} />
             </MenuMUI>
         </>
     )

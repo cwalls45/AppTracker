@@ -9,6 +9,7 @@ import { ChemicalApplicationFormActionTypes } from "../../entities/chemicalAppli
 import { apiGet, apiPost } from "../../utils/apiRequests";
 import { EnvironmentActionTypes } from "../../entities/environmentActionTypes";
 import { EnvironmentActions } from "../actions/environmentActions";
+import { SessionStorageKeys } from "../../entities/auth";
 
 export const addApplication = (application: IApplicationSummary) => {
     return (dispatch: Dispatch<ApplicationSummaryActionsTypes>) => dispatch({
@@ -21,7 +22,7 @@ export const postChemicalApplication = (application: IApplication) => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | ChemicalApplicationFormActionTypes>, getState: () => State) => {
 
         const { environment, account } = getState();
-        const accountId = account.accountId || sessionStorage.getItem('TurfTrackerAccountId');
+        const accountId = account.accountId || sessionStorage.getItem(SessionStorageKeys.ACCOUNTID);
 
         try {
             const response = await apiPost(`${environment.apiUrl}/api/createApplication`, {
@@ -57,7 +58,7 @@ export const fetchApplicationEvents = () => {
     return async (dispatch: Dispatch<ApplicationSummaryActionsTypes | EnvironmentActionTypes>, getState: () => State) => {
         try {
             const { environment, account } = getState();
-            const accountId = account.accountId || sessionStorage.getItem('TurfTrackerAccountId');
+            const accountId = account.accountId || sessionStorage.getItem(SessionStorageKeys.ACCOUNTID);
 
             const response = await apiGet(`${environment.apiUrl}/api/applicationEvents/${2024}/${accountId}`);
             let applicationEvents: IApplicationSummary[] = response.data;
