@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Dayjs } from 'dayjs';
 import dayjs from 'dayjs'
-import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { IApplication } from '../../entities/chemicalApplicationFormDefaultValues';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { chemicalApplicationFormActionCreators } from '../../redux';
@@ -47,9 +45,6 @@ const DatePickerCalendar = ({ label, property }: IProps) => {
                 value={date}
                 label={label}
                 onChange={handleDateChange}
-                renderInput={(params) => (
-                    <TextField {...params} />
-                )}
             />
         </LocalizationProvider>
     )

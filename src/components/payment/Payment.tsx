@@ -14,20 +14,25 @@ const Payment = () => {
 
   const { environment } = useSelector((state: State) => state);
 
-  const fetchPublishableKey = async () => {
+  const fetchPublishableKey = async (): Promise<string> => {
     const publishableKey = await apiGet(`${environment.apiUrl}/subscribe/stripe-config`);
-    return publishableKey.data;
+    return publishableKey.data.publishableKey;
   }
 
   useEffect(() => {
-    const publishableKey = fetchPublishableKey();
-    // get publishable key from api
-    // setStripePromise(loadStripe(publishableKey))
+    async function setStripePromiseWithPublishableKey() {
+      const publishableKey = await fetchPublishableKey();
+      console.log(publishableKey)
+      const loadStripeWithPublishableKey = await loadStripe(publishableKey);
+      setStripePromise(loadStripeWithPublishableKey)
+    }
+
+    setStripePromiseWithPublishableKey();
   }, []);
 
   return (
     <div>
-      <Elements stripe={stripePromise} options={{clientSecret: ''}}>
+      <Elements stripe={stripePromise} options={{ clientSecret: '' }}>
         <SubscriptionForm />
       </Elements>
     </div>

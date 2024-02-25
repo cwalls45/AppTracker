@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { applicationSummaryActionCreators, State } from '../redux';
 import SnackBarBanner from './snackBar/SnackBarBanner';
+import Payment from './payment/Payment';
 
 const Calendar = () => {
 
@@ -58,6 +59,7 @@ const Calendar = () => {
                 }}
 
             />
+            <Payment />
         </Container>
     );
 }
