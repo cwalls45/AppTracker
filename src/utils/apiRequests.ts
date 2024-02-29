@@ -11,6 +11,7 @@ export const apiGet = async (url: string) => {
             "X-Amz-Security-Token": authToken,
         },
     }
+
     const response = await axios.get(url, config);
     return response;
 };
@@ -23,6 +24,7 @@ export const apiPost = async (url: string, body) => {
         },
         ...(body && body)
     }
+
     const response = await axios.post(url, config);
     return response;
 }
