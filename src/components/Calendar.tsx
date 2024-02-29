@@ -14,7 +14,7 @@ const Calendar = () => {
 
     const dispatch = useDispatch();
     const { fetchApplicationEvents } = bindActionCreators(applicationSummaryActionCreators, dispatch);
-    const state = useSelector((state: State) => state);
+    const applicationSummaries = useSelector((state: State) => state.applicationSummaries);
 
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Calendar = () => {
             <SnackBarBanner />
             <Scheduler
                 view='month'
-                events={state.applicationSummaries}
+                events={applicationSummaries}
                 month={{
                     weekDays: [0, 1, 2, 3, 4, 5, 6],
                     weekStartOn: 0,

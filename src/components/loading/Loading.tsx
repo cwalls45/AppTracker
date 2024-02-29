@@ -4,12 +4,12 @@ import { State } from "../../redux";
 
 const Loading = () => {
 
-  const state = useSelector((state: State) => state);
+  const environment = useSelector((state: State) => state.environment);
 
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={state.environment.isLoading}
+      open={environment.isLoading}
     >
       <CircularProgress color="inherit" />
     </Backdrop>

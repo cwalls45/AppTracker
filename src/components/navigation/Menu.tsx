@@ -21,7 +21,7 @@ const Menu = () => {
 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
     const [abbreviation, setAbbreviation] = useState<string | null>(null);
-    const state = useSelector((state: State) => state);
+    const account = useSelector((state: State) => state.account);
     const navigate = useNavigate();
     const open = Boolean(anchorElement);
 
@@ -50,16 +50,16 @@ const Menu = () => {
     };
 
     function nameAbbreviation() {
-        if (!state.account.user.firstName || !state.account.user.lastName) {
+        if (!account.user.firstName || !account.user.lastName) {
             return null;
         }
-        return `${state.account.user.firstName[0].toUpperCase()}${state.account.user.lastName[0].toUpperCase()}`
+        return `${account.user.firstName[0].toUpperCase()}${account.user.lastName[0].toUpperCase()}`
     };
 
     useEffect(() => {
         const initails = nameAbbreviation();
         setAbbreviation(initails);
-    }, [state.account.user])
+    }, [account.user])
 
     return (
         <>

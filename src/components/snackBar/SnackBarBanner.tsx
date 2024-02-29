@@ -6,21 +6,23 @@ import SnackBarAlert from "./SnackBarAlert";
 
 const SnackBarBanner = () => {
     const dispatch = useDispatch();
-    const state = useSelector((state: State) => state);
+    const environment = useSelector((state: State) => state.environment);
     const { setError } = bindActionCreators(environmentActionCreators, dispatch);
+
     const handleSnackBarClose = (event: React.SyntheticEvent) => {
         setError(false, '');
     }
+
     return (
         <Snackbar
-            open={state.environment.isError.isError}
+            open={environment.isError.isError}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             autoHideDuration={10000}
             onClose={handleSnackBarClose}
         >
             <div>
                 <SnackBarAlert
-                    message={state.environment.isError.message}
+                    message={environment.isError.message}
                     onCloseFunc={handleSnackBarClose}
                     severity='error'
                 />
