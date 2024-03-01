@@ -32,12 +32,12 @@ const SubscriptionForm = () => {
       });
 
       if (error) {
-        //may need to throw error to be caught by the catch block
+        throw new Error(error.message);
       } else if (paymentIntent && paymentIntent.status === 'succeeded') {
         // set success banner or modal
       }
     } catch (error) {
-      setError(true, 'An error occurred while processing your payment.');
+      setError(true, `${error}`);
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +46,8 @@ const SubscriptionForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <Button disabled={environment.isLoading}>
-        Subscribe
+      <Button disabled={environment.isLoading || !stripe || !elements} type='submit' variant='contained'>
+        {environment.isLoading ? 'Processing...' : 'Subscribe'}
       </Button>
     </form>
   )
