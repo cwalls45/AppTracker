@@ -46,9 +46,11 @@ const LoginForm = ({ setIsLoggedIn }: IProps) => {
         setIsLoading(true);
         const isAuthenticated = await authenticateUser(email, password);
         setIsLoggedIn(isAuthenticated);
+
         if (isAuthenticated) {
             navigateToCalendar();
         }
+
         resetPassword();
         setIsLoading(false);
     };
