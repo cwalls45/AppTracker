@@ -16,7 +16,8 @@ const Menu = () => {
         { path: Paths.CREATE_APPLICATION, text: 'Create Application', clickFunction: handleNavigateMenuItemClick },
         { path: Paths.INVENTORY, text: 'Inventory', clickFunction: handleNavigateMenuItemClick },
         { path: Paths.REPORTS, text: 'Reports', clickFunction: handleNavigateMenuItemClick },
-        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleSignOutMenuItemClick }
+        { path: Paths.SIGNOUT, text: 'Log out', clickFunction: handleSignOutMenuItemClick },
+        { path: Paths.SUBSCRIBE, text: 'Subscription', clickFunction: handleNavigateMenuItemClick }
     ];
 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);

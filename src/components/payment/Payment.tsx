@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { Stripe, loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import SubscriptionForm from "./SubscriptionForm";
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 import { apiGet } from "../../utils/apiRequests";
 import { useSelector } from "react-redux";
 import { State } from "../../redux";
+import { Stripe, loadStripe } from "@stripe/stripe-js";
 
 const Payment = () => {
 
@@ -18,9 +17,9 @@ const Payment = () => {
     return publishableKey.data.publishableKey;
   }
 
-  const createPaymentIntent = async (): Promise<string> => {
-    const paymentIntentSecret = await apiGet(`${environment.apiUrl}/subscribe/payment-intent`);
-    return paymentIntentSecret.data.paymentIntent;
+  const createCheckoutSession = async (): Promise<string> => {
+    const paymentIntentSecret = await apiGet(`${environment.apiUrl}/subscribe/checkout-session`);
+    return paymentIntentSecret.data.clientSecret;
   };
 
   useEffect(() => {
@@ -34,20 +33,23 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
-    async function setClientSecretWithPaymentIntent() {
-      const paymentIntentSecret = await createPaymentIntent();
-      setClientSecret(paymentIntentSecret);
+    async function setClientSecretFromCheckoutSession() {
+      const checkoutSessionClientSecret = await createCheckoutSession();
+      setClientSecret(checkoutSessionClientSecret);
     };
 
-    setClientSecretWithPaymentIntent();
+    setClientSecretFromCheckoutSession();
   }, []);
 
   return (
     <div>
       {stripePromise && clientSecret && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <SubscriptionForm />
-        </Elements>
+        <EmbeddedCheckoutProvider
+          stripe={stripePromise}
+          options={{ clientSecret }}
+        >
+          <EmbeddedCheckout />
+        </EmbeddedCheckoutProvider>
       )}
     </div>
   )

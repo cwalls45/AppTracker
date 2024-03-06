@@ -22,6 +22,7 @@ import Reports from './components/reports/Reports';
 import { setAccountId } from './redux/action-creators/accountActionCreators';
 import { isEmpty } from 'lodash';
 import { CookieKeys, SessionStorageKeys } from './entities/auth';
+import Payment from './components/payment/Payment';
 
 const App = () => {
 
@@ -109,6 +110,8 @@ const App = () => {
                     <Route path={Paths.SIGNUP} element={<SignUpForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path={Paths.COURSE_INFO} element={<CourseInformation />} />
                     <Route path={Paths.COURSE_AREAS} element={<CourseAreasForm />} />
+                    <Route path={Paths.SUBSCRIBE} element={<Payment />} />
+                    <Route path={Paths.SUBSCRIPTION_SUCCESSFUL} element={<div>PAyment successful</div>} />
                 </Routes>
                 <Loading />
             </Router>

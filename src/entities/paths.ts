@@ -9,4 +9,6 @@ export enum Paths {
     COURSE_AREAS = '/signUp/courseArea',
     REPORTS = '/reports',
     SIGNOUT = '/signOut',
+    SUBSCRIBE = '/subscribe',
+    SUBSCRIPTION_SUCCESSFUL = '/subscribe/successful/:checkoutSessionId',
 };
