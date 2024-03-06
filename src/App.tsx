@@ -23,6 +23,7 @@ import { setAccountId } from './redux/action-creators/accountActionCreators';
 import { isEmpty } from 'lodash';
 import { CookieKeys, SessionStorageKeys } from './entities/auth';
 import Payment from './components/payment/Payment';
+import SubScriptionSuccess from './components/payment/SubscriptionSuccess';
 
 const App = () => {
 
@@ -111,7 +112,7 @@ const App = () => {
                     <Route path={Paths.COURSE_INFO} element={<CourseInformation />} />
                     <Route path={Paths.COURSE_AREAS} element={<CourseAreasForm />} />
                     <Route path={Paths.SUBSCRIBE} element={<Payment />} />
-                    <Route path={Paths.SUBSCRIPTION_SUCCESSFUL} element={<div>PAyment successful</div>} />
+                    <Route path={Paths.SUBSCRIPTION_SUCCESSFUL} element={<SubScriptionSuccess />} />
                 </Routes>
                 <Loading />
             </Router>
