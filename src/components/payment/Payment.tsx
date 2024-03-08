@@ -4,6 +4,7 @@ import { apiGet } from "../../utils/apiRequests";
 import { useSelector } from "react-redux";
 import { State } from "../../redux";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
+import Grid from "@mui/material/Grid";
 
 const Payment = () => {
 
@@ -42,16 +43,20 @@ const Payment = () => {
   }, []);
 
   return (
-    <div>
+    <Grid container justifyContent='center' alignItems='center' sx={{ height: '100vh', width: 'auto' }}>
       {stripePromise && clientSecret && (
-        <EmbeddedCheckoutProvider
-          stripe={stripePromise}
-          options={{ clientSecret }}
-        >
-          <EmbeddedCheckout />
-        </EmbeddedCheckoutProvider>
+        <Grid container item md={10} justifyContent='center' alignItems='center'>
+          <Grid container item justifyContent='center'>
+            <EmbeddedCheckoutProvider
+              stripe={stripePromise}
+              options={{ clientSecret }}
+            >
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          </Grid>
+        </Grid>
       )}
-    </div>
+    </Grid>
   )
 }
 
