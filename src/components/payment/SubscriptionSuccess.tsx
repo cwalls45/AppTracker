@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import { Paths } from "../../entities/paths";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { State, environmentActionCreators } from "../../redux";
+import { useDispatch } from "react-redux";
+import { environmentActionCreators } from "../../redux";
 import { apiPost } from "../../utils/apiRequests";
 import { bindActionCreators } from "redux";
 
@@ -13,7 +13,6 @@ const SubScriptionSuccess = () => {
     const dispatch = useDispatch();
     const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
 
-    const environment = useSelector((state: State) => state.environment);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -34,7 +33,7 @@ const SubScriptionSuccess = () => {
 
     useEffect(() => {
         createCheckoutSession();
-    }, [environment.apiUrl]);
+    }, []);
 
     return (
         <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: '100vh', width: 'auto' }}>
