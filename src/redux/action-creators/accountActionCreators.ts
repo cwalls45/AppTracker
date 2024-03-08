@@ -110,7 +110,7 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
                 payload: true
             });
 
-            await apiPost(`${environment.apiUrl}/auth/addCourseInfo`, {
+            await apiPost('auth/addCourseInfo', {
                 courseInfo,
                 accountId: account.accountId,
                 email: account.user.email
@@ -151,7 +151,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
                 payload: true
             });
 
-            const courseAreasResponse = await apiPost(`${environment.apiUrl}/auth/addCourseAreas`, {
+            const courseAreasResponse = await apiPost('auth/addCourseArea', {
                 courseAreas,
                 accountId: account.accountId,
                 email: account.user.email

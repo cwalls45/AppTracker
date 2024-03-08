@@ -20,7 +20,7 @@ export const postInventory = (inventory: IInventory) => {
         try {
             const { environment, account } = getState();
 
-            const response = await apiPost(`${environment.apiUrl}/api/addInventory`, { inventory, accountId: account.accountId });
+            const response = await apiPost('api/addInventory', { inventory, accountId: account.accountId });
             const formattedInventory: IInventory = response.data;
 
             dispatch({

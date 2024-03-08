@@ -25,7 +25,7 @@ export const postChemicalApplication = (application: IApplication) => {
         const accountId = account.accountId || sessionStorage.getItem(SessionStorageKeys.ACCOUNTID);
 
         try {
-            const response = await apiPost(`${environment.apiUrl}/api/createApplication`, {
+            const response = await apiPost('api/createApplication', {
                 application,
                 accountId: accountId
             });

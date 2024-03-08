@@ -12,7 +12,7 @@ export const loginUser = async (email: string, password: string)
     const { environment } = store.getState();
     try {
         const { data }: { data: { credentials: AuthenticateResponse, account: IAccount } } =
-            await apiPost(`${environment.apiUrl}/auth/login`, {
+            await apiPost('auth/login', {
                 user: {
                     email,
                     password
@@ -42,7 +42,7 @@ export const signOut = async (token: string): Promise<boolean> => {
     const { environment } = store.getState();
     try {
         const { data }: { data: { isSignedOut: boolean } } =
-            await apiPost(`${environment.apiUrl}/auth/signOut`, { token });
+            await apiPost('auth/signOut', { token });
 
         return data.isSignedOut;
     } catch (error) {

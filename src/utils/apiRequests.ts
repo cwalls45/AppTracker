@@ -17,6 +17,7 @@ export const apiGet = async (url: string) => {
 };
 
 export const apiPost = async (url: string, body) => {
+    const { environment } = store.getState();
     const authToken = Cookies.get('TurfTrackerAccessToken');
     const config = {
         headers: {
@@ -25,7 +26,7 @@ export const apiPost = async (url: string, body) => {
         ...(body && body)
     }
 
-    const response = await axios.post(url, config);
+    const response = await axios.post(`${environment.apiUrl}/${url}`, config);
     return response;
 }
 
