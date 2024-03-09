@@ -4,14 +4,14 @@ import Typography from "@mui/material/Typography";
 import { Paths } from "../../entities/paths";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { environmentActionCreators } from "../../redux";
+import { useSelector } from "react-redux";
+import { State } from "../../redux";
 import { apiPost } from "../../utils/apiRequests";
 import { bindActionCreators } from "redux";
+import { useInitializeApp } from "../../hooks/useInitializeApp";
 
 const SubScriptionSuccess = () => {
-    const dispatch = useDispatch();
-    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
+    const account = useSelector((state: State) => state.account);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,19 +21,25 @@ const SubScriptionSuccess = () => {
     };
 
     const createCheckoutSession = async (): Promise<void> => {
+        const accountId = account.accountId;
+        const email = account.user.email;
+
+        if (!accountId || !email) {
+            return;
+        };
+
         const currentUrl = location.pathname;
         const splitUrl = currentUrl.split("successful/");
         const sessionId = splitUrl[1];
-        await apiPost(`subscribe/successful-subscription`, { sessionId });
+
+        await apiPost(`subscribe/successful-subscription`, { sessionId, accountId, email });
     };
 
-    useEffect(() => {
-        setAPIUrl();
-    }, []);
+    useInitializeApp();
 
     useEffect(() => {
         createCheckoutSession();
-    }, []);
+    }, [account.accountId, account.user.email]);
 
     return (
         <Grid container justifyContent='center' alignContent='space-evenly' sx={{ height: '100vh', width: 'auto' }}>

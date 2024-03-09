@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { theme } from './theme';
 import { ThemeProvider } from '@mui/material';
@@ -9,58 +8,18 @@ import Login from './components/login/Login';
 import { Paths } from './entities/paths';
 import Inventory from './components/inventory/Inventory';
 import ProtectedWrapper from './components/login/ProtectedWrapper';
-import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { accountActionCreators, environmentActionCreators } from './redux';
-import { useCookies } from 'react-cookie';
 import SignUpForm from './components/login/SignUpForm';
 import CourseInformation from './components/courseInformationForm/CourseInformation';
 import CourseAreasForm from './components/courseInformationForm/CourseAreasForm';
 import Loading from './components/loading/Loading';
-import { getUserEmailWithAccessToken, removeCookiesAndSessionStorage } from './utils/authenticateUser';
 import Reports from './components/reports/Reports';
-import { setAccountId } from './redux/action-creators/accountActionCreators';
-import { isEmpty } from 'lodash';
-import { CookieKeys, SessionStorageKeys } from './entities/auth';
 import Payment from './components/payment/Payment';
 import SubScriptionSuccess from './components/payment/SubscriptionSuccess';
+import { useInitializeApp } from './hooks/useInitializeApp';
 
 const App = () => {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    const dispatch = useDispatch();
-    const { setAPIUrl } = bindActionCreators(environmentActionCreators, dispatch);
-    const { getUserByUserName } = bindActionCreators(accountActionCreators, dispatch);
-
-    const [cookies, , removeCookie] = useCookies();
-
-    const accountId = sessionStorage.getItem(SessionStorageKeys.ACCOUNTID) || '';
-
-    async function fetchUser(token: string) {
-        const user = await getUserEmailWithAccessToken(token)
-        return user;
-    }
-
-    useEffect(() => {
-        if (!isEmpty(accountId)) {
-            setAccountId(accountId);
-        }
-
-        setAPIUrl();
-
-        if (cookies.TurfTrackerAccessToken && cookies.TurfTrackerRefreshToken) {
-            fetchUser(cookies.TurfTrackerAccessToken)
-                .then(res => {
-                    getUserByUserName(res.userName);
-                    setIsLoggedIn(true);
-                });
-        }
-        else {
-            removeCookiesAndSessionStorage([CookieKeys.ACCESS_TOKEN, CookieKeys.REFRESH_TOKEN], [SessionStorageKeys.ACCOUNTID], removeCookie);
-            setIsLoggedIn(false);
-        }
-    }, [cookies.TurfTrackerAccessToken, cookies.TurfTrackerRefreshToken]);
+    const { cookies, isLoggedIn, setIsLoggedIn } = useInitializeApp();
 
     return (
         <ThemeProvider theme={theme}>
