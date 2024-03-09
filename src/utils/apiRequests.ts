@@ -21,12 +21,11 @@ export const apiPost = async (url: string, body) => {
     const authToken = Cookies.get('TurfTrackerAccessToken');
     const config = {
         headers: {
-            "X-Amz-Security-Token": authToken,
+            'X-Amz-Security-Token': authToken,
         },
-        ...(body && body)
     }
 
-    const response = await axios.post(`${environment.apiUrl}/${url}`, config);
+    const response = await axios.post(`${environment.apiUrl}/${url}`, body, config);
     return response;
 }
 
