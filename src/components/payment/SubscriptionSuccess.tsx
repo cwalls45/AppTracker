@@ -4,14 +4,16 @@ import Typography from "@mui/material/Typography";
 import { Paths } from "../../entities/paths";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { State } from "../../redux";
+import { useDispatch, useSelector } from "react-redux";
+import { State, environmentActionCreators } from "../../redux";
 import { apiPost } from "../../utils/apiRequests";
 import { bindActionCreators } from "redux";
 import { useInitializeApp } from "../../hooks/useInitializeApp";
 
 const SubScriptionSuccess = () => {
+    const dispatch = useDispatch();
     const account = useSelector((state: State) => state.account);
+    const { setError } = bindActionCreators(environmentActionCreators, dispatch);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,18 +23,22 @@ const SubScriptionSuccess = () => {
     };
 
     const createCheckoutSession = async (): Promise<void> => {
-        const accountId = account.accountId;
-        const email = account.user.email;
+        try {
+            const accountId = account.accountId;
+            const email = account.user.email;
 
-        if (!accountId || !email) {
-            return;
+            if (!accountId || !email) {
+                return;
+            };
+
+            const currentUrl = location.pathname;
+            const splitUrl = currentUrl.split("successful/");
+            const sessionId = splitUrl[1];
+
+            await apiPost(`subscribe/successful-subscription`, { sessionId, accountId, email });
+        } catch (error) {
+            setError(true, 'An error occured during the subscription process.');
         };
-
-        const currentUrl = location.pathname;
-        const splitUrl = currentUrl.split("successful/");
-        const sessionId = splitUrl[1];
-
-        await apiPost(`subscribe/successful-subscription`, { sessionId, accountId, email });
     };
 
     useInitializeApp();
