@@ -55,7 +55,7 @@ export const signUpUser = (
                 payload: true
             });
 
-            const { data } = await apiPost(`${environment.apiUrl}/auth/createUser`, {
+            const { data } = await apiPost('/auth/createUser', {
                 signUp: {
                     firstName,
                     lastName,
@@ -139,10 +139,10 @@ export const addCourseInfo = (courseInfo: ICourseInfo, navigateToCourseAreas: ()
     };
 }
 
-export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: () => void) => {
+export const addCourseAreas = (courseAreas: ICourseArea[], navigateToSubscription: () => void) => {
     return async (dispatch: Dispatch<AcccountActionTypes | EnvironmentActionTypes>, getState: () => State) => {
 
-        const { environment, account } = getState();
+        const { account } = getState();
 
         try {
 
@@ -151,7 +151,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
                 payload: true
             });
 
-            const courseAreasResponse = await apiPost('auth/addCourseArea', {
+            const courseAreasResponse = await apiPost('auth/addCourseAreas', {
                 courseAreas,
                 accountId: account.accountId,
                 email: account.user.email
@@ -162,7 +162,7 @@ export const addCourseAreas = (courseAreas: ICourseArea[], navigateToCalendar: (
                 payload: courseAreasResponse.data.courseAreas
             });
 
-            navigateToCalendar();
+            navigateToSubscription();
 
             dispatch({
                 type: EnvironmentActions.IS_LOADING,

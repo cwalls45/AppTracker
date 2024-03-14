@@ -18,7 +18,7 @@ const CourseAreasForm = () => {
   const { addCourseAreas } = bindActionCreators(accountActionCreators, dispatch);
 
   const navigate = useNavigate();
-  const navigateToCalendar = () => navigate(Paths.CALENDAR);
+  const navigateToSubscribe = () => navigate(Paths.SUBSCRIBE);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ const CourseAreasForm = () => {
       console.log('Area of course is not valid: ', courseAreas);
       return;
     }
-    addCourseAreas(courseAreas, navigateToCalendar);
+    addCourseAreas(courseAreas, navigateToSubscribe);
   }
 
   const handleAddCourseArea = (event) => {
